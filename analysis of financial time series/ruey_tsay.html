@@ -1,0 +1,1055 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!-- saved from url=(0063)http://faculty.chicagogsb.edu/ruey.tsay/teaching/fts2/index.htm -->
+
+<HTML><HEAD>
+
+<META http-equiv=Content-Type content="text/html; charset=unicode">
+
+<META content="MSHTML 6.00.6000.16441" name=GENERATOR></HEAD>
+
+<BODY>
+
+<P>&nbsp;<FONT face=Arial size=4>Web page for <FONT color=#cc0000>Analysis of
+
+Financial Time Series, Third Edition<BR>
+
+</FONT><FONT size=4>(Ruey S. Tsay,
+
+Wiley-Interscience 2010, Probability and Statistics)</FONT></FONT><FONT
+
+face=Arial size=4><FONT size=4> <BR>
+
+ISBN 978-0-470-41435-4<BR>
+
+</FONT></FONT></P>
+
+<P><FONT face=Arial size=4>This page contains data sets used and other
+
+information about the book. <BR>Most data files are different from those of the
+
+first edition. <BR>You may find the book on <A
+
+href="http://www.amazon.com/">Amazon</A>, <A
+
+href="http://www.barnesandnoble.com/">Barnes and Noble</A>, and <A
+
+href="http://www.wiley.com/">Wiley</A>.</FONT></P>
+
+<P><FONT face=Arial size=4><BR>
+
+</FONT><FONT face=Arial><FONT size=4>The main software package used in the book is <a href="http://www.r-project.org/">R</a>:<br>
+
+Other packages used are<BR>
+
+</FONT><A href="http://www.scausa.com/"><FONT
+
+size=4>SCA </FONT></A><FONT size=4>(Scientific Computing Associates),<BR><A
+
+href="http://www.insightful.com/">S-Plus</A> with FinMetrics
+
+(Insightful)</FONT><BR><A href="http://www.estima.com/"><FONT size=4>RATS
+
+</FONT></A><FONT size=4>(Regression Analysis of Time Series).<BR>
+
+<BR></FONT></FONT></P>
+
+<P><FONT face=Arial><FONT size=4><SPAN style="COLOR: rgb(255,0,0)">Further Instructions and some demonstrations </SPAN><font color="#000000">for using R and S-Plus <br>
+
+can be found in my teaching web for Business 41202.</font></FONT></FONT><FONT face=Arial><FONT size=4><BR>
+
+</FONT></FONT></P>
+
+<P><FONT size="4" face=Arial><a href="errata.pdf">Errata</a> </FONT><FONT face=Arial><FONT size=4>of the book. <BR>
+
+<BR>
+
+</FONT></FONT></P>
+
+<P><FONT face=Arial><FONT size=4><FONT color=#0000cc>Solutions</FONT> to
+
+exercises are available for instructors who use<BR>
+the book as a textbook.
+
+Please send&nbsp;request to <SPAN style="COLOR: rgb(255,0,0)">Kathleen Pagliaro</SPAN> of <BR>
+Wiley via e-mail at <SPAN
+
+style="COLOR: rgb(51,51,255)">kpagliaro@wiley.com</SPAN>&nbsp; or via mail at
+
+<BR>
+Ms Kathleen Pagliaro <BR>
+MS 8-02<BR>John Wiley &amp; Sons, Inc.<BR>111 River
+
+Street<BR>
+Hoboken, NJ 07030<BR>U.S.A.<BR></FONT></FONT></P>
+
+<P><FONT face=Arial size=4><BR></FONT><FONT color=#cc0000><FONT size=4><FONT
+
+face=Arial>Chapter 1: Financial Time Series and Their
+
+Characteristics</FONT><FONT face=Arial></FONT><BR></FONT></FONT></P>
+
+<P><FONT face=Arial size=4>Data used in the text:&nbsp;</FONT><FONT
+
+face=Arial><BR>
+
+<FONT size=4>(1) Daily simple returns of IBM, VW, EW, SP
+
+(01/02/70-12/31/08):<BR>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (Format: date, IBM, VW, EW
+
+&amp; SP): <a href="d-ibm3dx7008.txt">d-ibm3dx7008.txt</a> </FONT><BR>
+
+</FONT><FONT face=Arial><FONT size=4>(2) Daily&nbsp;simple returns of
+
+Intel stock (12/15/72-12/31/08): <a href="d-intc7208.txt">d-intc7208.txt</a> </FONT></FONT><FONT face=Arial><BR>
+
+<FONT size=4>(3) Daily simple returns of 3M
+
+stock (01/02/70-12/31/08): <a href="d-3m7008.txt">d-3m7008.txt</a> </FONT><BR>
+
+<FONT size=4>(4) Daily simple returns of Microsoft stock (03/04/86-12/13/08): <a href="d-msft8608.txt">d-msft8608.txt</a> </FONT><BR>
+
+<FONT size=4>(5) Daily simple returns of Citi-group
+
+stock (03/14/86-12/31/08): <a href="d-c8608.txt">d-c8608.txt</a> </FONT><BR>
+
+<FONT size=4>(6) Monthly simple returns of IBM, VW, EW, SP
+
+(1/26-12/08):<BR>
+
+&nbsp;&nbsp;&nbsp;&nbsp; (Format: date, IBM, VW, EW, &amp; SP): <a href="m-ibm3dx2608.txt">m-ibm3dx2608.txt</a> <BR>
+
+(7) Monthly simple returns of Intel stock: <a href="m-intc7308.txt">m-intc7308.txt</a> <BR>
+
+(8) Monthly simple returns of 3M stock (02/46-12/08): <a href="m-3m4608.txt">m-3m4608.txt</a> <BR>
+
+(9) Monthly simple returns of Microsoft stock: <a href="m-msft8608.txt">m-msft8608.txt</a> <BR>
+
+(10)
+
+Monthly simple returns of Citi-group stock: <a href="m-c8608.txt">m-c8608.txt</a> &nbsp; <BR>
+
+(11) Monthly 10-yr&nbsp; and 1-yr Treasury constant maturity rates
+
+(04/53-02/09):<BR>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (Format: year, month, date,
+
+rate): <a href="m-gs10.txt">m-gs10.txt</a> &nbsp;
+
+&amp; <a href="m-gs1.txt">m-gs1.txt</a> <BR>(12) Daily exchange rate between U.S. dollar and Japanese
+
+yen:<BR>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (01/04/00 - 03/27/09): <a href="d-jpus.txt">d-jpus.txt</a> <BR>(13) Monthly bond returns (1-12m, 24-36m, 48-60m,
+
+61-120m):<BR>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (Format: date, bond returns): <a href="m-fama-bonds.txt">m-fama-bonds.txt</a> <BR>(14) Monthly 3-yr and 5-yr Treasury constant maturity
+
+rates:<BR>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="m-gs3.txt">m-gs3.txt</a>&nbsp;
+
+and <a href="m-gs5.txt">m-gs5.txt</a> <BR>
+
+(15) Weekly Treasury Bill rates:</FONT>&nbsp;<FONT size=4><a href="w-tb3ms.txt">w-tb3ms.txt</a> &amp; <a href="w-tb6ms.txt">w-tb6ms.txt</a> </FONT></FONT></P>
+
+<P><FONT face=Arial color=#006600 size=4>Data sets&nbsp;for Exercises:
+
+<BR></FONT><FONT face=Arial><FONT size=4>1. Daily simple stock returns of
+
+American Express, Caterpillar, <BR>
+
+&nbsp;&nbsp;&nbsp; and Starbucks: <a href="d-3stocks9908.txt">d-3stocks9908.txt</a> <BR>
+
+</FONT><A
+
+href="http://faculty.chicagogsb.edu/ruey.tsay/teaching/fts2/d-tyc9099.dat"><FONT
+
+size=4></FONT></A></FONT></P>
+
+<P><FONT face=Arial><FONT size=4>2. Monthly simple returns of IBM stock, VW, EW,
+
+and S&amp;P:<BR>
+
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="m-gm3dx7508.txt">m-gm3dx7508.txt</a> <BR>
+
+</FONT><A
+
+href="http://faculty.chicagogsb.edu/ruey.tsay/teaching/fts2/m-mel7399.dat"><FONT
+
+size=4></FONT></A></FONT></P>
+
+<P><FONT face=Arial size=4>3. See S&amp;P returns in Problem 2.</FONT></P>
+
+<P><FONT face=Arial size=4>4. See American Express stock returns in Problem
+
+1.</FONT></P>
+
+<P><FONT face=Arial><FONT size=4>5. Exchange rates of Canadian Dollar: <a href="d-caus.txt">d-caus.txt</a> <BR>
+
+&nbsp;&nbsp;&nbsp; United Kingdom Pound: <a href="d-usuk.txt">d-usuk.txt</a> &nbsp;
+
+<BR>
+
+&nbsp;&nbsp;&nbsp; Japanese Yen:<a href="d-jpus.txt"> d-jpus.txt</a>,&nbsp;
+
+and <BR>
+
+&nbsp;&nbsp;&nbsp; Euro: <a href="d-useu.txt">d-useu.txt</a> &nbsp;&nbsp;
+
+versus U.S. Dollar. </FONT></FONT></P>
+
+<P><FONT face=Arial><FONT color="#FF00FF" size=4>R package used</FONT><FONT size=4>: fBasics<BR>
+
+</FONT><BR>
+
+</FONT></P>
+
+<P><FONT size=4><FONT face=Arial color=#cc0000>Chapter 2: Linear Time Series
+
+Analysis and Its Applications</FONT></FONT></P>
+
+<P><FONT face=Arial><FONT size=4>Data sets used in the chapter:<BR>
+
+(1) Monthly
+
+IBM stock, VW index, EW index and S&amp;P index returns: <a href="m-ibm3dx2608.txt">m-ibm3dx2608.txt</a><BR>
+
+(2) Growth rate of U.S. quarterly real gnp:&nbsp;<a href="dgnp82.txt">dgnp82.txt</a> (same as q-gnp4791.txt)<BR>
+
+(3) Monthly simple returns of 3M stock: <a href="m-3m4608.txt">m-3m4608.txt</a> <BR>
+
+(4)&nbsp; U.S. quarterly GDP (1947-2008): <a href="q-gdp4708.txt">q-gdp4708.txt</a> &nbsp;
+
+<BR>
+
+(5)&nbsp; Daily values of S&amp;P 500 index:&nbsp; <a href="d-sp55008.txt">d-sp55008.txt</a> <BR>
+
+(6) Quarterly earnings of JNJ (1960-1980):&nbsp;<a href="q-jnj.txt"> q-jnj.txt</a> <BR>
+
+(7)&nbsp; Monthly simple returns of Deciles 1, 2, 9 &amp; 10: <a href="m-deciles08.txt">m-deciles08.txt</a> <BR>
+
+(8) Weekly 1-yr &amp; 3-yr interest rates: <a href="w-gs1yr.txt">w-gs1yr.txt</a> &amp; <a href="w-gs3yr.txt">w-gs3yr.txt</a> <br>
+
+(9) Daily simple returns of VW and EW indices in: <a href="d-ibm3dx7008.txt">d-ibm3dx7008.txt</a> <BR>
+
+<BR></FONT><FONT size=4><A
+
+href="http://faculty.chicagogsb.edu/ruey.tsay/teaching/fts2/wgs3yr.dat"></A></FONT></FONT></P>
+
+<P><FONT face=Arial><FONT size=4><FONT color=#006600>Data sets for
+
+Exercises:</FONT> <BR>
+
+3.&nbsp; Monthly U.S. unemployment rate: <a href="m-unrate.txt">m-unrate.txt</a> </FONT></FONT></P>
+
+<P><FONT face=Arial><FONT size=4>4.&nbsp; Monthly simple returns of Deciles 1, 2, 9, &amp; 10: <a href="m-deciles08.txt">m-deciles08.txt</a> &nbsp;
+
+</FONT></FONT></P>
+
+<P><FONT face=Arial><FONT size=4>5. Daily returns of IBM (Date, IBM, VW,&nbsp;
+
+EW &amp; SP): <a href="d-ibm3dx7008.txt">d-ibm3dx7008.txt</a> </FONT></FONT></P>
+
+<P><FONT face=Arial><FONT size=4>6.&nbsp; Demand of electricity in logarithm: <a href="power6.txt">power6.txt</a> <BR>
+
+</FONT></FONT></P>
+
+<P><FONT face=Arial><FONT size=4>7, 8 &amp; 9.&nbsp; Daily returns of IBM, VW, EW &amp; S&amp;P: <a href="d-ibm3dxwkdays8008.txt">d-ibm3dxwkdays8008.txt</a></FONT></FONT><FONT face=Arial><FONT size=4><BR>
+
+</FONT></FONT></P>
+
+<P><FONT face=Arial><FONT size=4>10,11 &amp; 12.&nbsp; Weekly yields of Moddy's AAA
+
+&amp; BAA seasoned bonds:<BR>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="w-Aaa.txt">w-Aaa.txt</a> and <a href="w-Baa.txt">w-Baa.txt</a> <BR>
+
+</FONT></FONT></P>
+
+<P><FONT face=Arial><FONT size=4>13. Monthly returns of EW: <a href="m-ew6299.txt">m-ew6299.txt</a> <BR>
+
+<A
+
+href="http://faculty.chicagogsb.edu/ruey.tsay/teaching/fts2/wkdays8099.dat"></A></FONT></FONT></P>
+
+<P><FONT face=Arial><FONT size=4>14. Log prices of futures and spot of SP500: <a href="sp5may.dat">sp5may.dat</a> </FONT></FONT></P>
+
+<P><FONT face=Arial><FONT size=4>15. Quarterly GDP implicit price deflator:<a href="q-gdpdef.txt"> q-gdpdef.txt</a> </FONT></FONT></P>
+
+<P><FONT face=Arial><FONT color="#FF00FF" size=4>R packages used</FONT><FONT size=4>: fBasics, fUnitRoots, timeSeries (fSeries), TSA<BR>
+
+<BR>
+
+</FONT></FONT></P>
+
+<P><FONT face=Arial><FONT color=#990000 size=4>Chapter 3: Conditional
+
+Heteroscedastic Models</FONT></FONT></P>
+
+<P><FONT face=Arial size=4>Data sets used in the text:<BR>
+
+(1) Monthly simple
+
+returns of Intel stock:&nbsp; <a href="m-intc7308.txt">m-intc7308.txt</a> <BR>
+
+(2) 10-minute FX log returns (Mark-Dollar): <a href="exch-perc.txt">exch-perc.txt</a> <BR>
+
+(3) Monthly excess returns of the S&amp;P 500 index: <a href="sp500.dat">sp500.dat</a> <BR>
+
+(4)&nbsp; Monthly simple returns of IBM stock in: <a href="m-ibmvwew2697.txt">m-ibmvwew2697.txt</a> &amp; <a href="m-ibmvwewsp2603.txt">m-ibmvwewsp2603.txt</a> <BR>
+
+(5)&nbsp; Daily simple returns of IBM stock, VW, EW, and SP5: <a href="d-ibmvwewsp6203.txt">d-ibmvwewsp6203.txt</a> <BR>
+
+(6) Monthly log returns of IBM stock and S&amp;P 500 index: <a href="m-ibmspln.dat">m-ibmspln.dat</a> <BR>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Data for Example 3.4:<a href="m-ibmsplnsu.dat"> m-ibmsplnsu.dat</a> &nbsp;&nbsp;
+
+<BR>
+
+(7) Daily returns of S&amp;P 500 index: <a href="d-sp8099.txt">d-sp8099.txt</a> <BR>
+
+<BR><FONT color=#006600>Data sets&nbsp;for Exercises:</FONT><BR>
+
+5. Monthly
+
+simple returns of Intel stock: <a href="m-intc7308.txt">m-intc7308.txt</a> </FONT></P>
+
+<P><FONT face=Arial size=4>6. Monthly simple returns of Merck stock: <a href="m-mrk4608.txt">m-mrk4608.txt</a> <BR>
+
+</FONT></P>
+
+<P><FONT face=Arial size=4>7. Monthly simple returns of 3M stock: <a href="m-3m4608.txt">m-3m4608.txt</a> &nbsp;&nbsp;<A
+
+href="http://faculty.chicagogsb.edu/ruey.tsay/teaching/fts2/m-mmm.dat">
+
+</A></FONT></P>
+
+<P><FONT face=Arial size=4>8-10. Monthly simple returns of GM stock &amp; SP500: <a href="m-gmsp5008.txt">m-gmsp5008.txt</a> &nbsp;
+
+<BR>
+
+</FONT></P>
+
+<P><FONT face=Arial size=4>11-15. Daily simple returns of GM stock and SP500: <a href="d-gmsp9908.txt">d-gmsp9908.txt</a> </FONT></P>
+
+<P><FONT color="#FF00FF" size=4 face=Arial>R package used</FONT><FONT face=Arial size=4>: fGarch<BR>
+
+<BR>
+
+<A
+
+href="http://faculty.chicagogsb.edu/ruey.tsay/teaching/fts2/m-gmsp5099.dat"></A></FONT></P>
+
+<P><FONT face=Arial color=#990000 size=4>Chapter 4: Nonlinear Models and Their
+
+Applications</FONT></P>
+
+<P><FONT face=Arial size=4>Data sets used in the text:<BR>
+
+(1) Monthly U.S.
+
+civilian unemployment rate(48-09):&nbsp; <a href="m-unrate.txt">m-unrate.txt</a> &nbsp;
+
+<A href="http://faculty.chicagogsb.edu/ruey.tsay/teaching/fts2/m-ew.dat"
+
+href?m-ew.dat=""></A><BR>
+
+(2) Daily returns of IBM stock in the file: <a href="d-ibmvwewsp6203.txt">d-ibmvwewsp6203.txt</a> &nbsp;
+
+<BR>
+
+<A
+
+href="http://faculty.chicagogsb.edu/ruey.tsay/teaching/fts2/ibm-ar-tar.rats"></A>(3)
+
+Monthly simple returns of 3M stock:&nbsp; <a href="m-3m4608.txt">m-3m4608.txt</a> &nbsp;&nbsp;
+
+<A
+
+href="http://faculty.chicagogsb.edu/ruey.tsay/teaching/fts2/m-mmm.dat"></A><BR>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+RATS program for smooth TAR: <a href="star.rats">star.rats</a> <BR>
+
+(4) Quarterly growth rates of U.S. gnp: <a href="q-gnp4791.txt">q-gnp4791.txt</a> <BR>
+
+(5) Weekly 3-month Treasury Bill rates: <a href="w-tb3ms7097.txt">w-tb3ms7097.txt</a> &nbsp; &nbsp; <BR>
+
+(5) Monthly log returns, in percentages, of IBM stock: <a href="m-ibmln2699.txt">m-ibmln2699.txt</a> &nbsp;&nbsp;
+
+<A
+
+href="http://faculty.chicagogsb.edu/ruey.tsay/teaching/fts2/m-ibmln99.dat"></A><br>
+
+(6) Monthly EW, VW &amp; IBM returns: <a href="m-ibmvwew2697.txt">m-ibmvwew2697.txt</a> <BR>
+
+(6)
+
+Quarterly unemployment rates:&nbsp; <a href="q-unemrate.txt">q-unemrate.txt</a> &nbsp;&nbsp;<A
+
+href="http://faculty.chicagogsb.edu/ruey.tsay/teaching/fts2/qunemrate.dat">
+
+</A></FONT></P>
+
+<P><FONT face=Arial size=4>R and S commands for Example 4.7 are in&nbsp;<a href="nnet-ibm.sor">nnet-ibm.sor</a> <BR>
+
+</FONT></P>
+
+<P><FONT face=Arial color=#006600 size=4>Data sets&nbsp;for Exercises:
+
+</FONT><FONT face=Arial size=4><BR>
+
+1. Daily returns of JNJ stock: <a href="d-jnj9808.txt">d-jnj9808.txt</a> &nbsp; <BR>
+
+</FONT></P>
+
+<P><FONT face=Arial size=4>2,3,5: Monthly returns of GE stock: <a href="m-ge2608.txt">m-ge2608.txt</a> &nbsp;
+
+<BR>
+
+<A
+
+href="http://faculty.chicagogsb.edu/ruey.tsay/teaching/fts2/m-geln-p.dat"></A></FONT></P>
+
+<P><FONT face=Arial size=4>6. Weekly U.S. interest rates:<BR>
+
+&nbsp;&nbsp;&nbsp;
+
+(a) Treasury 1-year constant maturity rates: <a href="w-gs1yr.txt">w-gs1yr.txt</a> <BR>
+
+&nbsp;&nbsp;&nbsp; (b) Treasury 3-year constant maturity rates: <a href="w-gs3yr.txt">w-gs3yr.txt</a> </FONT></P>
+
+<P><FONT color="#FF00FF" size=4 face=Arial>R packages used</FONT><FONT face=Arial size=4>: fGarch, TSA<BR>
+
+<BR>
+
+</FONT></P>
+
+<P><FONT face=Arial color=#990000 size=4>Chapter 5: High-Frequency Data Analysis
+
+and
+
+Market<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Microstructure</FONT></P>
+
+<P><FONT face=Arial size=4>Data sets used in the text: <BR>
+
+(1) IBM transactions
+
+data (11/1/90-1/31/91): The columns<BR>&nbsp;&nbsp;&nbsp;&nbsp; are date/time,
+
+volume, bid quote, ask quote, and <BR>
+
+&nbsp;&nbsp;&nbsp;&nbsp; transaction
+
+price: <a href="ibm.txt">ibm.txt</a> <BR>
+
+(2) IBM transactions data of December
+
+1999. <BR>
+
+&nbsp;&nbsp;&nbsp; (day. time, price): <a href="ibm9912-tp.dat">ibm9912-tp.dat</a> <br>
+
+(3) BA transactions data on December 1, 2008:<a href="taq-td-ba12012008.txt"> taq-td-ba12012008.txt</a> <BR>
+
+(4)
+
+Adjusted time durations between trades (11/01/90-<BR>
+
+&nbsp;&nbsp;&nbsp;
+
+1/31/91): <a href="ibmdurad.dat">ibmdurad.dat</a> <BR>
+
+(5)
+
+Adjusted durations in (4) for the first 5 trading
+
+days:<BR>
+
+&nbsp;&nbsp;&nbsp;&nbsp;Positive durations only:<a href="ibm1to5-dur.txt"> ibm1to5-dur.txt</a> <BR>
+
+(6) Data for Example 5.2 <BR>
+
+&nbsp;&nbsp;&nbsp;&nbsp; (a) The ADS
+
+file:&nbsp;<a href="ibm91-ads.dat"> ibm91-ads.dat</a> <BR>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+(b) The explanatory variables as defined: <a href="ibm91-adsx.dat">ibm91-adsx.dat</a> <BR>
+
+(7) Transactions data of IBM stock on November 21,
+
+1990<BR>
+
+&nbsp;&nbsp;&nbsp; (a) original data:&nbsp;<a href="day15-ori.dat">day15-ori.dat</a> <BR>
+
+&nbsp;&nbsp;&nbsp;
+
+(b)<font face="Arial, Helvetica, sans-serif"> data for PCD models:&nbsp; <a href="day15.dat">day15.dat</a> <BR>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+data descriptions in file: <a href="day15.txt">day15.txt </a></font></FONT><font size="4" face="Arial, Helvetica, sans-serif"><br>
+
+(8) Daily prices of Apple stock (01/04/1999 - 11/20/2007): <a href="d-aapl9907.txt">d-aapl9907.txt</a></font></P>
+
+<P><FONT face=Arial size=4>RATS programs for estimating duration models:<BR>
+
+The
+
+data file used is <a href="ibm1to5-dur.txt">ibm1to5-dur.txt</a> <BR>
+
+(a)
+
+EACD model: <a href="eacd.rats">eacd.rats</a> <BR>
+
+(b)
+
+WACD model: <a href="wacd.rats">wacd.rats</a> <BR>
+
+(c)
+
+GACD model: <a href="gacd.rats">gacd.rats</a> <BR>
+
+(d)
+
+Threshold-WACD model: <a href="tar-wacd.rats">tar-wacd.rats</a> </FONT></P>
+
+<P><FONT face=Arial size=4><FONT color=#006600>Data sets for
+
+Exercises:<BR>
+
+</FONT>3. Adjusted durations of IBM stock (11/2/90): <a href="ibm-d2-dur.txt">ibm-d2-dur.txt</a> &nbsp; <BR>
+
+</FONT></P>
+
+<P><FONT face=Arial size=4>4 &amp; 5.
+
+Transactions data of 3M (12/99): <a href="mmm9912-dtp.txt">mmm9912-dtp.txt</a> </FONT></P>
+
+<P><FONT face=Arial size=4>6. Adjusted durations of 3M (12/99): <a href="mmm9912-adur.txt">mmm9912-adur.txt</a> <BR>
+
+</FONT></P>
+
+<P><FONT face=Arial size=4>7, 8, 9 &amp; 10. Trade data of Boeing (BA) stock:<br>
+
+(a) <a href="taq-td-ba12012008.txt">taq-td-ba12012008.txt</a>, (b) <a href="taq-td-ba12022008.txt">taq-td-ba12022008.txt</a>, (c) <a href="taq-td-ba12032008.txt">taq-td-ba12032008.txt</a> <br>
+
+(d) <a href="taq-td-ba12042008.txt">taq-td-ba12042008.txt</a>, &amp; (e) <a href="taq-td-ba12052008.txt">taq-td-ba12052008.txt</a> &nbsp;
+
+<br>
+
+R scripts: (a) number of trades: <a href="hfntra.R">hfntra.R</a>, (b) high-frequency returns: <a href="hfrtn.R">hfrtn.R</a> <BR>
+
+</FONT></P>
+
+<P><FONT face=Arial color=#ff0000 size=4><BR>Chapter 6: Continuous-Time Models
+
+and Their Applications</FONT></P>
+
+<P><FONT face=Arial size=4>Data sets used in the text:<BR>
+
+(1) Daily simple
+
+returns of IBM stock in 1998: <a href="d-ibmy98.txt">d-ibmy98.txt</a><BR>
+
+(2)
+
+Daily log returns of Cisco stock in 1999:&nbsp;<a href="d-csco2007.txt">d-csco2007.txt</a> &nbsp;&nbsp;
+
+<SPAN style="TEXT-DECORATION: underline"><BR>
+
+</SPAN></FONT></P>
+
+<P><FONT face=Arial size=4>Source code&nbsp;of a <FONT color=#ff00cc>Fortran
+
+</FONT>program for European call and put options <BR>based on the simple jump
+
+diffusion model discussed in the text:<BR><A
+
+href="kou.f">kou.f
+
+</A>(You need to compile the program.)<BR>
+
+<BR></FONT></P>
+
+<P><FONT face=Arial color=#ff0000 size=4>Chapter 7: Extreme Values, Quantile
+
+Estimation, and Value at Risk</FONT></P>
+
+<P><FONT face=Arial size=4>Data sets used in the text:<BR>(1) Daily returns of
+
+IBM stock:&nbsp; <A
+
+href="d-ibm6298.txt">d-ibm6298.txt</A>&nbsp;
+
+(9190 obs)<BR>
+
+(2) RATS programs used in Example
+
+7.3:&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (Note: returns used in the example
+
+are not in percentages.)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (a)
+
+AR(2)-GARCH(1,1):&nbsp;<A
+
+href="example7-3a.rats">example7-3a.rats</A><BR>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+(b) AR(2)-GARCH(1,1)-t5: <A
+
+href="example7-3b.rats">example7-3b.rats</A>
+
+<BR>
+
+(3) Daily log returns of Intel stock (Example 7.4): <a href="d-intc7208.txt">d-intc7208.txt</a> &nbsp;
+
+<A
+
+href="http://faculty.chicagogsb.edu/ruey.tsay/teaching/fts2/d-intc7297.dat"></A><BR>
+
+(4)
+
+Data used in Subsection 7.7.8<BR>&nbsp;&nbsp;&nbsp;&nbsp; (a) Mean-corrected
+
+daily log returns of IBM: <A
+
+href="d-ibmln98wm.txt">d-ibmln98wm.txt</A>&nbsp;&nbsp;
+
+<BR>
+
+&nbsp;&nbsp;&nbsp;&nbsp; (b) The explanatory variables on page 294: <A
+
+href="d-ibml25x.txt">d-ibml25x.txt</A>
+
+&nbsp; &nbsp;<A
+
+href="http://faculty.chicagogsb.edu/ruey.tsay/teaching/fts2/ibml25x.dat"></A>
+
+</FONT></P>
+
+<P><FONT face=Arial size=4><FONT color=#006600>Data sets for
+
+Exercises:</FONT><BR>
+
+1 &amp; 8. Daily returns of GE stock: <a href="d-ge9808.txt">d-ge9808.txt</a> &nbsp;
+
+<SPAN style="TEXT-DECORATION: underline"><BR>
+
+</SPAN></FONT></P>
+
+<P><FONT face=Arial size=4>2 &amp; 3.&nbsp; Daily returns of Cisco stock: <a href="d-csco9808.txt">d-csco9808.txt</a> &nbsp;&nbsp;<A
+
+href="http://faculty.chicagogsb.edu/ruey.tsay/teaching/fts2/d-csco9199.dat"></A></FONT></P>
+
+<P><FONT face=Arial size=4>4. Daily returns of HP and 3 indices: <a href="d-hpq3dx9808.txt">d-hpq3dx9808.txt</a> &nbsp;&nbsp;
+
+<BR>
+
+</FONT></P>
+
+<P><FONT face=Arial size=4>5, 6, &amp; 7. Daily returns of Alcoa stock and
+
+S&amp;P 500 index: <a href="d-aaspx9808.txt">d-aaspx9808.txt</a> &nbsp;
+
+</FONT></P>
+
+<P><FONT color="#FF00FF" size=4 face=Arial>R packages used</FONT><FONT face=Arial size=4>: evir, nnet, fGarch<BR>
+
+<BR>
+
+</FONT></P>
+
+<P><FONT face=Arial color=#ff0000 size=4>Chapter 8: Multivariate Time Series
+
+Analysis and Its Applications</FONT></P>
+
+<P><FONT face=Arial size=4>Data sets used in the text:<BR>
+
+(1) Monthly returns of
+
+IBM and S&amp;P 500:<a href="m-ibmsp2608.txt"> m-ibmsp2608.txt</a> &nbsp;&nbsp;
+
+<A
+
+href="http://faculty.chicagogsb.edu/ruey.tsay/teaching/fts2/m-ibmspln.dat"></A><BR>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+The SCA commands used to analyze the series:&nbsp;<A
+
+href="sca-ex-ch8.txt">sca-ex-ch8.txt</A><BR>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+Source code of a <FONT color=#ff00cc>Fortran</FONT> program for multivariate
+
+Q-stat: <A
+
+href="qstat.f">qstat.f</A>&nbsp;<BR>
+
+(2)
+
+Monthly simple returns of bond indexes: <A
+
+href="m-bnd.txt">m-bnd.txt</A>&nbsp;&nbsp;
+
+<BR>
+
+(3) Monthly U.S. interest rates of Example 8.6: <A
+
+href="m-gs1n3-5301.txt">m-gs1n3-5301.txt&nbsp;</A>&nbsp;
+
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SCA commands used: <A
+
+href="sca-ex8-6.txt">sca-ex8-6.txt</A>
+
+<BR>
+
+(4) Weekly U.S. interest rates (3-m &amp; 6-m): <A
+
+href="w-tb3n6ms.txt">w-tb3n6ms.txt</A>&nbsp;&nbsp;
+
+<BR>
+
+(5) Log prices of SP500 index futures and shares: <A
+
+href="sp5may.dat">sp5may.dat</A> <br>
+
+(6) Pairs trading example: <a href="d-bhp0206.txt">d-bhp0206.txt</a> &amp; <a href="d-vale0206.txt">d-vale0206.txt</a> <BR>
+
+<BR><A
+
+href="http://faculty.chicagogsb.edu/ruey.tsay/teaching/fts2/m-5cln.dat"></A></FONT></P>
+
+<P><FONT face=Arial size=4><FONT color=#006600>Data sets for
+
+Exercises:<BR></FONT>1. Monthly returns of MRK et al.: <A
+
+href="m-mrk2vw.txt">m-mrk2vw.txt</A>&nbsp;&nbsp;
+
+<SPAN style="TEXT-DECORATION: underline"><BR>
+
+</SPAN></FONT></P>
+
+<P><FONT face=Arial size=4>2, 3, &amp; 4. Monthly U.S. interest rates (1 &amp;
+
+10 yrs): <A
+
+href="m-gs1n10.txt">m-gs1n10.txt</A>&nbsp;&nbsp;
+
+<BR>
+
+</FONT></P>
+
+<P><FONT face=Arial size=4>7. Monthly U.S. interest rates (1-yr &amp; 3-yr): <A
+
+href="m-gs1n3-5304.txt">m-gs1n3-5304.txt&nbsp;</A>&nbsp;
+
+</FONT></P>
+
+<P><FONT color="#FF00FF" size=4 face=Arial>R packages used</FONT><FONT face=Arial size=4>: urca, fUnitRoots<BR>
+
+<BR>
+
+</FONT></P>
+
+<P><FONT face=Arial size=4><SPAN style="COLOR: rgb(255,0,0)">Chapter 9:
+
+Principal Component Analysis and Factor Models</SPAN><BR></FONT></P>
+
+<P><FONT face=Arial size=4>Data sets used in the text:<BR>(1) Monthly stock
+
+returns of Table 9.1:&nbsp; <A
+
+href="m-fac9003.txt">m-fac9003.txt</A>&nbsp;&nbsp;
+
+<BR>
+
+(2) Monthly macroeconomic variables: (CPI &amp;
+
+CE16):<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <A
+
+href="m-cpice16-dp7503.txt">m-cpice16-dp7503.txt</A>&nbsp;&nbsp;
+
+<BR>
+
+(3) Monthly excess returns of Table 9.2: <A
+
+href="m-barra-9003.txt">m-barra-9003.txt</A>&nbsp;
+
+<BR>
+
+(4) Monthly log returns, in percentages, of IBM, HPQ, INTC,
+
+<BR>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JPM &amp; BAC stocks:&nbsp;<a href="m-5clog-9008.txt"> m-5clog-9008.txt</a><BR>
+
+(5) Monthly returns of U.S. bond indices: <A
+
+href="m-bnd.txt">m-bnd.txt&nbsp;</A>&nbsp;
+
+<BR>
+
+(6) Monthly returns of 40 stocks in Table
+
+9.6:<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (Company ID, date, return): <A
+
+href="m-apca0103.txt">m-apca0103.txt</A>&nbsp;&nbsp;
+
+<BR>
+
+</FONT></P>
+
+<P><FONT face=Arial size=4><SPAN style="COLOR: rgb(0,153,0)">Data sets for
+
+Exercises:</SPAN><BR>
+
+1. Monthly returns of stocks and S&amp;P index: <a href="m-fac-ex-9008.txt">m-fac-ex-9008.txt</a> &nbsp;&nbsp;
+
+<BR>
+
+</FONT></P>
+
+<P><FONT face=Arial size=4>2 Monthly returns of MRK, JNJ, GE, ... &amp; VW index: <a href="m-mrk2vw.txt">m-mrk2vw.txt</a> </FONT></P>
+
+<P><FONT face=Arial size=4>3. to 6. Monthly simple excess returns:&nbsp; <A
+
+href="m-excess-c10sp-9003.txt">m-excess-c10sp-9003.txt</A>&nbsp;
+
+</FONT></P>
+
+<P><FONT face=Arial size=4>7. Federal funds rate &amp; IP index: <a href="m-fedip.txt">m-fedip.txt</a> <BR>
+
+</FONT></P>
+
+<P><FONT face=Arial size=4><BR></FONT></P>
+
+<P><FONT face=Arial color=#ff0000 size=4>Chapter 10: Multivariate Volatility
+
+Models and Their Applications</FONT></P>
+
+<P><FONT face=Arial size=4>Data sets used in the text: <BR>
+
+(1) HK and Japan daily market indices (Example 10.1):<BR>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+Data file (714 data pts): <a href="d-hkjp0608.txt">d-hkjp0608.txt</a> <BR>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Bivariate GARCH programs: <A
+
+href="hkja-c.rats">hkja-c.rats</A>&nbsp;and
+
+<A
+
+href="hkja-c1.rats">hkja-c1.rats</A><BR>
+
+(2)
+
+Monthly returns of Pfizer and Merck stocks:<BR>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="m-pfemrk6508.txt"> m-pfemrk6508.txt</a> <BR>
+
+(3) Monthly returns of IBM and S&amp;P 500: <A
+
+href="m-ibmsp2699.txt">m-ibmsp2699.txt</A>&nbsp;&nbsp;
+
+<BR>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Constant-correlation GARCH program: <A
+
+href="ibmsp-ex102.rats">ibmsp-ex102.rats</A><BR>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+Time-varying correlation GARCH: <A
+
+href="ibmsp-ex102q.rats">ibmsp-ex102q.rats</A><BR>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cholesky
+
+Decomposition: <A
+
+href="ibmsp-choles.rats">ibmsp-choles.rats</A><BR>
+
+(4) Daily log returns of S&amp;P 500, Cisco and Intel
+
+stocks:<BR>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Data (3 columns):&nbsp; <A
+
+href="d-spcscointc.txt">d-spcscointc.txt</A>&nbsp;&nbsp;&nbsp;
+
+<BR>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Time-varying 3-dim GARCH model: <A
+
+href="cholesky-ex103.rats">cholesky-ex103.rats</A>
+
+</FONT><br>
+
+<font size="4" face="Arial, Helvetica, sans-serif">(5) Daily exchange rates and stock returns: <a href="d-fxsk9904.txt">d-fxsk9904.txt</a> </font></P>
+
+<P><FONT face=Arial size=4><FONT color=#006600>Data sets for
+
+Exercises:<BR>
+
+</FONT>1 - 4: Monthly log returns of S&amp;P 500, IBM
+
+<BR>
+
+&nbsp;&nbsp;&nbsp; and GE stocks: <a href="m-ibmhpqsp6208.txt">m-ibmhpqsp6208.txt</a> </FONT></P>
+
+<P><FONT face=Arial size=4>5, 6: Simple returns of GE, IBM &amp; S&amp;P index: <a href="m-geibmsp2608.txt">m-geibmsp2608.txt</a> <BR>
+
+</FONT></P>
+
+<P><FONT face=Arial size=4>7, 8, 9: Monthly log returns, in
+
+percentages, of <BR>
+
+&nbsp;&nbsp;&nbsp;&nbsp; S&amp;P 500 index, IBM and GE
+
+stocks: <A
+
+href="m-spibmge.txt">m-spibmge.txt</A>&nbsp;&nbsp;
+
+<BR>
+
+</FONT></P>
+
+<P><FONT face=Arial size=4>10. Daily log returns of Dell and Cisco stocks: <A
+
+href="d-dellcsco9099.txt">d-dellcsco9099.txt</A>
+
+&nbsp; <BR>
+
+</FONT></P>
+
+<P><FONT face=Arial size=4><BR></FONT></P>
+
+<P style="COLOR: rgb(255,0,0)"><FONT face=Arial size=4>Chapter 11: State-Space
+
+Models and Kalman Filter</FONT></P>
+
+<P><FONT face=Arial size=4>Data sets used in the text:<BR>(1) Daily realized
+
+volatility series of Alcoa stock: (5m, 10m,
+
+20m)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A
+
+href="aa-3rv.txt">
+
+aa-3rv.txt</A>&nbsp;&nbsp; <BR>
+
+(2) Monthly excess returns of GM stock: see Table
+
+9.1 of Chapter 9.<BR>(3) Quarterly earnings of Johnson and Johnson: see Chapter
+
+2.<BR></FONT></P>
+
+<P><FONT face=Arial size=4><SPAN style="COLOR: rgb(0,153,0)">Data sets for
+
+Exercises:</SPAN><BR>2. Realized volatility of Alcoa&nbsp; stock (20m interval):
+
+<A
+
+href="aa-rv-20m.txt">aa-rv-20m.txt</A>&nbsp;&nbsp;
+
+<BR>
+
+</FONT></P>
+
+<P><FONT face=Arial size=4>3. Monthly simple excess returns of Pfizer stock and
+
+S&amp;P 500 index:<BR>&nbsp;&nbsp;&nbsp; <A
+
+href="m-pfesp-ex9003.txt">m-pfesp-ex9003.txt</A>&nbsp;&nbsp;
+
+<br>
+
+5. U.S. producer price index data (January 1947 to November 2009): <a href="m-ppiaco4709.txt">m-ppiaco4709.txt</a> <BR>
+
+</FONT></P>
+
+<P><FONT face=Arial size=4><BR></FONT></P>
+
+<P><FONT face=Arial color=#ff0000 size=4>Chapter 12: Markov Chain Monte Carlo
+
+Methods with Applications</FONT></P>
+
+<P><FONT face=Arial size=4>Data sets used in the text:<BR>(1) Change series of
+
+weekly US interest rates (3-y &amp; 1-y):<BR>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <A
+
+href="w-gs1n3c.txt">w-gs1n3c.txt</A>&nbsp;&nbsp;
+
+<A
+
+href="http://faculty.chicagogsb.edu/ruey.tsay/teaching/fts2/w-gs3n1c.dat"></A><BR>
+
+(2)
+
+Change series of weekly US 3-yr interest rate: <A
+
+href="w-gs3c.txt">w-gs3c.txt</A>&nbsp;
+
+<BR>
+
+(3) Monthly log returns of S&amp;P 500 index: <a href="m-sp500-6209.txt">m-sp500-6209.txt</a> &nbsp;
+
+<A
+
+href="http://faculty.chicagogsb.edu/ruey.tsay/teaching/fts2/m-sp6299.dat"></A><BR>
+
+(4)
+
+Monthly log returns of IBM stock &amp; SP 500: <a href="m-ibmsp6209.txt">m-ibmsp6209.txt</a> &nbsp;<br>
+
+(5) Monthly log index of S&amp;P 500 index: <a href="m-sp5-6204.txt">m-sp5-6204.txt</a> <BR>
+
+(6)
+
+Monthly log returns of GE stock: <A
+
+href="m-geln.txt">m-geln.txt
+
+</A>&nbsp;&nbsp;<A
+
+href="http://faculty.chicagogsb.edu/ruey.tsay/teaching/fts2/m-geln.dat"></A>
+
+</FONT></P>
+
+<P><FONT face=Arial><FONT size=4><FONT color=#006600>Data sets for
+
+Exercises:<BR>
+
+</FONT>4, 6. Monthly simple returns of Ford Motors stock and S&amp;P500: <a href="m-fsp6508.txt">m-fsp6508.txt</a> <BR>
+
+</FONT></FONT></P>
+
+<P><FONT face=Arial><FONT size=4>5. Daily returns of Cisco stock: <a href="d-csco0108.txt">d-csco0108.txt</a> &nbsp;&nbsp;<A
+
+href="http://faculty.chicagogsb.edu/ruey.tsay/teaching/fts2/d-csco9199.dat"></A></FONT></FONT></P>
+
+<P><FONT face=Arial size=4>7. Monthly returns of Procter &amp; Gamble stock and VW index: <a href="m-pgvw6508.txt">m-pgvw6508.txt</a> </FONT></P>
+
+<P><FONT face=Arial size=4>8. Monthly 30-year mortgage rate &amp; 3-month Treasury Bill rate: <a href="m-mort3mtb7109.txt">m-mort3mtb7109.txt</a> <BR>
+
+</FONT></P>
+
+</BODY>
+
+</HTML>
+
