@@ -1,0 +1,569 @@
+
+64.32.25.217
+133.130.122.125
+98.126.76.125
+139.162.82.204
+85.159.211.219
+
+
+ssh -f -N -D 127.0.0.1:1080 leftvip@85.159.211.219
+ssh -f -N -D 127.0.0.1:1080 leftvip@133.130.122.125
+ssh -f -N -D 10.0.62.50:1081 leftvip@133.130.122.125
+
+ssh leftvip@133.130.122.125 -f -nN -D127.0.0.1:1080 -o NumberOfPasswordPrompts=1
+
+ssh 133.130.122.125 -p 22 -l leftvip -nN -D1080 -o NumberOfPasswordPrompts=1 -f
+
+www.azuredaili.asia
+
+ssh -o ConnectTimeout=3 -o ConnectionAttempts=5 -o PasswordAuthentication=no -o StrictHostKeyChecking=no $ip  “command”
+1 ConnectTimeout=3                    连接时超时时间，3秒
+2 ConnectionAttempts=5                连接失败后重试次数，5次
+3 PasswordAuthentication=no           是否使用密码认证，（在遇到没做信任关系时非常有用，不然会卡在那里）
+4 StrictHostKeyChecking=no            第一次登陆服务器时自动拉取key文件，（跟上面一样，并且在第一次ssh登陆时，自动应答yes）
+
+ssh -f -N -D 127.0.0.1:1080 leftvip@64.32.25.217 -p 443
+
+autossh -M 20000 -o "ServerAliveInterval 10" -o "ServerAliveCountMax 5" -f -N -D 127.0.0.1:1080 leftvip@133.130.122.125 -p 443
+
+autossh -M 20000 -o "ServerAliveInterval 10" -o "ServerAliveCountMax 5" -f -N -D 127.0.0.1:1080 leftvip@64.32.25.217
+
+autossh -M 20000 -f -N -D 127.0.0.1:1080 leftvip@133.130.122.125
+
+
+autossh -M 20000 -f -N your_public_server -R 1234:localhost:22 -C
+
+autossh -f -N -D 127.0.0.1:1080 leftvip@133.130.122.125
+
+
+10.0.62.7 1080
+
+
+
+sudo jt -t monokai -cellw 1080 -lineh 112 -ofs 9 -fs 10 -T
+
+70:4D:7B:86:A5:43
+
+
+704D7B86A543
+
+
+sudo vi /etc/network/interfaces
+
+iface enp6s0 inet static
+pre-up ifconfig enp6s0 hw ether 70:4D:7B:86:A5:49
+address 10.0.62.50
+netmask 255.255.0.0
+gateway 10.0.0.10
+
+iface enp6s0 inet static
+#pre-up ifconfig enp6s0 hw ether 70:4D:7B:86:A5:49
+hwaddress ether 70:4D:7B:86:A5:49
+address 10.0.62.50
+netmask 255.255.0.0
+gateway 10.0.0.10
+
+
+sudo /etc/init.d/networking restart
+
+sudo ldconfig /usr/local/cuda/lib64
+
+########################################################################
+cuda
+
+https://hemenkapadia.github.io/blog/2016/11/11/Ubuntu-with-Nvidia-CUDA-Bumblebee.html
+https://gist.github.com/Ocramius/30c977242ee510c470eae3cc7bd963bc
+https://gist.github.com/whizzzkid/37c0d365f1c7aa555885d102ec61c048
+
+
+sudo prime-select nvidia
+optirun nvidia-smi
+
+########################################################################
+
+python train.py \
+  --logtostderr \
+  --pipeline_config_path=faster_rcnn_inception_resnet_v2_atrous_pets.config \
+  --train_dir=~/ml/train_models/pet_inception_resnet_faster_rcnn
+
+
+raise ValueError("No variables to save") ValueError: No variables to save
+
+/home/left5/code/python/ml/xtwxfxk/models/object_detection/faster_rcnn_inception_resnet_v2_atrous_pets.config
+
+export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
+
+export PYTHONPATH=$PYTHONPATH:`pwd`
+
+
+
+python train.py \
+    --logtostderr \
+    --pipeline_config_path=samples/faster_rcnn_inception_resnet_v2_atrous_pets.config \
+    --train_dir=/home/left5/ml/train_models/pet_inception_resnet_faster_rcnn
+
+
+python train.py \
+    --logtostderr \
+    --pipeline_config_path=samples/ssd_inception_v2_pets.config \
+    --train_dir=/home/left5/ml/train_models/ssd_inception_v2_coco
+
+
+python train.py \
+    --logtostderr \
+    --pipeline_config_path=samples/ssd_mobilenet_v1_pets.config \
+    --train_dir=/home/left5/ml/train_models/ssd_mobilenet_v1_pets
+
+python eval.py \
+    --logtostderr \
+    --pipeline_config_path=samples/faster_rcnn_inception_resnet_v2_atrous_pets.config \
+    --checkpoint_dir=/home/left5/ml/train_models/pet_inception_resnet_faster_rcnn \
+    --eval_dir=/home/left5/ml/eval/pet_inception_resnet_faster_rcnn
+
+
+python eval.py \
+    --logtostderr \
+    --pipeline_config_path=samples/ssd_inception_v2_pets.config \
+    --checkpoint_dir=/home/left5/ml/train_models/ssd_inception_v2_coco \
+    --eval_dir=/home/left5/ml/eval/ssd_inception_v2_coco
+
+
+python eval.py \
+    --logtostderr \
+    --pipeline_config_path=samples/ssd_mobilenet_v1_pets.config \
+    --checkpoint_dir=/home/left5/ml/train_models/ssd_mobilenet_v1_pets \
+    --eval_dir=/home/left5/ml/eval/ssd_mobilenet_v1_pets
+
+
+
+nvidia-375
+
+
+http://www.pixiv.net/member_illust.php?mode=medium&illust_id=62802355
+id-62802355
+
+
+
+http://imgsrc.baidu.com/forum/pic/item/785cce2f07082838f43d9f90b299a9014c08f122.jpg
+
+
+Sequence to Sequence Learning with Neural Networks
+
+
+
+with open('xxxxx', 'r') as f:
+    f.readline()
+    f.readline()
+
+    lines = f.readlines()
+    lines = [l.strip() for l in lines]
+    data_arr = ' '.join(lines).split()
+
+    datas = np.asarray(data_arr).astype(np.float32)
+
+    return np.transpose(datas.reshape(241, 241))
+
+
+export ORACLE_HOME=/opt/instantclient_12_2
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ORACLE_HOME
+
+
+#######################################################
+
+http://www.linuxfromscratch.org/blfs/view/svn/general/python2.html
+
+###############
+
+https://www.python.org/ftp/python/2.7.12/Python-2.7.12.tgz
+https://www.python.org/ftp/python/2.7.13/Python-2.7.13.tgz
+tar xzf Python-2.7.13.tgz
+
+cd Python-2.7.13
+./configure --enable-shared --enable-unicode=ucs4
+make
+sudo make install
+
+
+sudo make altinstall
+
+
+
+python2.7/zipfile.py ... Makefile:1081: recipe for target 'libinstall' failed
+
+
+Removing gvfs-backends (1.28.2-1ubuntu1~16.04.1) ...
+Removing ipython (2.4.1-1) ...
+Removing okular (4:15.12.3-0ubuntu1) ...
+Removing kde-runtime (4:15.12.3-0ubuntu1) ...
+Removing libsmbclient:amd64 (2:4.3.11+dfsg-0ubuntu0.16.04.9) ...
+Removing pycharm-community (2016.3~mm1) ...
+Removing virtualbox-qt (5.0.40-dfsg-0ubuntu1.16.04.1) ...
+Removing virtualbox (5.0.40-dfsg-0ubuntu1.16.04.1) ...
+Removing python-pip (8.1.1-2ubuntu0.4) ...
+Removing python-pil:amd64 (3.1.2-0ubuntu1.1) ...
+Removing python-wheel (0.29.0-1) ...
+Removing python-all-dev (2.7.11-1) ...
+Removing python-all (2.7.11-1) ...
+Removing python-bs4 (4.4.1-1) ...
+Removing python-chardet (2.3.0-2) ...
+Removing python-decorator (4.0.6-1) ...
+Removing python-dev (2.7.11-1) ...
+Removing python-html5lib (0.999-4) ...
+Removing python-lxml (3.5.0-1build1) ...
+Removing python-pexpect (4.0.1-1) ...
+Removing python-setuptools (20.7.0-1) ...
+Removing python-pkg-resources (20.7.0-1) ...
+Removing python-ptyprocess (0.5-1) ...
+Removing python-simplegeneric (0.8.1-1) ...
+Removing python-six (1.10.0-3) ...
+Removing samba-libs:amd64 (2:4.3.11+dfsg-0ubuntu0.16.04.9) ...
+Removing python-talloc (2.1.5-2) ...
+Removing python-tk (2.7.11-2) ...
+Removing python (2.7.11-1) ...
+
+
+
+tar xvf Python-2.7.13.tgz
+cd Python-2.7.13
+./configure --prefix=/usr/local \
+            --enable-shared     \
+            --with-system-expat \
+            --with-system-ffi   \
+            --with-ensurepip=yes \
+            --enable-unicode=ucs4 && make
+
+make install && chmod -v 755 /usr/lib/libpython2.7.so.1.0
+
+##################################################################
+
+
+
+conn = cx_Oracle.connect('c##local_dlbigdata/123456@10.0.62.6:1521/orcl')
+
+start = i * size
+end = (i+1) * size
+if start > count:
+    break
+
+_sql = open('orig_data_page.sql', 'r').read() % (start, end)
+print('query start: %s - end: %s' % (start, end))
+data = pd.read_sql(_sql, conn)
+
+pickle.dump(data, open('data.%s.p' % i, 'wb'))
+del data
+
+
+
+select * from (select a1.*,rownum rn from (select * from student) a1 where rownum <=5) where rn>=2
+
+
+Start: 7AEC2DCD-DC7B-D0B6-E043-0A8A022BD0B6-00001
+Start: 7AEC2DCD-CFDD-D0B6-E043-0A8A022BD0B6-00001
+Start: 7AEC2DCD-CDBD-D0B6-E043-0A8A022BD0B6-00001
+
+
+YOLO9000: Better, Faster, Stronger
+
+systemctl disable lightdm.service
+systemctl enable lightdm.service
+
+systemctl start lightdm.service
+sudo ln -s /lib/systemd/system/lightdm.service /etc/systemd/system/display-manager.service
+
+
+
+
+./darknet detect cfg/yolo.cfg ~/code/c/yolo.weights data/eagle.jpg
+./darknet detect cfg/yolo9000.cfg ~/code/c/yolo9000.weights data/dog.jpg
+./darknet detect cfg/yolo.2.0.cfg ~/code/c/yolo.2.0.weights data/dog.jpg
+
+####################################################################################################
+
+https://www.learnopencv.com/install-opencv3-on-ubuntu/
+http://www.pyimagesearch.com/2015/06/22/install-opencv-3-0-and-python-2-7-on-ubuntu/
+
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+      -D CMAKE_INSTALL_PREFIX=/usr/local \
+      -D FORCE_VTK=ON -D WITH_TBB=ON \
+      -D WITH_V4L=ON \
+      -D WITH_QT=ON \
+      -D WITH_OPENGL=ON \
+      -D WITH_CUBLAS=ON \
+      -D CUDA_NVCC_FLAGS="-D_FORCE_INLINES" \
+      -D WITH_GDAL=ON \
+      -D WITH_XINE=ON 
+      -D BUILD_EXAMPLES=ON ..
+
+
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+      -D CMAKE_INSTALL_PREFIX=/usr/local \
+      -D INSTALL_C_EXAMPLES=ON \
+      -D INSTALL_PYTHON_EXAMPLES=ON \
+      -D WITH_TBB=ON \
+      -D WITH_V4L=ON \
+      -D WITH_QT=ON \
+      -D WITH_OPENGL=ON \
+      -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules \
+      -D BUILD_EXAMPLES=ON ..
+
+
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+      -D CMAKE_INSTALL_PREFIX=/usr/local \
+      -D INSTALL_C_EXAMPLES=ON \
+      -D INSTALL_PYTHON_EXAMPLES=ON \
+      -D WITH_TBB=ON \
+      -D WITH_V4L=ON \
+      -D WITH_QT=ON \
+      -D WITH_OPENGL=ON \
+      -D BUILD_EXAMPLES=ON ..
+
+
+####################################################################################################
+
+coursera-dl -u xtwxfxk@163.com neural-networks
+
+tsocks coursera-dl -u xtwxfxk@163.com neural-networks-deep-learning
+tsocks coursera-dl -u xtwxfxk@163.com deep-neural-network
+tsocks coursera-dl -u xtwxfxk@163.com machine-learning-projects
+tsocks coursera-dl -u xtwxfxk@163.com convolutional-neural-networks
+tsocks coursera-dl -u xtwxfxk@163.com nlp-sequence-models
+
+https://www.coursera.org/learn/neural-networks-deep-learning
+https://www.coursera.org/learn/deep-neural-network
+https://www.coursera.org/learn/machine-learning-projects
+https://www.coursera.org/learn/convolutional-neural-networks
+https://www.coursera.org/learn/nlp-sequence-models
+
+
+
+#!/bin/sh
+
+#This is an SSH-D proxy with auto-reconnect on disconnect
+
+#Created by Leon on 28, Sep, 2011
+#Email: i@leons.im
+
+i=0
+while test 1==1
+do
+    remote_ip=YOUR_REMOTE_IP
+    remote_user=YOUR_REMOTE_USER
+    local_port=YOUR_LOCAL_PORT
+
+    exist=`ps aux | grep $remote_user@$remote_ip | grep $local_port`
+    #echo $exist
+    if test -n "$exist"
+    then
+        if test $i -eq 0
+        then
+            echo "I'm alive since $(date)"
+        fi
+        i=1
+    else
+        i=0
+        echo "I died..."
+        ssh $remote_user@$remote_ip -f -N -D 0.0.0.0:$local_port
+    fi
+    sleep 1
+done
+
+
+
+
+_XSERVTransSocketUNIXAccept: accept() failed
+
+
+logrotate
+Xorg
+compiz
+
+celery -A jiyuan.celery worker --concurrency=1
+
+
+Wavelet Multiresolution Analysis of Financial Time Series
+
+
+
+
+sudo -H pip install http://download.pytorch.org/whl/cu80/torch-0.2.0.post3-cp27-cp27mu-manylinux1_x86_64.whl
+sudo -H pip install torchvision
+##################################################################################
+
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/waitForWind/MyFirstGitProject.git
+git push -u origin master
+
+
+##################################################################################
+
+python main.py -a alexnet --lr 0.01 ~/datas/torch_imagenet/ILSVRC2012_img_val
+
+
+python main.py -a alexnet /srv/sdb/left5/datas/torch_imagenet
+
+python main.py -a alexnet --b 1024 /srv/sdb/left5/datas/torch_imagenet
+
+python main.py -a inception_v3 -b 512 /srv/sdb/left5/datas/torch_imagenet
+
+###
+python main.py -a resnet34 /srv/sdb/left5/datas/torch_imagenet
+Epoch: [19][3250/5005]  Time 1.807 (3.206)  Data 1.643 (3.015)  Loss 2.2575 (2.3128)    Prec@1 46.875 (48.324)  Prec@5 75.391 (73.036)
+###
+
+
+extract imagenet image
+
+https://github.com/amd/OpenCL-caffe/wiki/Instructions-to-create-ImageNet-2012-data
+
+find . -name "*.tar" | while read NAME ; do mkdir -p "${NAME%.tar}"; tar -xvf "${NAME}" -C "${NAME%.tar}"; rm -f "${NAME}"; done
+##################################################################################
+
+
+
+
+Analysis of Financial Time-Series using Fourier and Wavelet Methods
+Wavelets in time series analysis
+
+
+
+
+exiftool -Title="This is the Title" -Author="Happy Man" -Subject="PDF Metadata" drawing.pdf
+
+
+
+
+
+
+http://api.finance.sina.com.cn/
+http://api.finance.ifeng.com/
+
+
+
+
+from matplitlib import rcParams
+rcParams['figure.figsize'] = (12, 8)
+
+
+lam = 1.
+k = 1.5
+fn = lambda x: (k / lam) * np.power(x/lam, k-1) * np.exp(-np.power(x/lam, k))
+
+lam = 1.
+k = 1.5
+fn = lambda x: 1 - np.exp(-np.power(x / lam, k))
+a1 = 2.5 * np.random.random_sample(100000)
+x = fn(a1)
+a2 = a1[a1 < x]
+
+
+
+rar x /mnt/disk/weather2016/1601/160101.rar /mnt/disk/weather_project/data
+
+
+
+
+
+
+docker run -p 8899:8899 pydoc
+
+############################################################################
+
+start-stop-daemon --start -b --exec /usr/bin/pydoc -- -p 8899
+
+start-stop-daemon --start -b --exec /usr/bin/pydoc -- -p 8899 >> /var/log/pydoc/pydoc.log 2>&1
+
+start-stop-daemon --staop --name pydoc
+
+
+##############################
+
+
+/etc/systemd/system/jupyter.service
+##
+[Unit]
+Description=Jupyter Workplace
+ 
+[Service]
+Type=simple
+PIDFile=/run/jupyter.pid
+ExecStart=/usr/local/bin/jupyter-notebook --config=/home/left5/.jupyter/jupyter_notebook_config.py
+User=left5
+Group=left5
+WorkingDirectory=/home/left5/code/python
+Restart=always
+RestartSec=10
+ 
+[Install]
+WantedBy=multi-user.target
+
+##
+
+systemctl enable jupyter.service
+systemctl daemon-reload
+systemctl restart jupyter.service
+
+
+
+#############################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
