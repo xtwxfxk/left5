@@ -26,17 +26,14 @@ ssh -f -N -D 127.0.0.1:1080 leftvip@64.32.25.217 -p 443
 
 autossh -M 20000 -o "ServerAliveInterval 10" -o "ServerAliveCountMax 5" -f -N -D 127.0.0.1:1080 leftvip@133.130.122.125 -p 443
 
-autossh -M 20000 -o "ServerAliveInterval 10" -o "ServerAliveCountMax 5" -f -N -D 127.0.0.1:1080 leftvip@64.32.25.217
+autossh -M 20000 -o "ServerAliveInterval 10" -o "ServerAliveCountMax 5" -f -N -D 127.0.0.1:1080 leftvip@133.130.122.125
 
 autossh -M 20000 -f -N -D 127.0.0.1:1080 leftvip@133.130.122.125
 
-
-autossh -M 20000 -f -N your_public_server -R 1234:localhost:22 -C
-
-autossh -f -N -D 127.0.0.1:1080 leftvip@133.130.122.125
+ssh -f -N -D 127.0.0.1:1080 leftvip@133.130.122.125 -o ServerAliveInterval=5 -o ServerAliveCountMax=10
 
 
-10.0.62.7 1080
+10.0.62.7 1081
 
 
 
@@ -396,6 +393,11 @@ git remote add origin https://github.com/waitForWind/MyFirstGitProject.git
 git push -u origin master
 
 
+1. git status（查看本地分支文件信息，确保更新时不产生冲突）
+2. git checkout -- [file name] （若文件有修改，可以还原到最初状态; 若文件需要更新到服务器上，应该先merge到服务器，再更新到本地）
+3. git branch（查看当前分支情况）
+4. git checkout [remote branch](若分支为本地分支，则需切换到服务器的远程分支)
+5. git pull
 ##################################################################################
 
 python main.py -a alexnet --lr 0.01 ~/datas/torch_imagenet/ILSVRC2012_img_val
@@ -518,6 +520,7 @@ ed2k://|file|Ludwig.Van.Beethoven.-.The.32.Piano.Sonatas.-.Claudio.Arrau.-.(1962
 
 
 
+darknet19.weights.npz
 
 
 

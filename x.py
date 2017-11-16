@@ -70,3 +70,6 @@ a = weibull.pdf(x)
 sns.distplot(a)
 plt.show()
 
+
+
+
