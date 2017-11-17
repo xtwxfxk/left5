@@ -276,6 +276,7 @@ sudo ln -s /lib/systemd/system/lightdm.service /etc/systemd/system/display-manag
 
 ####################################################################################################
 
+http://withr.me/install-opencv-on-ubuntu-16/
 https://www.learnopencv.com/install-opencv3-on-ubuntu/
 http://www.pyimagesearch.com/2015/06/22/install-opencv-3-0-and-python-2-7-on-ubuntu/
 
@@ -523,9 +524,16 @@ ed2k://|file|Ludwig.Van.Beethoven.-.The.32.Piano.Sonatas.-.Claudio.Arrau.-.(1962
 darknet19.weights.npz
 
 
+docker
+http://blog.csdn.net/u010440155/article/details/62422757
+dig auth.docker.io
 
 
 
+sudo docker run -d -p 8887:8888 -p 8889:8889 --name crayon alband/crayon
+
+
+https://doc-14-9g-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/0b6o1mfpf5berqtbf4ilal8gm6vplfis/1510891200000/07651315955848037574/*/0B4pXCfnYmG1WUUdtRHNnLWdaMEU?e=download
 
 
 
