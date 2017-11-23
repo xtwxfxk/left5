@@ -30,7 +30,7 @@ for n_iter in range(100):
         writer.add_text('Text', 'text logged at step:'+str(n_iter), n_iter)
         for name, param in resnet18.named_parameters():
             writer.add_histogram(name, param.clone().cpu().data.numpy(), n_iter)
-        # writer.add_pr_curve('xoxo', np.random.randint(2, size=100), np.random.rand(100), n_iter) #needs tensorboard 0.4RC or later
+        writer.add_pr_curve('xoxo', np.random.randint(2, size=100), np.random.rand(100), n_iter) #needs tensorboard 0.4RC or later
 dataset = datasets.MNIST('data', train=False, download=True)
 images = dataset.test_data[:100].float()
 label = dataset.test_labels[:100]
