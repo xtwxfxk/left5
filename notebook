@@ -1,7 +1,7 @@
 
 64.32.25.217
 133.130.122.125
-98.126.76.125
+98.126.76.123
 139.162.82.204
 85.159.211.219
 
@@ -548,23 +548,56 @@ pinned
 [{"url":"https://www.baidu.com/","title":"百度一下，你就知道","frecency":1900,"lastVisitDate":1509090270051957,"type":"history","baseDomain":"baidu.com"},{"url":"https://github.com/","title":"GitHub","frecency":30363,"lastVisitDate":1511235781047338,"type":"history","baseDomain":"github.com"},{"url":"https://en.wikipedia.org/wiki/Main_Page","title":"Wikipedia, the free encyclopedia","frecency":1718,"lastVisitDate":1510732668771814,"type":"history","baseDomain":"en.wikipedia.org"},{"url":"https://www.coursera.org/","title":"Coursera | Online Courses From Top Universities. Join for Free","frecency":7620,"lastVisitDate":1510214552721227,"type":"history","baseDomain":"coursera.org"},null,{"url":"http://127.0.0.1:8888/tree","title":"jupyter","frecency":27512,"lastVisitDate":1510536604326181,"type":"history","baseDomain":"127.0.0.1"},{"url":"http://10.0.62.35:8888/tree/weather","title":"weather/","frecency":6200,"lastVisitDate":1510128246244501,"type":"history","baseDomain":"10.0.62.35"},{"url":"http://localhost:8899/","title":"Python: Index of Modules","frecency":6673,"lastVisitDate":1510537253708037,"type":"history","baseDomain":"localhost"},{"url":"https://www.docker.com/","title":"Docker - Build, Ship, and Run Any App, Anywhere","frecency":1511,"lastVisitDate":1510123866003076,"type":"history","baseDomain":"docker.com"}]
 
 
+[{"url":"https://www.baidu.com/","title":"百度一下，你就知道","frecency":1900,"lastVisitDate":1509090270051957,"type":"history","baseDomain":"baidu.com"},{"url":"https://github.com/","title":"GitHub","frecency":30363,"lastVisitDate":1511235781047338,"type":"history","baseDomain":"github.com"},{"url":"https://en.wikipedia.org/wiki/Main_Page","title":"Wikipedia, the free encyclopedia","frecency":1718,"lastVisitDate":1510732668771814,"type":"history","baseDomain":"en.wikipedia.org"},{"url":"https://www.coursera.org/","title":"Coursera | Online Courses From Top Universities. Join for Free","frecency":7620,"lastVisitDate":1510214552721227,"type":"history","baseDomain":"coursera.org"},{"url":"http://pytorch.org/","title":"PyTorch","frecency":6169,"lastVisitDate":1510906392880972,"type":"history","baseDomain":"pytorch.org"},{"url":"http://127.0.0.1:8888/tree","title":"jupyter","frecency":27512,"lastVisitDate":1510536604326181,"type":"history","baseDomain":"127.0.0.1"},{"url":"http://10.0.62.35:8888/tree/weather","title":"weather/","frecency":6200,"lastVisitDate":1510128246244501,"type":"history","baseDomain":"10.0.62.35"},{"url":"http://localhost:8899/","title":"Python: Index of Modules","frecency":6673,"lastVisitDate":1510537253708037,"type":"history","baseDomain":"localhost"},{"url":"https://www.docker.com/","title":"Docker - Build, Ship, and Run Any App, Anywhere","frecency":1511,"lastVisitDate":1510123866003076,"type":"history","baseDomain":"docker.com"}]
+
+
+sudo apt-cache madison firefox
+sudo apt-cache policy firefox
+sudo apt-get install firefox=45.0.2+build1-0ubuntu1
+sudo apt-get install firefox=54.0+build3-0ubuntu0.16.04.1
+
+
+
+sudo systemctl disable apt-daily.service
+sudo systemctl disable apt-daily.timer
 
 
 
 
-# conv1s
-[(32, 3)],
-['M', (64, 3)],
-['M', (128, 3), (64, 1), (128, 3)],
-['M', (256, 3), (128, 1), (256, 3)],
-['M', (512, 3), (256, 1), (512, 3), (256, 1), (512, 3)],
-# conv2
-['M', (1024, 3), (512, 1), (1024, 3), (512, 1), (1024, 3)],
-# ------------
-# conv3
-[(1024, 3), (1024, 3)],
-# conv4
-[(1024, 3)]
+
+cudaMemcpyToSymbol
+cudaMemcpyFromSymbol
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
