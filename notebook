@@ -31,6 +31,7 @@ autossh -M 20000 -o "ServerAliveInterval 10" -o "ServerAliveCountMax 5" -f -N -D
 autossh -M 20000 -f -N -D 127.0.0.1:1080 leftvip@133.130.122.125
 
 ssh -f -N -D 127.0.0.1:1080 leftvip@133.130.122.125 -o ServerAliveInterval=5 -o ServerAliveCountMax=10
+ssh -f -N -D 127.0.0.1:1080 leftvip@98.126.76.123 -o ServerAliveInterval=5 -o ServerAliveCountMax=10
 
 
 10.0.62.7 1081
@@ -392,6 +393,9 @@ git add README.md
 git commit -m "first commit"
 git remote add origin https://github.com/waitForWind/MyFirstGitProject.git
 git push -u origin master
+
+git stash save --keep-index
+git stash drop
 
 
 1. git status（查看本地分支文件信息，确保更新时不产生冲突）
