@@ -385,6 +385,7 @@ Wavelet Multiresolution Analysis of Financial Time Series
 
 
 sudo -H pip install http://download.pytorch.org/whl/cu80/torch-0.2.0.post3-cp27-cp27mu-manylinux1_x86_64.whl
+                                torch-0.3.0.post4-cp27-cp27mu-linux_x86_64.whl
 sudo -H pip install torchvision
 ##################################################################################
 
@@ -565,12 +566,40 @@ sudo apt-get install firefox=54.0+build3-0ubuntu0.16.04.1
 sudo systemctl disable apt-daily.service
 sudo systemctl disable apt-daily.timer
 
+sudo apt-get remove update-manager
 
 
 
 
 cudaMemcpyToSymbol
 cudaMemcpyFromSymbol
+
+
+
+
+###########################################################################
+
+Get more data (or data augmentation)
+Dropout
+DropConnect
+L1 and L2 regularization
+Feature scale clipping
+Global average pooling
+Make network smaller
+Early stopping
+
+
+
+
+https://xmr.nanopool.org/account/446uU6ZCv47BrrLm81PKLhjAn2WjQykME8PZGtq252sudmRCPbPTVQkh8Vivsnzcgz8t5jqsTgcDB94duwcL11nb7yVKFcQ
+
+xdotool key --window $(xdotool search --limit 1 --all --pid $(pgrep QQ) --name QQ) "ctrl+alt+z"
+xdotool key --window $(xdotool search "QQ.exe" | head -1) "ctrl+alt+z"
+
+
+
+http://10.0.0.8
+
 
 
 
