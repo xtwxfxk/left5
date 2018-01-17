@@ -604,17 +604,35 @@ http://10.0.0.8
 
 
 
+deb file:///var/cuda-repo-8-0-local-cublas-performance-update /
+deb file:///var/cuda-repo-8-0-local-ga2 /
 
 
 
+http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching_files/intro_RL.pdf
+http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching_files/MDP.pdf
+http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching_files/DP.pdf
+http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching_files/MC-TD.pdf
+http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching_files/control.pdf
+http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching_files/FA.pdf
+http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching_files/pg.pdf
+http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching_files/dyna.pdf
+http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching_files/XX.pdf
+http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching_files/games.pdf
+http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching_files/Easy21-Johannes.pdf
 
 
 
-
-
-
-
-
+###############################################
+[Desktop Entry]
+Name=WeChat
+Exec=env WINEPREFIX="/home/left5/.wine" LC_ALL=zh_CN.UTF-8 wine C:\\\\windows\\\\command\\\\start.exe /Unix /home/left5/.wine/dosdevices/c:/ProgramData/Microsoft/Windows/Start\\ Menu/Programs/WeChat/WeChat.lnk
+Type=Application
+StartupNotify=true
+Path=/home/left5/.wine/dosdevices/c:/Tencent/WeChat
+Icon=449F_WeChat.0
+StartupWMClass=wechat.exe
+###############################################
 
 
 
