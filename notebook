@@ -634,8 +634,40 @@ Icon=449F_WeChat.0
 StartupWMClass=wechat.exe
 ###############################################
 
+[Desktop Entry]
+Categories=Network;InstantMessaging;
+Exec=wine ".wine/drive_c/Program Files/QQ/Bin/QQ.exe"
+Icon=QQ
+Name=Wine QQ
+NoDisplay=false
+StartupNotify=true
+Terminal=0
+Type=Application
 
 
+*txplatform.exe
+
+
+
+gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=setting -sOutputFile=output.pdf input.pdf
+gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -sOutputFile=机器学习-周志华1.pdf 机器学习-周志华.pdf
+
+
+
+[Default Applications]
+x-scheme-handler/tg=telegramdesktop.desktop
+
+
+https://etherscan.io/address/0xb3d201b5963db83c434e5810b54ac62e3ee05c00
+
+https://etherscan.io/address/0x8823511fEa2bacfcA1f710af01f83f33752ba524
+
+
+http://ethpool.org/miners/e4375bdb35e00df35c974a29bb19bbecf453299d
+
+eth -v 1 -a 0xE4375bDB35e00DF35c974a29bb19bBEcF453299d --client-name "left5" -x 50 -m on -G
+
+eth -v 1 -a 0xe4375bdb35e00df35c974a29bb19bbecf453299d --client-name "left5" -x 50 -m on -G
 
 
 
