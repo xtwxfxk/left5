@@ -1,7 +1,7 @@
 
-64.32.25.217
+174.139.72.91
 133.130.122.125
-98.126.76.123
+98.126.76.122
 139.162.82.204
 85.159.211.219
 
@@ -647,6 +647,9 @@ Type=Application
 
 *txplatform.exe
 
+bash
+
+export LC_ALL=zh_CN.UTF-8
 
 
 gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=setting -sOutputFile=output.pdf input.pdf
