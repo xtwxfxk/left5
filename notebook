@@ -3,7 +3,7 @@
 133.130.122.125
 98.126.76.122
 139.162.82.204
-85.159.211.219
+
 
 
 ssh -f -N -D 127.0.0.1:1080 leftvip@85.159.211.219
@@ -30,8 +30,12 @@ autossh -M 20000 -o "ServerAliveInterval 10" -o "ServerAliveCountMax 5" -f -N -D
 
 autossh -M 20000 -f -N -D 127.0.0.1:1080 leftvip@133.130.122.125
 
+ssh -f -N -D 127.0.0.1:1080 leftvip@174.139.72.91 -o ServerAliveInterval=5 -o ServerAliveCountMax=10
 ssh -f -N -D 127.0.0.1:1080 leftvip@133.130.122.125 -o ServerAliveInterval=5 -o ServerAliveCountMax=10
-ssh -f -N -D 127.0.0.1:1080 leftvip@98.126.76.123 -o ServerAliveInterval=5 -o ServerAliveCountMax=10
+ssh -f -N -D 127.0.0.1:1080 leftvip@98.126.76.122 -o ServerAliveInterval=5 -o ServerAliveCountMax=10
+ssh -f -N -D 127.0.0.1:1080 leftvip@139.162.82.204 -o ServerAliveInterval=5 -o ServerAliveCountMax=10
+sslocal -c /etc/shadowsocks.json -d start
+
 
 
 10.0.62.7 1081
@@ -671,6 +675,12 @@ http://ethpool.org/miners/e4375bdb35e00df35c974a29bb19bbecf453299d
 eth -v 1 -a 0xE4375bDB35e00DF35c974a29bb19bBEcF453299d --client-name "left5" -x 50 -m on -G
 
 eth -v 1 -a 0xe4375bdb35e00df35c974a29bb19bbecf453299d --client-name "left5" -x 50 -m on -G
+
+
+dpkg -l | grep ^rc | cut -d' ' -f3 | sudo xargs dpkg --purge
+
+
+
 
 
 
