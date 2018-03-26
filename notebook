@@ -655,6 +655,17 @@ bash
 
 export LC_ALL=zh_CN.UTF-8
 
+[Desktop Entry]
+Categories=Application;Game;
+Exec=env LC_ALL=zh_CN.UTF-8 wine ".wine/drive_c/game/World of Warcraft/WoW.exe"
+Icon=wow
+Name=wow
+NoDisplay=false
+StartupNotify=true
+Terminal=0
+Type=Application
+
+
 
 gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=setting -sOutputFile=output.pdf input.pdf
 gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -sOutputFile=机器学习-周志华1.pdf 机器学习-周志华.pdf
@@ -678,6 +689,8 @@ eth -v 1 -a 0xe4375bdb35e00df35c974a29bb19bbecf453299d --client-name "left5" -x 
 
 
 dpkg -l | grep ^rc | cut -d' ' -f3 | sudo xargs dpkg --purge
+
+
 
 
 
