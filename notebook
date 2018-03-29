@@ -337,6 +337,7 @@ https://www.coursera.org/learn/machine-learning-projects
 https://www.coursera.org/learn/convolutional-neural-networks
 https://www.coursera.org/learn/nlp-sequence-models
 
+coursera-dl -u xtwxfxk@163.com statistical-inferences
 
 
 #!/bin/sh
@@ -690,6 +691,37 @@ eth -v 1 -a 0xe4375bdb35e00df35c974a29bb19bbecf453299d --client-name "left5" -x 
 
 dpkg -l | grep ^rc | cut -d' ' -f3 | sudo xargs dpkg --purge
 
+
+/home/user/.theanorc
+
+[cuda]
+root = /usr/local/cuda
+
+[global]
+device = cuda
+floatX = float32
+
+
+-- Install configuration: "Release"
+-- Installing: /usr/local/include/gpuarray/array.h
+-- Installing: /usr/local/include/gpuarray/blas.h
+-- Installing: /usr/local/include/gpuarray/collectives.h
+-- Installing: /usr/local/include/gpuarray/buffer.h
+-- Installing: /usr/local/include/gpuarray/buffer_blas.h
+-- Installing: /usr/local/include/gpuarray/buffer_collectives.h
+-- Installing: /usr/local/include/gpuarray/abi_version.h
+-- Installing: /usr/local/include/gpuarray/config.h
+-- Installing: /usr/local/include/gpuarray/elemwise.h
+-- Installing: /usr/local/include/gpuarray/error.h
+-- Installing: /usr/local/include/gpuarray/extension.h
+-- Installing: /usr/local/include/gpuarray/ext_cuda.h
+-- Installing: /usr/local/include/gpuarray/kernel.h
+-- Installing: /usr/local/include/gpuarray/types.h
+-- Installing: /usr/local/include/gpuarray/util.h
+-- Installing: /usr/local/lib/libgpuarray.so.3.0
+-- Installing: /usr/local/lib/libgpuarray.so.3
+-- Installing: /usr/local/lib/libgpuarray.so
+-- Installing: /usr/local/lib/libgpuarray-static.a
 
 
 
