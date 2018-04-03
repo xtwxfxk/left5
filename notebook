@@ -35,6 +35,16 @@ ssh -f -N -D 127.0.0.1:1080 leftvip@133.130.122.125 -o ServerAliveInterval=5 -o 
 ssh -f -N -D 127.0.0.1:1080 leftvip@98.126.76.122 -o ServerAliveInterval=5 -o ServerAliveCountMax=10
 ssh -f -N -D 127.0.0.1:1080 leftvip@139.162.82.204 -o ServerAliveInterval=5 -o ServerAliveCountMax=10
 sslocal -c /etc/shadowsocks.json -d start
+{
+    "server":"xx.xx.xx.xx",
+    "server_port":8388,
+    "local_address": "x",
+    "local_port":1080,
+    "password":"xx",
+    "timeout":300,
+    "method":"aes-256-cfb",
+    "fast_open": false
+}
 
 
 
@@ -722,6 +732,15 @@ floatX = float32
 -- Installing: /usr/local/lib/libgpuarray.so.3
 -- Installing: /usr/local/lib/libgpuarray.so
 -- Installing: /usr/local/lib/libgpuarray-static.a
+
+
+sudo apt-get install libopenblas-dev
+
+
+
+
+
+
 
 
 
