@@ -31,7 +31,7 @@ autossh -M 20000 -o "ServerAliveInterval 10" -o "ServerAliveCountMax 5" -f -N -D
 autossh -M 20000 -f -N -D 127.0.0.1:1080 leftvip@133.130.122.125
 
 ssh -f -N -D 127.0.0.1:1080 leftvip@174.139.72.91 -o ServerAliveInterval=5 -o ServerAliveCountMax=10
-ssh -f -N -D 127.0.0.1:1080 leftvip@133.130.122.125 -o ServerAliveInterval=5 -o ServerAliveCountMax=10
+ssh -f -N -D 127.0.0.1:1081 leftvip@133.130.122.125 -o ServerAliveInterval=5 -o ServerAliveCountMax=10
 ssh -f -N -D 127.0.0.1:1080 leftvip@98.126.76.122 -o ServerAliveInterval=5 -o ServerAliveCountMax=10
 ssh -f -N -D 127.0.0.1:1080 leftvip@139.162.82.204 -o ServerAliveInterval=5 -o ServerAliveCountMax=10
 sslocal -c /etc/shadowsocks.json -d start
@@ -746,16 +746,52 @@ sudo apt-get install libopenblas-dev
 
 
 
+./bin/spark-submit --class org.apache.spark.examples.SparkPi \
+    --master yarn \
+    --deploy-mode cluster \
+    --driver-memory 4g \
+    --executor-memory 2g \
+    --executor-cores 1 \
+    --queue thequeue \
+    examples/jars/spark-examples*.jar \
+    10
+
+./bin/spark-submit --class org.apache.spark.examples.SparkPi \
+    --master yarn \
+    --deploy-mode cluster \
+    --executor-cores 1 \
+    --queue thequeue \
+    examples/jars/spark-examples*.jar \
+    10
 
 
+./bin/spark-submit \
+  --master spark://207.184.161.138:7077 \
+  examples/src/main/python/pi.py \
+  1000
+
+./bin/spark-submit \
+  --class org.apache.spark.examples.SparkPi \
+  --master local[8] \
+  --executor-memory 20G \
+  --total-executor-cores 100 \
+  examples/target/scala-2.11/jars/spark-examples*.jar \
+  1000
+
+./bin/spark-submit \
+  --class org.apache.spark.examples.SparkPi \
+  --master local[8] \
+  --executor-memory 20G \
+  --total-executor-cores 100 \
+  examples/target/scala-2.11/jars/spark-examples*.jar \
+  1000
+
+  /home/left5/code/java/sp
+
+./bin/spark-submit --master yarn pi.py 1000
 
 
-
-
-
-
-
-
+celery -A WeatherWeb worker -l info
 
 
 
