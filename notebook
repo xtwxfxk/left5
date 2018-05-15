@@ -1,7 +1,7 @@
 
 174.139.72.91
 133.130.122.125
-98.126.76.122
+98.126.76.102
 139.162.82.204
 
 
@@ -45,6 +45,8 @@ sslocal -c /etc/shadowsocks.json -d start
     "method":"aes-256-cfb",
     "fast_open": false
 }
+
+
 
 
 
@@ -792,6 +794,17 @@ sudo apt-get install libopenblas-dev
 
 
 celery -A WeatherWeb worker -l info
+
+
+
+
+
+
+
+
+
+
+
 
 
 
