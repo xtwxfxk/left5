@@ -799,6 +799,45 @@ celery -A WeatherWeb worker -l info
 
 
 
+10.0.12.16 7180
+admin !QAZ2wsx
+
+帐号：张华强  密码:zhq667
+https://10.0.0.187/svn/气象_福建省/FJ201711R001_福建省气象局气象大数据研究项目/01开发库/05代码/01trunk/WeatherWeb
+
+10.0.7.170
+
+
+http://127.0.0.1:8000/rest/debug_task/
+
+http://127.0.0.1:8000/rest/predict/2017112820
+
+http://127.0.0.1:8000/rest/predict/finerain/2017112508
+http://127.0.0.1:8000/rest/predict/xgb/2017112508
+
+http://127.0.0.1:8000/rest/det/finerain/2017/11/25
+
+http://127.0.0.1:8000/rest/det/finerain/2017/11
+http://127.0.0.1:8000/rest/det/xgb/2017/11
+
+
+
+rainstorm_
+
+TS_0_24  TS_24_48  TS_48_72
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
