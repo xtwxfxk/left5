@@ -34,6 +34,16 @@ ssh -f -N -D 127.0.0.1:1080 leftvip@174.139.72.91 -o ServerAliveInterval=5 -o Se
 ssh -f -N -D 127.0.0.1:1081 leftvip@133.130.122.125 -o ServerAliveInterval=5 -o ServerAliveCountMax=10
 ssh -f -N -D 127.0.0.1:1080 leftvip@98.126.76.122 -o ServerAliveInterval=5 -o ServerAliveCountMax=10
 ssh -f -N -D 127.0.0.1:1080 leftvip@139.162.82.204 -o ServerAliveInterval=5 -o ServerAliveCountMax=10
+
+
+
+
+
+
+
+
+
+
 sslocal -c /etc/shadowsocks.json -d start
 {
     "server":"xx.xx.xx.xx",
@@ -46,6 +56,34 @@ sslocal -c /etc/shadowsocks.json -d start
     "fast_open": false
 }
 
+
+
+python local.py -s xx.xx.xx.xx -p 443 -k password -m aes-256-cfb -o tls1.2_ticket_auth
+python local.py -s xx.xx.xx.xx \
+                -p 443 \
+                -k password \
+                -m aes-256-cfb \
+                -o tls1.2_ticket_auth \
+                -O origin \
+                -l 1080
+
+{
+"server":"xxx",
+"server_ipv6":"::",
+"server_port":443,
+"local_address":"127.0.0.1",
+"local_port":1080,
+"password":"xxx",
+"timeout":300,
+"udp_timeout":60,
+"method":"aes-256-cfb",
+"protocol":"auth_aes128_md5",
+"protocol_param":"",
+"obfs":"tls1.2_ticket_auth",
+"obfs_param":"",
+"fast_open":false,
+"workers":1
+}
 
 
 
@@ -202,38 +240,7 @@ sudo make altinstall
 
 
 
-python2.7/zipfile.py ... Makefile:1081: recipe for target 'libinstall' failed
 
-
-Removing gvfs-backends (1.28.2-1ubuntu1~16.04.1) ...
-Removing ipython (2.4.1-1) ...
-Removing okular (4:15.12.3-0ubuntu1) ...
-Removing kde-runtime (4:15.12.3-0ubuntu1) ...
-Removing libsmbclient:amd64 (2:4.3.11+dfsg-0ubuntu0.16.04.9) ...
-Removing pycharm-community (2016.3~mm1) ...
-Removing virtualbox-qt (5.0.40-dfsg-0ubuntu1.16.04.1) ...
-Removing virtualbox (5.0.40-dfsg-0ubuntu1.16.04.1) ...
-Removing python-pip (8.1.1-2ubuntu0.4) ...
-Removing python-pil:amd64 (3.1.2-0ubuntu1.1) ...
-Removing python-wheel (0.29.0-1) ...
-Removing python-all-dev (2.7.11-1) ...
-Removing python-all (2.7.11-1) ...
-Removing python-bs4 (4.4.1-1) ...
-Removing python-chardet (2.3.0-2) ...
-Removing python-decorator (4.0.6-1) ...
-Removing python-dev (2.7.11-1) ...
-Removing python-html5lib (0.999-4) ...
-Removing python-lxml (3.5.0-1build1) ...
-Removing python-pexpect (4.0.1-1) ...
-Removing python-setuptools (20.7.0-1) ...
-Removing python-pkg-resources (20.7.0-1) ...
-Removing python-ptyprocess (0.5-1) ...
-Removing python-simplegeneric (0.8.1-1) ...
-Removing python-six (1.10.0-3) ...
-Removing samba-libs:amd64 (2:4.3.11+dfsg-0ubuntu0.16.04.9) ...
-Removing python-talloc (2.1.5-2) ...
-Removing python-tk (2.7.11-2) ...
-Removing python (2.7.11-1) ...
 
 
 
@@ -386,7 +393,6 @@ done
 
 
 
-_XSERVTransSocketUNIXAccept: accept() failed
 
 
 logrotate
@@ -714,32 +720,9 @@ device = cuda
 floatX = float32
 
 
--- Install configuration: "Release"
--- Installing: /usr/local/include/gpuarray/array.h
--- Installing: /usr/local/include/gpuarray/blas.h
--- Installing: /usr/local/include/gpuarray/collectives.h
--- Installing: /usr/local/include/gpuarray/buffer.h
--- Installing: /usr/local/include/gpuarray/buffer_blas.h
--- Installing: /usr/local/include/gpuarray/buffer_collectives.h
--- Installing: /usr/local/include/gpuarray/abi_version.h
--- Installing: /usr/local/include/gpuarray/config.h
--- Installing: /usr/local/include/gpuarray/elemwise.h
--- Installing: /usr/local/include/gpuarray/error.h
--- Installing: /usr/local/include/gpuarray/extension.h
--- Installing: /usr/local/include/gpuarray/ext_cuda.h
--- Installing: /usr/local/include/gpuarray/kernel.h
--- Installing: /usr/local/include/gpuarray/types.h
--- Installing: /usr/local/include/gpuarray/util.h
--- Installing: /usr/local/lib/libgpuarray.so.3.0
--- Installing: /usr/local/lib/libgpuarray.so.3
--- Installing: /usr/local/lib/libgpuarray.so
--- Installing: /usr/local/lib/libgpuarray-static.a
 
 
 sudo apt-get install libopenblas-dev
-
-
-
 
 
 
@@ -817,7 +800,6 @@ Repeat (for each episode):
 
 \Delta w = \alpha (G_t - \hat{v}(S_t, w))\Delta_w \hat{v} (S_t, w)
 
-
 TD(0):
 
 \Delta w = \alpha (R_{t+1} + \gamma \hat{v}(S_{t+1}, w) - \hat{v} (S_t, w))\Delta \hat{v}(S_t, w)
@@ -825,6 +807,7 @@ TD(0):
 TD(lambda)
 
 \Delta w = \alpha (G^{\lambda}_{t} - \hat{v} (S_t, w))\Delta_w \hat{v}(S_t, w)
+
 
 
 
