@@ -5,3 +5,5 @@ data
 runs
 pytorch/ser
 pytorch/datas
+pytorch/log
+pytorch/logs
