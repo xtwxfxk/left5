@@ -44,7 +44,7 @@ ssh -f -N -D 127.0.0.1:1080 leftvip@139.162.82.204 -o ServerAliveInterval=5 -o S
 
 
 
-sslocal -c /etc/shadowsocks.json -d start
+sslocal -c /path/to/config/shadowsocks.json -d start
 {
     "server":"xx.xx.xx.xx",
     "server_port":8388,
