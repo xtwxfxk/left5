@@ -845,7 +845,7 @@ TD(lambda)
 
 
 
-sslocal -c /etc/shadowsocks.json -d start
+
 
 
 
