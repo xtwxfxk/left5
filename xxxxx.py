@@ -6,3 +6,4 @@ import torchvision
 
 torchvision.utils.save_image()
 
+torchvision.datasets

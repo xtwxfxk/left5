@@ -9,3 +9,4 @@ pytorch/log
 pytorch/logs
 pytorch/rl_cnn_img
 pytorch/cnn_gan_img
+pytorch/cnn_gan_faces
