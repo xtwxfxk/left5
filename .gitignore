@@ -3,6 +3,7 @@
 *.pyc
 data
 runs
+pytorch/xxx
 pytorch/ser
 pytorch/datas
 pytorch/log
@@ -10,3 +11,4 @@ pytorch/logs
 pytorch/rl_cnn_img
 pytorch/cnn_gan_img
 pytorch/cnn_gan_faces
+pytorch/cnn_gan_faces_multip_gpu
