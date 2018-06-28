@@ -13,3 +13,4 @@ pytorch/cnn_gan_img
 pytorch/cnn_gan_faces
 pytorch/cnn_gan_faces_multip_gpu
 pytorch/cnn_dcgan_img
+pytorch/dcgan_faces_multip_gpu
