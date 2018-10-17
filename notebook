@@ -847,8 +847,8 @@ self.deconv1 = nn.ConvTranspose2d(z_dimension, d*8, 3, 1, 0) # b d*8 3 3
 
 
 
-
-
+#####
+https://www.tinymind.cn/articles/410?from=articles_commend
 
 
 
