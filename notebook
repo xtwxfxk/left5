@@ -36,9 +36,29 @@ ssh -f -N -D 127.0.0.1:1080 leftvip@98.126.76.122 -o ServerAliveInterval=5 -o Se
 ssh -f -N -D 127.0.0.1:1080 leftvip@139.162.82.204 -o ServerAliveInterval=5 -o ServerAliveCountMax=10
 
 
+##############################
+centos 7
+wget https://github.com/tcp-nanqinlang/lkl-rinetd/releases/download/1.1.0/tcp_nanqinlang-rinetd-centos.sh
+bash tcp_nanqinlang-rinetd-centos.sh
+
+debian
+wget https://github.com/tcp-nanqinlang/lkl-haproxy/releases/download/1.1.1/tcp_nanqinlang-haproxy-debian.sh
+bash tcp_nanqinlang-haproxy-debian.sh
+
+wget --no-check-certificate -O shadowsocks-go.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-go.sh
+chmod +x shadowsocks-go.sh
+./shadowsocks-go.sh
+
+./shadowsocks-go.sh uninstall
+/etc/init.d/shadowsocks status
 
 
-
+/etc/shadowsocks/config.json
+启动: /etc/init.d/shadowsocks start
+停止: /etc/init.d/shadowsocks stop
+重启: /etc/init.d/shadowsocks restart
+状态: /etc/init.d/shadowsocks status
+##############################
 
 
 
