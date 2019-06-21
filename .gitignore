@@ -20,3 +20,6 @@ pytorch/cnn_wgan_img
 pytorch/save_images
 
 jinnan/data
+jinnan/ssd/weights
+
+RL/gym-results
