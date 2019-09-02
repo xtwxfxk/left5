@@ -85,31 +85,31 @@ class Agent(object):
 class NNPolicy(nn.Module): # an actor-critic neural network
     def __init__(self, channels, memsize, num_actions):
         super(NNPolicy, self).__init__()
-        self.conv1 = nn.Conv2d(channels, 32, 3, stride=2, padding=1) # b c 80 80
-        self.bn1 = nn.BatchNorm2d(32)
-        self.conv2 = nn.Conv2d(32, 32, 3, stride=2, padding=1)
-        self.bn2 = nn.BatchNorm2d(32)
-        self.conv3 = nn.Conv2d(32, 32, 3, stride=2, padding=1)
-        self.bn3 = nn.BatchNorm2d(32)
-        self.conv4 = nn.Conv2d(32, 32, 3, stride=2, padding=1)
+        self.conv1 = nn.Conv2d(channels, 4, 3, stride=2, padding=1) # b c 80 80
+        self.bn1 = nn.BatchNorm2d(4)
+        self.conv2 = nn.Conv2d(4, 8, 3, stride=2, padding=1)
+        self.bn2 = nn.BatchNorm2d(8)
+        self.conv3 = nn.Conv2d(8, 16, 3, stride=2, padding=1)
+        self.bn3 = nn.BatchNorm2d(16)
+        self.conv4 = nn.Conv2d(16, 32, 3, stride=2, padding=1)
         self.bn4 = nn.BatchNorm2d(32)
-        self.conv5 = nn.Conv2d(32, 32, 3, stride=2, padding=1)
-        self.bn5 = nn.BatchNorm2d(32)
-        self.conv6 = nn.Conv2d(32, 128, 5, stride=1, padding=0)
+        self.conv5 = nn.Conv2d(32, 64, 3, stride=2, padding=1)
+        self.bn5 = nn.BatchNorm2d(64)
+        self.conv6 = nn.Conv2d(64, 128, 5, stride=1, padding=0)
+        self.bn6 = nn.BatchNorm2d(128)
 
         self.seq1 = nn.Sequential( # 160 x 160
-            nn.Conv2d(channels, 32, 5, stride=2, padding=2), # b c 80 80
+            nn.Conv2d(channels, 4, 5, stride=2, padding=2), # b c 80 80
+            nn.BatchNorm2d(4),
+            nn.Conv2d(4, 8, 5, stride=2, padding=2), # b c 40 40
+            nn.BatchNorm2d(8),
+            nn.Conv2d(8, 16, 5, stride=2, padding=2), # b c 20 20
+            nn.BatchNorm2d(16),
+            nn.Conv2d(16, 32, 5, stride=2, padding=2), # b c 10 10
             nn.BatchNorm2d(32),
-            nn.Conv2d(32, 32, 5, stride=2, padding=2), # b c 40 40
-            nn.BatchNorm2d(32),
-            nn.Conv2d(32, 32, 5, stride=2, padding=2), # b c 20 20
-            nn.BatchNorm2d(32),
-            nn.Conv2d(32, 32, 5, stride=2, padding=2), # b c 10 10
-            nn.BatchNorm2d(32),
-            nn.Conv2d(32, 32, 5, stride=2, padding=2), # b c 5 5
-            nn.BatchNorm2d(32),
-            nn.Conv2d(32, 128, 5, stride=1, padding=0),
-
+            nn.Conv2d(32, 64, 5, stride=2, padding=2), # b c 5 5
+            nn.BatchNorm2d(64),
+            nn.Conv2d(64, 128, 5, stride=1, padding=0),
             )
 
 
