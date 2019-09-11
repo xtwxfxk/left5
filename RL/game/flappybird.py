@@ -294,4 +294,4 @@ if __name__ == "__main__":
 
 
 
-# python flappybird.py --env MsPacman-v4 --processes 1 --rnn_steps 30 --hidden 512
+# python flappybird.py --processes 6 --rnn_steps 30 --hidden 512
