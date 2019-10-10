@@ -23,3 +23,8 @@ jinnan/data
 jinnan/ssd/weights
 
 RL/gym-results
+
+
+ecg/ecg_pytorch/ckpt
+ecg/ecg_pytorch/data
+ecg/ecg_pytorch/submit

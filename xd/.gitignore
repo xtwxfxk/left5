@@ -1,8 +1,0 @@
-.idea
-.ipynb_checkpoints
-*.pyc
-data
-runs
-ecg_pytorch/ckpt
-ecg_pytorch/data
-ecg_pytorch/submit
