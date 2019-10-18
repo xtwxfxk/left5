@@ -8,10 +8,10 @@ import pywt, os, copy
 import torch
 import numpy as np
 import pandas as pd
+import neurokit as nk
 from config import config
 from torch.utils.data import Dataset
 from torchvision import transforms
-from sklearn.preprocessing import scale
 from scipy import signal
 
 
@@ -66,7 +66,7 @@ def wavelet(sig, threshold =.04):
         maxlev = pywt.dwt_max_level(_data.shape[0], w.dec_len)
         coeffs = pywt.wavedec(_data, db, level=maxlev)
         for i in range(1, len(coeffs)):
-            coeffs[i] = pywt.threshold(coeffs[i] + 1, threshold*max(coeffs[i]))
+            coeffs[i] = pywt.threshold(coeffs[i] + .0001, threshold*max(coeffs[i]))
 
         sig[:, col] = pywt.waverec(coeffs, db)
         
@@ -85,24 +85,36 @@ def switch(sig):
         
     return sig
 
+def neuro_ecg(sig, sampling_rate=500):
+    _data = None
+    for col in range(sig.shape[1])[:1]:
+        bio = nk.bio_process(ecg=sig[:, col], sampling_rate=sampling_rate, ecg_hrv_features=None)
+        _data = bio['df'] if _data is None else np.hstack((_data, bio['df'].values))
+
+    return np.hstack((sig, _data))
 
 def transform(sig, sex, age, train=False):
     # 前置不可或缺的步骤
     sig = resample(sig, config.target_point_num)
     # # 数据增强
-    if train:
-        if np.random.randn() > 0.5: sig = scaling(sig)
-        if np.random.randn() > 0.5: sig = verflip(sig)
-        if np.random.randn() > 0.5: sig = shift(sig)
-        if np.random.randn() > 0.5: sig = wavelet(sig)
+    # if train:
+    #     if np.random.randn() > 0.3: sig = wavelet(sig)
+    #     if np.random.randn() > 0.3: sig = scaling(sig)
+
+    #     if np.random.randn() > 0.5: sig = verflip(sig)
+        # if np.random.randn() > 0.5: sig = shift(sig)
+    
+
+    sig = neuro_ecg(sig)
+
     # 后置不可或缺的步骤
     sig = np.column_stack((sig, sex, age))
     sig = sig.transpose()
 
     sig = torch.tensor(sig.copy(), dtype=torch.float)
-    # qn = torch.norm(sig, dim=1)
-    # sig = sig.div(qn.unsqueeze(1).expand_as(sig))
-    # sig[torch.isnan(sig)] = 0
+    qn = torch.norm(sig, dim=1)
+    sig = sig.div(qn.unsqueeze(1).expand_as(sig))
+    sig[torch.isnan(sig)] = 0
     
     return sig
 
@@ -137,6 +149,7 @@ class ECGDataset(Dataset):
 
         x = transform(df, sex, age, self.train)
 
+        # print(x.shape)
         # print(x.data.numpy())
         # x = np.vstack((x.data.numpy(), sex, age))
         # torch.tensor(sig.copy(), dtype=torch.float)

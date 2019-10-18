@@ -36,7 +36,7 @@ class Config:
     #保存提交文件的文件夹
     sub_dir = 'submit'
     #初始的学习率
-    lr = 1e-4
+    lr = 1e-3
     #保存模型当前epoch的权重
     current_w = 'current_w.pth'
     #保存最佳的权重

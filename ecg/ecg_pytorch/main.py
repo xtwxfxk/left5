@@ -14,6 +14,13 @@ from torch import nn, optim
 from torch.utils.data import DataLoader
 from dataset import ECGDataset
 from config import config
+import warnings
+
+
+# warnings.warn("deprecated", DeprecationWarning)
+# warnings.warn("deprecated", UserWarning)
+warnings.simplefilter('ignore')
+
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -133,7 +140,7 @@ def train(args):
             lr /= config.lr_decay
             best_w = os.path.join(model_save_dir, config.best_w)
             model.load_state_dict(torch.load(best_w)['state_dict'])
-            tqdm.write("*" * 10, "step into stage%02d lr %.3ef" % (stage, lr))
+            tqdm.write("    step into stage%02d lr %.3ef" % (stage, lr))
             utils.adjust_learning_rate(optimizer, lr)
 
 #用于测试加载模型
