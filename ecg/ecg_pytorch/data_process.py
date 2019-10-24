@@ -6,7 +6,7 @@
     2.划分数据集
 @ author: javis
 '''
-import os, torch
+import os, torch, time
 import numpy as np
 from config import config
 
@@ -85,15 +85,19 @@ def count_labels(data, file2idx):
 
 def train(name2idx, idx2name):
     file2idx = file2index(config.train_label, name2idx)
+    print(file2idx)
     train, val = split_data(file2idx, .2)
     wc=count_labels(train,file2idx)
     print(wc)
+    # print(train)
+    # print(val)
     dd = {'train': train, 'val': val, "idx2name": idx2name, 'file2idx': file2idx,'wc':wc}
     torch.save(dd, config.train_data)
 
 
 if __name__ == '__main__':
-    pass
+    time.sleep(21000)
+    # pass
     name2idx = name2index(config.arrythmia)
     idx2name = {idx: name for name, idx in name2idx.items()}
     train(name2idx, idx2name)

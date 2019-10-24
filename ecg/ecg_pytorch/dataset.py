@@ -14,6 +14,8 @@ from torch.utils.data import Dataset
 from torchvision import transforms
 from scipy import signal
 
+import traceback
+
 
 def resample(sig, target_point_num=None):
     '''
@@ -105,17 +107,20 @@ def transform(sig, sex, age, train=False):
         # if np.random.randn() > 0.5: sig = shift(sig)
     
 
-    sig = neuro_ecg(sig)
+    # sig = neuro_ecg(sig)
 
     # 后置不可或缺的步骤
     sig = np.column_stack((sig, sex, age))
     sig = sig.transpose()
 
-    sig = torch.tensor(sig.copy(), dtype=torch.float)
-    qn = torch.norm(sig, dim=1)
-    sig = sig.div(qn.unsqueeze(1).expand_as(sig))
-    sig[torch.isnan(sig)] = 0
+    # print(sig.shape)
+
+    # sig = torch.tensor(sig.copy(), dtype=torch.float)
+    # qn = torch.norm(sig, dim=1)
+    # sig = sig.div(qn.unsqueeze(1).expand_as(sig))
+    # sig[torch.isnan(sig)] = 0
     
+    sig = torch.tensor(sig, dtype=torch.float)
     return sig
 
 
@@ -134,14 +139,33 @@ class ECGDataset(Dataset):
         self.file2idx = dd['file2idx']
         self.wc = 1. / np.log(dd['wc'])
 
+        # print(self.data)
+        print(len(self.data))
+
     def __getitem__(self, index):
         fid = self.data[index]
+        # file_path = os.path.join(config.train_dir, fid)
+        # df = pd.read_csv(file_path, sep=' ') # .values
+
         file_path = os.path.join(config.train_dir, fid)
-        df = pd.read_csv(file_path, sep=' ') # .values
-        df['III'] = df['I'] - df['II']
-        df['aVR'] = -(df['I'] + df['II']) / 2
-        df['aVL'] = df['I'] - df['II'] / 2
-        df['aVF'] = df['II'] - df['I'] / 2
+        # print(file_path)
+        # with open(file_path, 'rb') as f:
+        #     df = pd.read_parquet(f, engine='auto') # .values
+        #     for i in range(3):
+        #         try:
+        #             df = pd.read_parquet(f, engine='auto') # .values
+        #         except:
+        #             open('/home/left/code/xx.txt', 'w').write(traceback.format_exc())
+                    
+        #         break
+
+        df = pd.read_feather(file_path)
+
+        # df.head()
+        # df['III'] = df['I'] - df['II']
+        # df['aVR'] = -(df['I'] + df['II']) / 2
+        # df['aVL'] = df['I'] - df['II'] / 2
+        # df['aVF'] = df['II'] - df['I'] / 2
         df = df.values
         
         sex = np.ones(df.shape[0]) * self.file2idx[fid][-1]

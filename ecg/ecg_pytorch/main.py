@@ -187,7 +187,7 @@ def test(args):
 
 
 if __name__ == '__main__':
-
+    time.sleep(21600)
     import argparse
 
     parser = argparse.ArgumentParser()
