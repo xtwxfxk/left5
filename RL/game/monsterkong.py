@@ -14,7 +14,7 @@ from tqdm import tqdm
 from torch.utils.tensorboard import SummaryWriter
 from numpy import linalg as LA
 
-from envs import create_env
+from envs import MonsterKongEnv
 
 os.environ['OMP_NUM_THREADS'] = '1'
 
@@ -31,7 +31,7 @@ parser.add_argument('--horizon', default=0.99, type=float, help='horizon for run
 parser.add_argument('--hidden', default=256, type=int, help='hidden size of GRU')
 parser.add_argument('--device', default='cuda', type=str, help='device')
 args = parser.parse_args()
-args.env = 'FlappyBird-v0'
+args.env = 'MonsterKong'
 
 # if args.processes != 1:
 #     os.environ['SDL_VIDEODRIVER'] = 'dummy'
@@ -42,7 +42,7 @@ if args.render:
     args.test = True # render mode -> test mode w one process
 if args.test: args.lr = 0 # don't train in render mode
 
-args.num_actions = 2 # get the action space of this game
+args.num_actions = 6 # get the action space of this game
 os.makedirs(args.save_dir) if not os.path.exists(args.save_dir) else None # make dir to save models etc.
 
 args.device = torch.device(args.device)
@@ -185,10 +185,10 @@ def cost_func(args, values, logps, actions, rewards): # [n+1], [n, action_space.
 #     return policy_loss + 0.5 * value_loss - 0.01 * entropy_loss
 
 def train(shared_model, shared_optimizer, rank, args, info):
-    env = create_env() # make a local (unshared) environment
+    env = MonsterKongEnv() # make a local (unshared) environment
 
     torch.manual_seed(args.seed + rank) # seed everything
-    model = NNPolicy(channels=1, memsize=args.hidden, num_actions=args.num_actions).to(device=args.device) # a local/unshared model
+    model = NNPolicy(channels=1, memsize=args.hidden, num_actions=len(env.action_space)).to(device=args.device) # a local/unshared model
     state = torch.tensor(prepro(env.reset())).to(device=args.device) # get first state
 
     start_time = last_disp_time = time.time()
@@ -294,4 +294,4 @@ if __name__ == "__main__":
 
 
 
-# python flappybird.py --processes 6 --rnn_steps 30 --hidden 512
+# python monsterkong.py --processes 4 --rnn_steps 30 --hidden 512
