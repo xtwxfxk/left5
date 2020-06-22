@@ -67,7 +67,7 @@ def AdaBoost_scratch(X,y, M=10, learning_rate = 1):
 
     #For m = 1 to M
     for m in range(M):   
-        ipdb.set_trace()
+        # ipdb.set_trace()
         #Fit a classifier
         estimator = DecisionTreeClassifier(max_depth = 1, max_leaf_nodes=2)
         estimator.fit(X, y, sample_weight=sample_weight)
@@ -77,14 +77,14 @@ def AdaBoost_scratch(X,y, M=10, learning_rate = 1):
         incorrect = (y_predict != y)
 
         #Estimator error
-        estimator_error = np.mean( np.average(incorrect, weights=sample_weight, axis=0))
+        estimator_error = np.mean(np.average(incorrect, weights=sample_weight, axis=0))
         
         #Boost estimator weights
-        estimator_weight =  learning_rate * np.log((1. - estimator_error) / estimator_error)
+        estimator_weight = learning_rate * np.log((1. - estimator_error) / estimator_error)
 
         #Boost sample weights
         sample_weight *= np.exp(estimator_weight * incorrect * ((sample_weight > 0) | (estimator_weight < 0)))
-
+        #open('xxx.txt', 'a+').write('%s\n' % ', '.join(sample_weight.astype(np.str).tolist()))
         #Save iteration values
         estimator_list.append(estimator)
         y_predict_list.append(y_predict.copy())
