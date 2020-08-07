@@ -3,6 +3,7 @@
 .DS_Store
 
 *.pyc
+tmp
 data
 datas/*
 runs
