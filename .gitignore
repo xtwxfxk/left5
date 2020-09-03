@@ -5,6 +5,7 @@
 *.pyc
 tmp
 data
+stock_data
 datas/*
 runs
 pytorch/xxx
