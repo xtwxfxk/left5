@@ -112,7 +112,10 @@ python local.py -s xx.xx.xx.xx \
 
 
 
+use custom.css
 sudo jt -t monokai -cellw 1080 -lineh 112 -ofs 9 -fs 10 -T
+     jt -t monokai -f fira -cellw 1380 -lineh 112 -ofs 9 -fs 10 -T
+
 
 70:4D:7B:86:A5:43
 
