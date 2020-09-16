@@ -260,7 +260,6 @@ body > #header {
 .list_container > div {
  border-bottom: 1px solid rgba(93,92,82,.25);
  font-size: 13pt;
- padding-bottom: 5px;
 }
 .list_header > div,
 .list_item > div {
@@ -685,7 +684,7 @@ div.notification_area {
 div#notification_notebook.notification_widget.btn.btn-xs.navbar-btn {
  font-size: 9pt !important;
  z-index: 0;
-# margin-top: -5px !important;
+ margin-top: -5px !important;
 }
 #modal_indicator {
  float: right !important;
@@ -996,7 +995,7 @@ div.kse-dropdown > .dropdown-menu,
  border: 0px solid #2f2f2f;
  border-bottom: 2px solid transparent;
  margin-left: 5px;
-# padding-top: 4px !important;
+ padding-top: 4px !important;
 }
 .item_buttons > .btn:hover,
 .item_buttons > .btn-group:hover,
@@ -1015,7 +1014,7 @@ div.kse-dropdown > .dropdown-menu,
  transition: none;
 }
 .item_buttons {
-# line-height: 1.5em !important;
+ line-height: 1.5em !important;
 }
 .item_buttons .btn {
  min-width: 11ex;
@@ -1508,7 +1507,7 @@ div.cell.edit_mode {
 div.CodeMirror-sizer {
  margin-left: 0px;
  margin-bottom: -21px;
- border-right-width: 16px !important;
+ border-right-width: 16px;
  min-height: 37px;
  padding-right: 0px;
  padding-bottom: 0px;
@@ -1628,7 +1627,7 @@ div.prompt.input_prompt {
  width: 11.5ex !important;
 }
 div.cell.code_cell .input_prompt {
-# border-right: 2px solid #49483e;
+ border-right: 2px solid #49483e;
 }
 div.cell.selected .prompt {
  top: 0;
@@ -1810,7 +1809,7 @@ div.cell.text_cell .CodeMirror-lines {
  padding-bottom: .4em !important;
  padding-left: .5em !important;
  padding-right: .5em !important;
-# margin-top: .4em;
+ margin-top: .4em;
  margin-bottom: .3em;
 }
 div.cell.text_cell.unrendered div.input_area,
@@ -1872,8 +1871,8 @@ div.cell.text_cell.rendered .prompt {
  font-weight: normal;
  color: #75715e !important;
  text-align: right !important;
- min-width: 12ex !important;
- width: 11.5ex !important;
+ min-width: 14.5ex !important;
+ width: 14.5ex !important;
  background-color: #282828;
  border-right: 2px solid #49483e;
  border-left: 4px solid #282828;
@@ -1884,8 +1883,8 @@ div.cell.text_cell.unrendered .prompt {
  font-weight: normal;
  color: #75715e !important;
  text-align: right !important;
- min-width: 12ex !important;
- width: 11.5ex !important;
+ min-width: 14.5ex !important;
+ width: 14.5ex !important;
  border-right: 2px solid #49483e;
  border-left: 4px solid #282828;
  background-color: #282828;
@@ -3247,17 +3246,6 @@ div#maintoolbar {
  display: none !important;
 }
 
-.file_size {
- width: 80px;
-}
-
-div.prompt_container {
- border-right: 2px solid #49483e;
-}
-
-.CodeMirror-dialog {
- color: black;
-}
 <script>
     MathJax.Hub.Config({
         "HTML-CSS": {
