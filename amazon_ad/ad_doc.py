@@ -329,17 +329,16 @@ Expire Date: %s''' % (current_url, product_name, coupon_per + discount_per, disc
         _p = p.lower()
         for discount_key in discount_list:
             if discount_key in _p:
-                for _str in _p.rsplit(discount_key):
-                    dis_line = _p.rsplit(_str)[1].splitlines()[0]
-                    is_pass = any([True if exclude_str in dis_line else False for exclude_str in exclude_list])
+                dis_line = _p.rsplit(discount_key)[1].splitlines()[0]
+                is_pass = any([True if exclude_str in dis_line else False for exclude_str in exclude_list])
 
-                    if is_pass:
-                        continue
+                if is_pass:
+                    continue
 
-                    matches_list = discount_reg.findall(dis_line)
-                    for m in matches_list:
-                        if m not in pass_matchs_list:
-                            return m.upper()
+                matches_list = discount_reg.findall(dis_line)
+                for m in matches_list:
+                    if m not in pass_matchs_list:
+                        return m.upper()
 
 
     
