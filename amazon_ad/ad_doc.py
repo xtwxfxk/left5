@@ -79,10 +79,17 @@ class DocMaker(object):
         self.variation_over = False
         self.variation_list = []
 
+    def browser_home(self):
+        body = self.browser.find_element_by_xpath('//body')
+        body.send_keys(Keys.HOME)
+        time.sleep(1)
+        body.send_keys(Keys.HOME)
+        time.sleep(1)
+
     def make(self, path):
 
         df = pd.read_excel(path, names=['客户给的', '修改后的'], header=0)
-        for i, p in enumerate(df['客户给的'][-2:]):
+        for i, p in enumerate(df['客户给的']): # [-2:]
             print(p)
             print('############################')
             self.is_find_discount = False
@@ -143,7 +150,7 @@ class DocMaker(object):
 Product name: %s
 %s%% off code: %s
 Reg.Price: $%s
-Final Price: $%s
+Final Price: $%.2f
 Expire Date: %s''' % (current_url, product_name, coupon_per + discount_per, discount_str, variation_price, final_price, expire_date)
 
             print(output_str)
@@ -233,22 +240,27 @@ Expire Date: %s''' % (current_url, product_name, coupon_per + discount_per, disc
             url = 'https://%s/dp/%s?%s' % (urlparse(self.browser.current_url).netloc, variation_code, params)
             print('url: %s' % url)
             self.browser.get(url)
+            self.wait.until(lambda driver: driver.find_element_by_xpath('//input[@id="add-to-cart-button"]'))
 
         variation_price = .0
         if self.browser.page_source.find('See All Buying Options') > -1:
+            print('not add to cart')
             self.browser.find_element_by_xpath('//a[@title="See All Buying Options"]').click()
             self.wait.until(lambda driver: driver.find_element_by_xpath('//div[@id="aod-offer-price"]//span[@class="a-price"]/span[contains(@class, "a-offscreen")]'))
             variation_price = self.browser.find_element_by_xpath('//div[@id="aod-offer-price"]//span[@class="a-price"]/span[contains(@class, "a-offscreen")]').text.strip()
             if variation_price.startswith('$'):
                 variation_price = float(variation_price[1:])
 
-            self.browser.find_element_by_xpath('//input[@name="submit.addToCart" or @id="add-to-cart-button"]').click()
+            self.browser_home()
+            self.browser.find_element_by_xpath('//input[@id="add-to-cart-button"]').click()
             time.sleep(1)
         else:
+            print('add to cart')
             variation_price = self.browser.find_element_by_xpath('//span[@id="priceblock_ourprice" or @id="priceblock_saleprice"]').text.strip()
             if variation_price.startswith('$'):
                 variation_price = float(variation_price[1:])
 
+            self.browser_home()
             self.browser.find_element_by_xpath('//input[@id="add-to-cart-button"]').click()
             time.sleep(1)
 
