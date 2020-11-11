@@ -242,7 +242,7 @@ Expire Date: %s''' % (current_url, product_name, coupon_per + discount_per, disc
             if variation_price.startswith('$'):
                 variation_price = float(variation_price[1:])
 
-            self.browser.find_element_by_xpath('//input[@name="submit.addToCart"]').click()
+            self.browser.find_element_by_xpath('//input[@name="submit.addToCart" or @id="add-to-cart-button"]').click()
             time.sleep(1)
         else:
             variation_price = self.browser.find_element_by_xpath('//span[@id="priceblock_ourprice" or @id="priceblock_saleprice"]').text.strip()
