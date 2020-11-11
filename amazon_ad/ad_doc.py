@@ -139,12 +139,12 @@ class DocMaker(object):
                 discount_per = math.ceil(discount_price / variation_price * 100)
                 final_price = final_price - discount_price
 
-            discount_str = ''
+            discount_str = discount_code
             dis_list = []
             if discount_per > .0: dis_list.append('%s%% off code' % discount_per)
             if coupon_per: dis_list.append('%s%% coupon' % coupon_per)
             if len(dis_list) > 0:
-                discount_str = '%s%% (%s): %s' % (discount_per + coupon_per, ' + '.join(dis_list), discount_code)
+                discount_str = '%s%% (%s): %s' % (discount_per + coupon_per, ' + '.join(dis_list), discount_str)
 
             output_str = '''URL: %s
 Product name: %s
@@ -186,7 +186,7 @@ Expire Date: %s''' % (current_url, product_name, coupon_per + discount_per, disc
         print("URL: %s" % _product_url)
         self.browser.get(_product_url)
         self.product_url = _product_url
-        if self.browser.current_url.find('/gp/') > -1:
+        if self.browser.current_url.find('/gp/mpc/') > -1:
             self.is_gp = True
             self.browser.find_elements_by_xpath('//div[contains(@class, "a-column")]//div[contains(@class, "a-row")]')[0].click()
 
@@ -240,13 +240,17 @@ Expire Date: %s''' % (current_url, product_name, coupon_per + discount_per, disc
             url = 'https://%s/dp/%s?%s' % (urlparse(self.browser.current_url).netloc, variation_code, params)
             print('url: %s' % url)
             self.browser.get(url)
-            self.wait.until(lambda driver: driver.find_element_by_xpath('//input[@id="add-to-cart-button"]'))
+            time.sleep(1)
 
         variation_price = .0
         if self.browser.page_source.find('See All Buying Options') > -1:
             print('not add to cart')
             self.browser.find_element_by_xpath('//a[@title="See All Buying Options"]').click()
+            self.wait.until(lambda driver: driver.find_element_by_xpath('//input[@id="add-to-cart-button"]'))
+            time.sleep(1)
+
             self.wait.until(lambda driver: driver.find_element_by_xpath('//div[@id="aod-offer-price"]//span[@class="a-price"]/span[contains(@class, "a-offscreen")]'))
+            time.sleep(1)
             variation_price = self.browser.find_element_by_xpath('//div[@id="aod-offer-price"]//span[@class="a-price"]/span[contains(@class, "a-offscreen")]').text.strip()
             if variation_price.startswith('$'):
                 variation_price = float(variation_price[1:])
@@ -255,7 +259,9 @@ Expire Date: %s''' % (current_url, product_name, coupon_per + discount_per, disc
             self.browser.find_element_by_xpath('//input[@id="add-to-cart-button"]').click()
             time.sleep(1)
         else:
-            print('add to cart')
+            self.wait.until(lambda driver: driver.find_element_by_xpath('//input[@id="add-to-cart-button"]'))
+            self.wait.until(lambda driver: driver.find_element_by_xpath('//span[@id="priceblock_ourprice" or @id="priceblock_saleprice"]'))
+            time.sleep(1)
             variation_price = self.browser.find_element_by_xpath('//span[@id="priceblock_ourprice" or @id="priceblock_saleprice"]').text.strip()
             if variation_price.startswith('$'):
                 variation_price = float(variation_price[1:])
@@ -279,6 +285,7 @@ Expire Date: %s''' % (current_url, product_name, coupon_per + discount_per, disc
             ele_del.click()
             time.sleep(1)
 
+        self.browser_home()
         self.browser.find_element_by_xpath('//span[@id="sc-buy-box-ptc-button"]').click()
         time.sleep(1)
 
@@ -333,7 +340,7 @@ Expire Date: %s''' % (current_url, product_name, coupon_per + discount_per, disc
         
 
     def make_discount_code(self, p):
-        discount_list = ['优惠码', 'code', '折扣码', 'coupon']
+        discount_list = ['优惠码', 'code', '折扣码', 'coupon', '折扣']
         exclude_list = ['price', '$']
         pass_matchs_list = ['discount']
         discount_reg = re.compile('[a-z0-9]{8}')
