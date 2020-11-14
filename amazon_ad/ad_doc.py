@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 __author__ = 'xtwxfxk'
 
-import os, time, re, json, math
+import os, time, re, json, math, traceback, xlwt
 import pandas as pd
 from datetime import datetime
 from lutils.lrequest import LRequest
@@ -12,45 +12,8 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import Select, WebDriverWait
 from selenium.webdriver.common.keys import Keys
 
-p_list = ['''URL: https://www.amazon.com/dp/B08DL5LR3J?ref=myi_title_dp
-Product name（简短标题）: 10Pcs DIY Drawing Wooden Sailboat
-
-50% off code: QLHMPKFI
-Reg.Price: $11.99
-Final Price: $5.9
-Start Date:11.1
-Expire Date: 11.15''',
-
-'''URL: 
-https://www.amazon.com/Boichen-Picture-Definition-Tabletop-Mounting/dp/B07TPGZ8Q4?ref_=ast_sto_dp&th=1
-Product Name: BOICHEN Rustic Distressed Solid Wood Picture Frames in Blue(4x6、5x7、8x10) / White(4x6、5x7) 
-40% off code: M3B2CNGD
-Reg.Price: $29.99
-Final Price: $17.99
-Start Date: 2020-10-31 01:00PDT
-Expire Date: 2020-11-15 23:59PDT''',
-
-'''1031A大  美国站外推广1单（周）
-产品简介Title:  FOWOKAW Heavy Duty Self Wall Hooks,Transparent Adhesive Hooks 15lb(Max),11 Pack
-折扣百分比%off：40%
-起始日期Start date:  2020-10-31  06:00PDT 
-结束日期Ending date:  2020-11-14  23:59PDT
-初始价格Original price:  6.99
-折扣后价格Final price:  4.194
-产品链接Link: https://www.amazon.com/dp/B07TWWNY7K?ref=myi_title_dp
-折扣优惠码Discount code：GAYYUTDU''',
-
-'''#26,930 in Home & Kitchen (See Top 100 in Home & Kitchen)
-#102 in Utility Hooks"
-"42.5w usbc car charger 50% OFF  Canada
-(original price ) ：CAD$ 17.99
-(price with code）：CAD$ 8.995
-Code:  KROGTBWZ
-StartDate: 2020-10-3003:00PDT
-ExpireDate:2020-11-1523:59PDT
-Link ：https://amzn.to/3ebTnGB''']
-
-
+old_path = '客户文件'
+new_path = '修改文件'
 config = {'profile_dir': 'D:/profiles/xxxxxx'}
 
 result_format = '''URL: %s
@@ -59,6 +22,7 @@ Product name: %s
 Reg.Price: $%s
 Final Price: $%s
 Expire Date: %s'''
+
 
 
 class DocMaker(object):
@@ -79,6 +43,9 @@ class DocMaker(object):
         self.variation_over = False
         self.variation_list = []
 
+        if not os.path.exists(new_path):
+            os.mkdir(new_path)
+
     def browser_home(self):
         body = self.browser.find_element_by_xpath('//body')
         body.send_keys(Keys.HOME)
@@ -86,78 +53,140 @@ class DocMaker(object):
         body.send_keys(Keys.HOME)
         time.sleep(1)
 
+    def browser_end(self):
+        body = self.browser.find_element_by_xpath('//body')
+        body.send_keys(Keys.END)
+        time.sleep(1)
+        body.send_keys(Keys.END)
+        time.sleep(1)
+
+    def browser_up(self):
+        body = self.browser.find_element_by_xpath('//body')
+        body.send_keys(Keys.PAGE_UP)
+        time.sleep(1)
+        body.send_keys(Keys.PAGE_UP)
+        time.sleep(1)
+
+    def browser_down(self):
+        body = self.browser.find_element_by_xpath('//body')
+        body.send_keys(Keys.PAGE_DOWN)
+        time.sleep(1)
+        body.send_keys(Keys.PAGE_DOWN)
+        time.sleep(1)
+
     def make(self, path):
 
-        df = pd.read_excel(path, names=['客户给的', '修改后的'], header=0)
-        for i, p in enumerate(df['客户给的']): # [-2:]
-            print(p)
-            print('############################')
-            self.is_find_discount = False
-            self.is_gp = False
-            self.variation_over = False
-            self.variation_list = []
+        for f in os.listdir(old_path):
+            df = pd.read_excel(os.path.join(old_path, f), names=['old', 'new'], header=0)
+            for i, p in enumerate(df['old']): # [-2:]
+                for _ in range(2):
+                    try:
+                        output_str = self.do(p)
+                        df['new'][i] = output_str
+                    except:
+                        traceback.print_exc()
+                        print('redo')
+                    else:
+                        break
 
-            self.product_url = ''
+            # df.to_excel(os.path.join(new_path, f), index=False)
+            self.write(df, f)
 
-            p = self.warp(p)
-            print('warp: %s' % p)
+    def write(self, df, file_name):
 
-            discount_code = self.make_discount_code(p)
-            expire_date = self.make_expire_date(p)
-            self.get_product_page(p)
-            #####
-            current_url, product_name, reg_price, coupon_price = self.make_url_name_price(p)
-            if self.is_gp:
-                current_url = self.product_url
+        alignment = xlwt.Alignment()
+        alignment.horz = xlwt.Alignment.HORZ_LEFT
+        alignment.vert = xlwt.Alignment.VERT_CENTER
+        alignment.wrap = 1
+        style = xlwt.XFStyle()
+        style.alignment = alignment
 
+        # excel_for_write = df.reset_index()
+
+        workbook = xlwt.Workbook(encoding='UTF-8')
+        worksheet = workbook.add_sheet('sheet')
+        worksheet.write(0, 0, '客户给的', style)
+        worksheet.write(0, 1, '修改后的', style)
+        worksheet.col(0).width = 256 * 70
+        worksheet.col(1).width = 256 * 70
+        # for i, line in enumerate(df):
+        for index, row in df.iterrows():
+            worksheet.write(index + 1, 0, row['old'], style)
+            worksheet.write(index + 1, 1, row['new'], style)
+            worksheet.row(index + 1).height_mismatch = True
+            worksheet.row(index + 1).height = 120 * 20
+
+        workbook.save(os.path.join(new_path, file_name))
+
+
+
+    def do(self, p):
+        print('############################')
+        self.is_find_discount = False
+        self.is_gp = False
+        self.variation_over = False
+        self.variation_list = []
+
+        self.product_url = ''
+
+        p = self.warp(p)
+
+        discount_code = self.make_discount_code(p)
+        expire_date = self.make_expire_date(p)
+        self.get_product_page(p)
+        #####
+        current_url, product_name, reg_price, coupon_price = self.make_url_name_price(p)
+        if self.is_gp:
+            current_url = self.product_url
+
+        variation_price = self.add_cart(p)
+        discount_price = self.make_discount_price(p, discount_code)
+
+        # print('#############\nurl: %s\nname: %s\nreg: %s\nvariation price: %s\ncoupon: %s\ndiscount price: %s\ndiscount coed: %s\nexpire: %s\n###########' % (
+        #     current_url, product_name, reg_price, variation_price, coupon_price, discount_price, discount_code,
+        #     expire_date))
+
+        while discount_price == .0 and len(self.variation_list) > 0:
             variation_price = self.add_cart(p)
             discount_price = self.make_discount_price(p, discount_code)
 
-            print('#############\nurl: %s\nname: %s\nreg: %s\nvariation price: %s\ncoupon: %s\ndiscount price: %s\ndiscount coed: %s\nexpire: %s\n###########' % (
-                current_url, product_name, reg_price, variation_price, coupon_price, discount_price, discount_code,
-                expire_date))
+            # print('#############\nurl: %s\nname: %s\nreg: %s\nvariation price: %s\ncoupon: %s\ndiscount price: %s\ndiscount coed: %s\nexpire: %s\n###########' % (current_url, product_name, reg_price, variation_price, coupon_price, discount_price, discount_code, expire_date))
 
-            while discount_price == .0 and len(self.variation_list) > 0:
-                variation_price = self.add_cart(p)
-                discount_price = self.make_discount_price(p, discount_code)
+        final_price = variation_price
 
-                print('#############\nurl: %s\nname: %s\nreg: %s\nvariation price: %s\ncoupon: %s\ndiscount price: %s\ndiscount coed: %s\nexpire: %s\n###########' % (current_url, product_name, reg_price, variation_price, coupon_price, discount_price, discount_code, expire_date))
+        coupon_per = .0
+        if coupon_price and coupon_price.startswith("$"):
+            coupon_per = math.ceil(float(coupon_price[1:]) / variation_price * 100)
+            final_price = final_price - float(coupon_price[1:])
+        elif coupon_price and coupon_price.endswith("%"):
+            coupon_per = float(coupon_price[:-1])
+            coupon_price = coupon_per / 100 * variation_price
+            final_price = final_price - coupon_price
 
-            final_price = variation_price
+        discount_per = .0
+        if discount_price > .0:
+            discount_per = math.ceil(discount_price / variation_price * 100)
+            final_price = final_price - discount_price
 
-            coupon_per = .0
-            if coupon_price and coupon_price.startswith("$"):
-                coupon_per = math.ceil(float(coupon_price[1:]) / variation_price * 100)
-                final_price = final_price - float(coupon_price[1:])
-            elif coupon_price and coupon_price.endswith("%"):
-                coupon_per = float(coupon_price[:-1])
-                coupon_price = coupon_per / 100 * variation_price
-                final_price = final_price - coupon_price
+        discount_str = discount_code
+        dis_list = []
+        if discount_per > .0: dis_list.append('%s%% off code' % discount_per)
+        if coupon_per: dis_list.append('%s%% coupon' % coupon_per)
+        if len(dis_list) > 0:
+            discount_str = '%s%% (%s): %s' % (discount_per + coupon_per, ' + '.join(dis_list), discount_str)
 
-            discount_per = .0
-            if discount_price > .0:
-                discount_per = math.ceil(discount_price / variation_price * 100)
-                final_price = final_price - discount_price
-
-            discount_str = discount_code
-            dis_list = []
-            if discount_per > .0: dis_list.append('%s%% off code' % discount_per)
-            if coupon_per: dis_list.append('%s%% coupon' % coupon_per)
-            if len(dis_list) > 0:
-                discount_str = '%s%% (%s): %s' % (discount_per + coupon_per, ' + '.join(dis_list), discount_str)
-
-            output_str = '''URL: %s
+        output_str = '''URL: %s
 Product name: %s
 %s%% off code: %s
 Reg.Price: $%s
 Final Price: $%.2f
-Expire Date: %s''' % (current_url, product_name, coupon_per + discount_per, discount_str, variation_price, final_price, expire_date)
+Expire Date: %s''' % (
+        current_url, product_name, coupon_per + discount_per, discount_str, variation_price, final_price,
+        expire_date)
 
-            print(output_str)
-            print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
-            df['修改后的'][i] = output_str
-
-        df.to_excel("output.xlsx", index=False)
+        print(output_str)
+        print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+        return output_str
 
     def warp(self, p: str):
         chars = {' ': ' ', '：': ':'}
@@ -165,6 +194,7 @@ Expire Date: %s''' % (current_url, product_name, coupon_per + discount_per, disc
             p = p.replace(k, v)
 
         ppp = []
+        p = '\n'.join(p.split('                   '))
         pp = p.splitlines()
         next_pass = False
         for i, _p in enumerate(pp):
@@ -201,6 +231,7 @@ Expire Date: %s''' % (current_url, product_name, coupon_per + discount_per, disc
             domain, p = current_url.split('/dp/')
             current_url = 'https://%s/dp/%s' % (domain.split('/')[2], p[:10])
 
+        self.wait.until(lambda driver: driver.find_element_by_xpath('//span[@id="priceblock_ourprice" or @id="priceblock_saleprice"]'))
         reg_price = self.browser.find_element_by_xpath('//span[@id="priceblock_ourprice" or @id="priceblock_saleprice"]').text.strip()
 
         coupon_price = ''
@@ -226,13 +257,13 @@ Expire Date: %s''' % (current_url, product_name, coupon_per + discount_per, disc
                             string_val = json.loads(variation_a_ele.get_attribute('data-value'))['stringVal']
                             if string_val != '-1':
                                 variation_code = string_val.split(',')[-1]
-                                if variation_code not in self.variation_list:
+                                if len(variation_code) == 10 and variation_code not in self.variation_list:
                                     self.variation_list.append(variation_code)
                     else:
                         variation_li_eles = variation_ele.find_elements_by_xpath('.//li')
                         for variation_li_ele in variation_li_eles:
                             variation_code = variation_li_ele.get_attribute('data-defaultasin')
-                            if variation_code not in self.variation_list:
+                            if len(variation_code) == 10 and variation_code not in self.variation_list:
                                 self.variation_list.append(variation_code)
 
         if self.is_variation():
@@ -281,9 +312,20 @@ Expire Date: %s''' % (current_url, product_name, coupon_per + discount_per, disc
 
         self.wait.until(lambda driver: driver.find_element_by_xpath('//span[@id="sc-buy-box-ptc-button"]'))
         ele_deletes = self.browser.find_elements_by_xpath('//input[@data-action="delete"]')
-        for ele_del in ele_deletes[1:]:
-            ele_del.click()
-            time.sleep(1)
+        while len(ele_deletes) > 1:
+            if ele_deletes[1].is_displayed():
+                ele_deletes[1].click()
+                time.sleep(1)
+            else:
+                self.browser.get(self.browser.current_url)
+                time.sleep(1)
+            ele_deletes = self.browser.find_elements_by_xpath('//input[@data-action="delete"]')
+
+
+        # for ele_delete in ele_deletes[1:]:
+        #     if ele_delete.is_displayed():
+        #         ele_delete.click()
+        #         time.sleep(2)
 
         self.browser_home()
         self.browser.find_element_by_xpath('//span[@id="sc-buy-box-ptc-button"]').click()
