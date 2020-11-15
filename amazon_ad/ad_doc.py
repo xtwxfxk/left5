@@ -4,7 +4,6 @@ __author__ = 'xtwxfxk'
 import os, time, re, json, math, traceback, xlwt
 import pandas as pd
 from datetime import datetime
-from lutils.lrequest import LRequest
 from urllib.parse import urlparse
 
 from selenium.webdriver.chrome.options import Options
@@ -29,11 +28,13 @@ class DocMaker(object):
 
     def __init__(self):
 
-        opts = Options()
-        opts.add_argument("user-data-dir=%s" % config['profile_dir']) # D:/profiles/xxx
+        options = Options()
+        options.add_argument('--ignore-certificate-errors')
+        options.add_argument('--ignore-ssl-errors')
+        options.add_argument("user-data-dir=%s" % config['profile_dir']) # D:/profiles/xxx
         # if config.get('proxy', None) is not None and config.get('proxy'):
-        #     opts.add_argument('proxy-server=%s' % config['proxy']) # socks5://127.0.0.1:1080
-        self.browser = webdriver.Chrome(options=opts)
+        #     options.add_argument('proxy-server=%s' % config['proxy']) # socks5://127.0.0.1:1080
+        self.browser = webdriver.Chrome(options=options)
 
         self.wait = WebDriverWait(self.browser, 120)
         self.is_find_discount = False
@@ -311,7 +312,7 @@ Expire Date: %s''' % (
         time.sleep(1)
 
         self.wait.until(lambda driver: driver.find_element_by_xpath('//span[@id="sc-buy-box-ptc-button"]'))
-        ele_deletes = self.browser.find_elements_by_xpath('//input[@data-action="delete"]')
+        ele_deletes = self.browser.find_elements_by_xpath('//form[@id="activeCartViewForm"]//input[@data-action="delete"]')
         while len(ele_deletes) > 1:
             if ele_deletes[1].is_displayed():
                 ele_deletes[1].click()
@@ -319,7 +320,7 @@ Expire Date: %s''' % (
             else:
                 self.browser.get(self.browser.current_url)
                 time.sleep(1)
-            ele_deletes = self.browser.find_elements_by_xpath('//input[@data-action="delete"]')
+            ele_deletes = self.browser.find_elements_by_xpath('//form[@id="activeCartViewForm"]//input[@data-action="delete"]')
 
 
         # for ele_delete in ele_deletes[1:]:
@@ -328,6 +329,12 @@ Expire Date: %s''' % (
         #         time.sleep(2)
 
         self.browser_home()
+
+        self.browser.find_element_by_xpath('//span[@data-a-class="quantity"]').click()
+        time.sleep(1)
+        self.browser.find_elements_by_xpath('//ul[@role="listbox"]//li')[1].click()
+        time.sleep(1)
+
         self.browser.find_element_by_xpath('//span[@id="sc-buy-box-ptc-button"]').click()
         time.sleep(1)
 
@@ -404,7 +411,7 @@ Expire Date: %s''' % (
 
     
     def make_expire_date(self, p):
-        expire_date_list = [e.lower() for e in ['Ending date', 'ExpireDate', 'Expire Date', 'End Date', '结束时间', 'Expiration Date', 'Code End Day']]
+        expire_date_list = [e.lower() for e in ['Ending date', 'ExpireDate', 'Expire Date', 'End Date', '结束时间', 'Expiration Date', 'Code End Day', 'End Day']]
         _p = p.lower()
         expire = None
         for expire_date in expire_date_list:
@@ -420,7 +427,7 @@ Expire Date: %s''' % (
                          '%Y.%m.%d': re.compile('\d{4}.\d{2}.\d{2}'),
                          '%Y/%m/%d': re.compile('\d{4}/\d{2}/\d{2}'),
                          '%m.%d': re.compile('\d{2}\.\d{2}'),
-                         '%m-%d': re.compile('\d{2}\.\d{2}'), }
+                         '%m-%d': re.compile('\d{2}\-\d{2}'), }
 
         for date_format, date_reg_exp in date_reg_exps.items():
             matches_list = date_reg_exp.findall(expire)
