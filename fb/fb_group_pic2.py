@@ -98,8 +98,8 @@ def fetch_image(keywords):
 
             highlight_eles = ele.find_elements_by_xpath('.//span[@dir="auto"]/span')
             for highlight_ele in highlight_eles:
-                text = highlight_ele.text.lower()
-                new_text = text.replace(keyword.lower(), '''<span class="ccccxxxxccc">%s</span>''' % keyword.lower())
+                text = highlight_ele.text.upper()
+                new_text = text.replace(keyword.upper(), '''<span class="ccccxxxxccc">%s</span>''' % keyword.upper())
                 aa = 'arguments[0].innerHTML = `%s`;' % new_text.replace('"', '\\"')
                 browser.execute_script(aa, highlight_ele)
 
