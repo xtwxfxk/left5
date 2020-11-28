@@ -40,12 +40,6 @@ def fetch_image(keywords):
         browser.get('http://www.facebook.com')
         doc = Document()
 
-
-        # group_tab_xpath = '//a[@aria-label="小组"]/parent::div'
-        # wait.until(lambda driver: driver.find_element_by_xpath(group_tab_xpath))
-        # group_tab = browser.find_element_by_xpath(group_tab_xpath)
-        # group_tab.click()
-
         wait.until(lambda driver: driver.find_element_by_xpath('//input[@type="search"]'))
         search = browser.find_element_by_xpath('//input[@type="search"]')
         search.clear()
@@ -74,12 +68,13 @@ def fetch_image(keywords):
 
         body = browser.find_element_by_xpath('//body')
 
-        pic_box_xpath = '//div[@role="article"]/div/div/div/div/div/a[@role="link"]'
-        wait.until(lambda driver: driver.find_element_by_xpath(pic_box_xpath))
+        # article_xpath = '//div[@role="article"]/div'
+        article_xpath = '//div[@role="article"]/div/div/div/div/div/a[@role="link"]'
+        wait.until(lambda driver: driver.find_element_by_xpath(article_xpath))
 
         eles = []
         for i in range(10):
-            eles = browser.find_elements_by_xpath(pic_box_xpath)
+            eles = browser.find_elements_by_xpath(article_xpath)
             if len(eles) < pic_count:
                 if body:
                     for _ in range(3):
@@ -92,9 +87,9 @@ def fetch_image(keywords):
         body.send_keys(Keys.HOME)
         time.sleep(2)
 
-        eles = browser.find_elements_by_xpath(pic_box_xpath)
+        eles = browser.find_elements_by_xpath(article_xpath)
         for ele in eles[:pic_count]:
-            browser.execute_script('arguments[0].setAttribute("style", "padding-top: 5px;")', ele)
+            browser.execute_script('arguments[0].setAttribute("style", "margin-top: 10px;")', ele)
 
             highlight_eles = ele.find_elements_by_xpath('.//span[@dir="auto"]/span')
             for highlight_ele in highlight_eles:
@@ -103,38 +98,59 @@ def fetch_image(keywords):
                 aa = 'arguments[0].innerHTML = `%s`;' % new_text.replace('"', '\\"')
                 browser.execute_script(aa, highlight_ele)
 
-        eles = browser.find_elements_by_xpath(pic_box_xpath)
+        eles = browser.find_elements_by_xpath(article_xpath)
 
         for i, ele in enumerate(eles[:pic_count]):
+            # browser.execute_script('arguments[0].setAttribute("style", "width: 680px;display: block;")', ele)
+            # browser.execute_script('arguments[0].style.cssText = "width: 680px"', ele)
+            # browser.execute_script('arguments[0].style.width = "680px"', ele)
+            # browser.execute_script('arguments[0].style.display = "block"', ele)
+            # browser.execute_script('arguments[0].css("width", "680px");', ele)
+
+            # print('<span style="width: 680px;display: block">%s</span>' % ele.get_attribute('innerHTML'))
+            # browser.execute_script('arguments[0].innerHTML = `<span style=\\"width: 680px;display: block\\">%s</span>`;' % ele.get_attribute('innerHTML'), ele)
+            # ele = ele.find_element_by_xpath('./span')
+            # browser.execute_script('arguments[0].role = "cccsdf"', ele)
+
+            print('sss')
             img = Image.open(BytesIO(ele.screenshot_as_png))
 
-            if len(ele.find_elements_by_xpath('./div')) > 1:
-                blacks = ele.find_elements_by_xpath('./div[1]')
+            url_location = ele.location
+            url_size = ele.size
+            url_box = [0, 0, url_size['width'], url_size['height']]
 
-                url_localtion = blacks[0].location
-                url_size = blacks[0].size
-                url_box = [0, 5, url_size['width'], url_size['height'] + 5]
+            img_nodes = []
+            img_eles = ele.find_elements_by_xpath('.//div[@style="height: 90px; width: 90px;"]')
+            for img_ele in img_eles:
+                img_left = img_ele.location['x'] - url_location['x']
+                img_upper = img_ele.location['y'] - url_location['y']
+                img_right = img_left + img_ele.size['width']
+                img_lower = img_upper + img_ele.size['height']
+                img_box = [img_left, img_upper, img_right, img_lower]
+                img_img = img.crop(img_box)
+                img_nodes.append([img_box, img_img])
 
-                hightNodes = []
-                trs = ele.find_elements_by_xpath('.//span[@class="ccccxxxxccc"]')
-                for t in trs:
-                    left = t.location['x'] - url_localtion['x']
-                    upper = t.location['y'] - url_localtion['y']
-                    right = left + t.size['width']
-                    lower = upper + t.size['height']
-                    box = [left - 5, upper - 5, right + 5, lower + 5]
-                    hightNodes.append([box, img.crop(box)])
+            hightNodes = []
+            trs = ele.find_elements_by_xpath('.//span[@class="ccccxxxxccc"]')
+            for t in trs:
+                left = t.location['x'] - url_location['x']
+                upper = t.location['y'] - url_location['y']
+                right = left + t.size['width']
+                lower = upper + t.size['height']
+                box = [left, upper, right, lower]
+                hightNodes.append([box, img.crop(box)])
+            url_img = img.crop(url_box)
+            if config.get('blur', None) and str(config.get('blur')).isdigit():
+                url_img = url_img.filter(ImageFilter.BoxBlur(config.get('blur')))
+            if config.get('watermark', None):
+                watermark = Image.open(config.get('watermark'))
+                url_img.paste(watermark, mask=watermark)
 
-                url_img = img.crop(url_box)
-                if config.get('blur', None) and str(config.get('blur')).isdigit():
-                    url_img = url_img.filter(ImageFilter.BoxBlur(config.get('blur')))
-                if config.get('watermark', None):
-                    watermark = Image.open(config.get('watermark'))
-                    url_img.paste(watermark, mask=watermark)
-
-                img.paste(url_img, url_box)
-                for box, im in hightNodes:
-                    img.paste(im, box)
+            img.paste(url_img, url_box)
+            for img_box, img_img in img_nodes:
+                img.paste(img_img, img_box)
+            for box, im in hightNodes:
+                img.paste(im, box)
 
             buf = BytesIO()
             img.save(buf, "PNG")
