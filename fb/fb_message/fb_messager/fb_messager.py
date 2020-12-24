@@ -35,7 +35,7 @@ class DataLoader():
             users_path = os.path.join(self.data_path, users_links_file)
             if os.path.exists(messages_path) and os.path.exists(users_path):
                 messages = [m.strip() for m in open(messages_path, 'r', encoding='utf-8').read().split('\n\n')]
-                users = [u.strip() for u open(users_path, 'r', encoding='utf-8').readlines()]
+                users = [u.strip() for u in open(users_path, 'r', encoding='utf-8').readlines()]
 
                 datas.append([[users_links_file, messages_file], [users, messages]])
         return datas
@@ -78,16 +78,16 @@ class Messager():
                 self.load_user(user_url)
                 for message in messages:     
                     if self.post_message(message):
-                        logger.info('发送成功，等待 %s秒...' % MESSAGE_INTERVAL)
+                        logger.info('发送成功，等待 %s 秒...' % MESSAGE_INTERVAL)
                     else:
-                        logger.info('无法确认信息是否发送成功，等待 %s秒...' % MESSAGE_INTERVAL)
+                        logger.info('无法确认信息是否发送成功，等待 %s 秒...' % MESSAGE_INTERVAL)
 
                     time.sleep(MESSAGE_INTERVAL)
                     if AUTO_REFRESH_PAGE:
                         logger.info('重新加载用户: %s' % user_url)
                         self.load_user(user_url)
 
-                logger.info('用户: %s 发送完毕，等待 %s秒后继续执行...' % (user_url, USER_INTERVAL * 60))
+                logger.info('用户: %s 发送完毕，等待 %s 秒后继续执行...' % (user_url, USER_INTERVAL * 60))
                 time.sleep(USER_INTERVAL * 60)
             except Exception as ex:
                 logger.error(traceback.format_exc())
@@ -104,6 +104,7 @@ def start():
         logger.info('用户: %s, 消息: %s 发送完毕...' % (users_links_file, messages_file))
         # time.sleep(USER_INTERVAL * 60)
 
+    logger.info('所有信息发送完毕...')
 
 if __name__ == '__main__':
     start()
