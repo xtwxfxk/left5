@@ -91,7 +91,7 @@ class Messager():
                 time.sleep(USER_INTERVAL * 60)
             except Exception as ex:
                 logger.error(traceback.format_exc())
-                time.sleep(999)
+                time.sleep(10)
 
 def start():
     logger.info('开始加载数据...')
