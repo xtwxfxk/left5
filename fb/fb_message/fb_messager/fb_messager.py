@@ -1,0 +1,110 @@
+# -*- coding: utf-8 -*-
+__author__ = 'xtwxfxk'
+
+import os, time, math, json, pymysql, traceback, itertools, urllib, copy, logging, configparser, random
+import lutils
+from io import BytesIO
+from PIL import Image, ImageFilter
+from selenium.webdriver.chrome.options import Options
+from selenium import webdriver
+from selenium.webdriver.support.ui import Select, WebDriverWait
+from selenium.webdriver.common.keys import Keys
+
+config = configparser.ConfigParser()
+config.read('settings.ini')
+DATA_PATH = config['setting']['data_path']
+MESSAGE_INTERVAL = int(config['setting']['message_interval'])
+USER_INTERVAL = int(config['setting']['user_interval'])
+PROXY = config['setting']['proxy']
+AUTO_REFRESH_PAGE = int(config['setting']['auto_refresh_page'])
+USER_DATA_DIR = config['setting']['user_data_dir']
+
+logger = logging.getLogger('lutils')
+
+class DataLoader():
+
+    def __init__(self, data_path):
+        self.data_path = data_path
+
+    def load(self):
+        datas = []
+        for i in range(1, 99):
+            messages_file = 'messages%02d.txt' % i
+            users_links_file = 'users_links%02d.txt' % i
+            messages_path = os.path.join(self.data_path, messages_file)
+            users_path = os.path.join(self.data_path, users_links_file)
+            if os.path.exists(messages_path) and os.path.exists(users_path):
+                messages = [m.strip() for m in open(messages_path, 'r', encoding='utf-8').read().split('\n\n')]
+                users = [u.strip() for u open(users_path, 'r', encoding='utf-8').readlines()]
+
+                datas.append([[users_links_file, messages_file], [users, messages]])
+        return datas
+
+
+
+class Messager():
+
+    def __init__(self, user_data_dir=None):
+        opts = Options()
+        if user_data_dir:
+            opts.add_argument("user-data-dir=%s" % user_data_dir)
+        self.browser = webdriver.Chrome(options=opts)
+        self.wait = WebDriverWait(self.browser, 120)
+
+    def post_message(self, message):
+        edit_div = self.browser.find_element_by_xpath('//div[@data-block="true"]/div')
+        edit_div.click()
+        time.sleep(1)
+        for char in message:
+            if char == '\n':
+                edit_div.send_keys(Keys.ALT + Keys.ENTER)
+            else:
+                edit_div.send_keys(char)
+        edit_div.send_keys(Keys.ENTER)
+        time.sleep(3)
+        last_ele = self.browser.find_elements_by_xpath('//span[@role="gridcell"]')[-1]
+        if message.find(last_ele.text) > -1:
+            return True
+        else:
+            return False
+    def load_user(self, url):
+        self.browser.get(url)
+        self.wait.until(lambda driver: driver.find_element_by_xpath('//div[@data-block="true"]/div'))
+
+    def post_messages(self, users, messages):
+        for user_url in users:
+            try:
+                logger.info('加载用户: %s' % user_url)
+                self.load_user(user_url)
+                for message in messages:     
+                    if self.post_message(message):
+                        logger.info('发送成功，等待 %s秒...' % MESSAGE_INTERVAL)
+                    else:
+                        logger.info('无法确认信息是否发送成功，等待 %s秒...' % MESSAGE_INTERVAL)
+
+                    time.sleep(MESSAGE_INTERVAL)
+                    if AUTO_REFRESH_PAGE:
+                        logger.info('重新加载用户: %s' % user_url)
+                        self.load_user(user_url)
+
+                logger.info('用户: %s 发送完毕，等待 %s秒后继续执行...' % (user_url, USER_INTERVAL * 60))
+                time.sleep(USER_INTERVAL * 60)
+            except Exception as ex:
+                logger.error(traceback.format_exc())
+                time.sleep(999)
+
+def start():
+    logger.info('开始加载数据...')
+    datas = DataLoader(DATA_PATH).load()
+    messager = Messager(USER_DATA_DIR)
+    logger.info('开始发送数据...')
+    for [[users_links_file, messages_file], [users, messages]] in datas:
+        messager.post_messages(users, messages)
+
+        logger.info('用户: %s, 消息: %s 发送完毕...' % (users_links_file, messages_file))
+        # time.sleep(USER_INTERVAL * 60)
+
+
+if __name__ == '__main__':
+    start()
+    
