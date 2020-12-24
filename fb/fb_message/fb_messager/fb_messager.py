@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 __author__ = 'xtwxfxk'
 
-import os, time, math, json, pymysql, traceback, itertools, urllib, copy, logging, configparser, random
+import os, time, math, json, traceback, itertools, urllib, copy, logging, configparser, random
 import lutils
-from io import BytesIO
-from PIL import Image, ImageFilter
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select, WebDriverWait
