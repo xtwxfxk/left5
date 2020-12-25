@@ -5,8 +5,8 @@ import logging, logging.config, time, traceback
 from shove import Shove
 from concurrent.futures imoprt ThreadPoolExecutor
 
-from spider1.best_sell2 import BestSell, ThreadSet
-from spider1.base.models import URL_TYPE
+from spider.best_sell2 import BestSell, ThreadSet
+from spider.base.models import URL_TYPE
 
 import config
 
@@ -15,7 +15,6 @@ logging.config.fileConfig('logging.conf')
 logger = logging.getLogger('verbose')
 
 multiple = 4
-
 
 string_proxies = [
     # 'socks4://192.168.1.188:1080',
@@ -29,7 +28,7 @@ string_proxies = [
 
 executor = ThreadPoolExecutor(max_workers=len(string_proxies)*multiple)
 
-url_info = Shove(url_info_root)
+url_info = Shove(config.URL_URL_INFO)
 key_set = ThreadSet()
 
 key_set = key_set.union(url_info.keys())
@@ -37,7 +36,7 @@ key_set = key_set.union(url_info.keys())
 bs = []
 for i in range(multiple):
     for string_proxy in string_proxies:
-        bs.append(BestSell(key_set, string_proxy=string_proxy, url_info_root=config.url_info_root))
+        bs.append(BestSell(key_set, string_proxy=string_proxy, url_info_root=config.URL_URL_INFO))
 
 
 def spider():
@@ -58,7 +57,9 @@ def spider():
         logger.info('Wait 5 Second...')
         time.sleep(5)
 
-spider()
+
+if __name__ == '__main__':
+    spider()
 
 
 
