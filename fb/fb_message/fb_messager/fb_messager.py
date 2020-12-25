@@ -16,6 +16,8 @@ USER_INTERVAL = int(config['setting']['user_interval'])
 PROXY = config['setting']['proxy']
 AUTO_REFRESH_PAGE = int(config['setting']['auto_refresh_page'])
 USER_DATA_DIR = config['setting']['user_data_dir']
+WORD_COUNT = int(config['setting']['word_count'])
+WORD_INTERVAL = float(config['setting']['word_interval'])
 
 logger = logging.getLogger('lutils')
 
@@ -64,11 +66,20 @@ class Messager():
         edit_div = self.browser.find_element_by_xpath('//div[@data-block="true"]/div')
         edit_div.click()
         time.sleep(1)
-        for char in message:
-            if char == '\n':
-                edit_div.send_keys(Keys.ALT + Keys.ENTER)
-            else:
-                edit_div.send_keys(char)
+
+        for line in message.splitlines():
+            chunks = line.strip()
+            if WORD_COUNT > 1:
+                chunks = [chunks[i:i+WORD_COUNT] for i in range(0, len(chunks), WORD_COUNT)]
+
+            for chars in chunks:
+                edit_div.send_keys(chars)
+                if WORD_INTERVAL > 0: time.sleep(WORD_INTERVAL)
+
+            edit_div.send_keys(Keys.ALT + Keys.ENTER)
+            edit_div = self.browser.find_elements_by_xpath('//div[@data-block="true"]/div')[-1]
+            edit_div.click()
+
         edit_div.send_keys(Keys.ENTER)
         time.sleep(3)
         last_ele = self.browser.find_elements_by_xpath('//span[@role="gridcell"]')[-1]
@@ -86,7 +97,7 @@ class Messager():
             try:
                 logger.info('加载用户: %s' % user_url)
                 self.load_user(user_url)
-                for message in messages:     
+                for message in messages:
                     if self.post_message(message):
                         logger.info('发送成功，等待 %s 秒...' % MESSAGE_INTERVAL)
                     else:
