@@ -2,7 +2,12 @@
 .ipynb_checkpoints
 .DS_Store
 
+**/build/
+**/logs/
+**/dist/
+*.spec
 *.pyc
+chromedriver.exe
 tmp
 data
 stock_data
