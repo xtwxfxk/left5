@@ -49,6 +49,17 @@ class Messager():
         self.browser = webdriver.Chrome(options=opts)
         self.wait = WebDriverWait(self.browser, 120)
 
+        while not self.check_login():
+            time.sleep(120)
+
+    def check_login(self):
+        self.browser.get('http://www.facebook.com')
+        time.sleep(5)
+        if self.browser.page_source.find('featuredLogin') > -1:
+            logger.info('你有 2 分钟时间登录...')
+            return False
+        return True
+
     def post_message(self, message):
         edit_div = self.browser.find_element_by_xpath('//div[@data-block="true"]/div')
         edit_div.click()
@@ -67,6 +78,7 @@ class Messager():
             return False
     def load_user(self, url):
         self.browser.get(url)
+        time.sleep(10)
         self.wait.until(lambda driver: driver.find_element_by_xpath('//div[@data-block="true"]/div'))
 
     def post_messages(self, users, messages):
