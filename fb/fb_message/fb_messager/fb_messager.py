@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 __author__ = 'xtwxfxk'
 
-import os, time, math, json, traceback, itertools, urllib, copy, logging, configparser, random
-import lutils
+import os, time, math, json, traceback, itertools, urllib, copy, logging, configparser, random, datetime
+import logging
+import logging.config
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select, WebDriverWait
@@ -19,7 +20,8 @@ USER_DATA_DIR = config['setting']['user_data_dir']
 WORD_COUNT = int(config['setting']['word_count'])
 WORD_INTERVAL = float(config['setting']['word_interval'])
 
-logger = logging.getLogger('lutils')
+logging.config.fileConfig('logging.conf')
+logger = logging.getLogger('verbose')
 
 class DataLoader():
 
@@ -98,19 +100,29 @@ class Messager():
                 logger.info('加载用户: %s' % user_url)
                 self.load_user(user_url)
                 for message in messages:
-                    if self.post_message(message):
-                        logger.info('发送成功，等待 %s 秒...' % MESSAGE_INTERVAL)
-                    else:
-                        logger.info('无法确认信息是否发送成功，等待 %s 秒...' % MESSAGE_INTERVAL)
+                    try:
+                        if self.post_message(message):
+                            logger.info('发送成功，等待 %s 秒...' % MESSAGE_INTERVAL)
+                        else:
+                            logger.info('无法确认信息是否发送成功，等待 %s 秒...' % MESSAGE_INTERVAL)
 
-                    time.sleep(MESSAGE_INTERVAL)
-                    if AUTO_REFRESH_PAGE:
-                        logger.info('重新加载用户: %s' % user_url)
-                        self.load_user(user_url)
+                        time.sleep(MESSAGE_INTERVAL)
+                        if AUTO_REFRESH_PAGE:
+                            logger.info('重新加载用户: %s' % user_url)
+                            self.load_user(user_url)
+                    except Exception as e:
+                        now = datetime.datetime.now()
+                        self.browser.save_screenshot('logs/%s.png' % now.strftime('%Y-%m-%d %H-%M-%S'))
+                        open('logs/%s.html' % now.strftime('%Y-%m-%d %H-%M-%S'), 'w', encoding='utf-8').write(self.browser.page_source)
+                        logger.error(traceback.format_exc())
+                        time.sleep(5)
 
                 logger.info('用户: %s 发送完毕，等待 %s 秒后继续执行...' % (user_url, USER_INTERVAL * 60))
                 time.sleep(USER_INTERVAL * 60)
             except Exception as ex:
+                now = datetime.datetime.now()
+                self.browser.save_screenshot('logs/%s.png' % now.strftime('%Y-%m-%d %H-%M-%S'))
+                open('logs/%s.html' % now.strftime('%Y-%m-%d %H-%M-%S'), 'w', encoding='utf-8').write(self.browser.page_source)
                 logger.error(traceback.format_exc())
                 time.sleep(10)
 
