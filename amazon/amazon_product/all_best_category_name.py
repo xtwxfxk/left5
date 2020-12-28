@@ -21,8 +21,8 @@ url = 'https://www.amazon.com/Best-Sellers/zgbs/ref=zg_bs_unv_ac_0_ac_1'
 urls = [
     'https://www.amazon.com/Best-Sellers-Automotive/zgbs/automotive/ref=zg_bs_nav_0',
     'https://www.amazon.com/Best-Sellers-Beauty/zgbs/beauty/ref=zg_bs_nav_0',
-    'https://www.amazon.com/best-sellers-camera-photo/zgbs/photo/ref=zg_bs_nav_0',
-    'https://www.amazon.com/Best-Sellers-Cell-Phones-Accessories/zgbs/wireless/ref=zg_bs_nav_0',
+    # 'https://www.amazon.com/best-sellers-camera-photo/zgbs/photo/ref=zg_bs_nav_0',
+    # 'https://www.amazon.com/Best-Sellers-Cell-Phones-Accessories/zgbs/wireless/ref=zg_bs_nav_0',
     'https://www.amazon.com/Best-Sellers-Electronics/zgbs/electronics/ref=zg_bs_nav_0',
     'https://www.amazon.com/Best-Sellers-Health-Personal-Care/zgbs/hpc/ref=zg_bs_nav_0',
     'https://www.amazon.com/Best-Sellers-Home-Kitchen/zgbs/home-garden/ref=zg_bs_nav_0',
@@ -40,7 +40,7 @@ def iter_name(string_proxy, queue):
         try:
             url, deep = queue.get(timeout=30)
             xp = '//ul[@id="zg_browseRoot"]/%s/li/a' % '/'.join(['ul' for i in range(deep)])
-            # print(xp)
+            # logger.info(xp)
             lr.load(url)
 
             next_deep = deep + 1
@@ -48,14 +48,14 @@ def iter_name(string_proxy, queue):
                 name = ele.text.strip()
                 if name not in categories:
                     categories.add(name)
-                    print(name)
+                    logger.info(name)
                     queue.put([ele.attrib['href'], next_deep])
         # except KeyboardInterrupt:
         #     return
         except Exception as ex:
             traceback.print_exec()
         except Empty:
-            print('Empty')
+            logger.info('Empty')
 
 
 queue = Queue()

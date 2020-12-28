@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 __author__ = 'xtwxfxk'
 
-import os, time, traceback, urlparse, base64, StringIO, cPickle, hashlib, gzip, logging, logging.config, datetime, json
+import os, time, traceback, base64, pickle, hashlib, gzip, logging, logging.config, datetime, json
+from urllib.parse import urljoin
 from lxml.etree import XMLSyntaxError
 
 from PIL import Image
@@ -9,6 +10,8 @@ from lutils import isfloat
 from lutils.lrequest import LRequest
 from lutils.captcha.gsa_captcha import GsaCaptcha
 from lxml import etree
+
+import config
 
 logger = logging.getLogger('verbose')
 
@@ -78,7 +81,7 @@ def image_data(method):
         for i, url in enumerate(kwargs.get('image_urls', [])):
             name = '%s_%02d.jpg' % (kwargs.get('key'), (i+1))
             if not self.exists_image(name):
-                logger.info('Load Image: %s' % url)
+                # logger.info('Load Image: %s' % url)
                 self.lr.load(url, is_xpath=False)
                 self.save_image(name, self.lr.body)
 
@@ -142,7 +145,7 @@ def brand(detail):
         brand_ele = self.lr.xpath('//a[@id="brand"]')
         if brand_ele is not None and hasattr(brand_ele, 'text') and brand_ele.text is not None:
             brand = brand_ele.text.strip()
-            brand_url = urlparse.urljoin(self.lr.current_url, brand_ele.attrib['href'])
+            brand_url = urljoin(self.lr.current_url, brand_ele.attrib['href'])
         result['brand'] = brand
         result['brand_url'] = brand_url
 
@@ -177,7 +180,7 @@ def sold_by(detail):
         if merchant_a_eles is not None and len(merchant_a_eles) > 0:
             if merchant_a_eles[0].text.find('Fulfilled by Amazon') < 0:
                 sold_by = merchant_a_eles[0].text.strip()
-                sold_by_url = urlparse.urljoin(self.lr.current_url, merchant_a_eles[0].attrib['href'])
+                sold_by_url = urljoin(self.lr.current_url, merchant_a_eles[0].attrib['href'])
         result['sold_by'] = sold_by
         result['sold_by_url'] = sold_by_url
 
@@ -233,7 +236,7 @@ def ranks_str(detail):
                         rank_url = ''
                         if rank_a_ele and len(rank_a_ele) > 0:
                             rank_keyword = rank_a_ele[0].text.strip()
-                            rank_url = urlparse.urljoin(product_url, rank_a_ele[0].attrib['href'])
+                            rank_url = urljoin(product_url, rank_a_ele[0].attrib['href'])
 
                         ranks.append([rank_count_text, rank_keyword, rank_url])
 
@@ -281,7 +284,7 @@ def other_seller(detail):
         if self.lr.body.find('Other Sellers on Amazon') > -1:
             other_ele = self.lr.xpath('//div[@id="mbc"]//span[@class="a-size-small"]/a')
             if other_ele is not None:
-                other_url = urlparse.urljoin(self.lr.current_url, other_ele.attrib['href'])
+                other_url = urljoin(self.lr.current_url, other_ele.attrib['href'])
                 other_text = other_ele.text.strip()
         result['other_url'] = other_url
         result['other_text'] = other_text
@@ -315,13 +318,13 @@ class AmazonBase(object):
 
     captcha = None
 
-    def __init__(self, cache_root, **kwargs):
+    def __init__(self, **kwargs):
 
         self.lr = LRequest(string_proxy=kwargs.get('string_proxy', ''))
 
         self.captcha = GsaCaptcha(ip=kwargs.get('gsa_ip', '192.168.1.188'), port=kwargs.get('gsa_port', '8000'))
 
-        self.CACHE_ROOT = cache_root
+        self.CACHE_ROOT = config.AMAZON_CACHE_ROOT
         self.CACHE_PAGES_ROOT = kwargs.get('cache_page', os.path.join(self.CACHE_ROOT, 'pages'))
         self.CACHE_IMAGES_ROOT = kwargs.get('cache_image', os.path.join(self.CACHE_ROOT, 'images'))
 
@@ -334,7 +337,7 @@ class AmazonBase(object):
         self.CACHE_EXPIRED_DAYS = kwargs.get('cache_expired_days', 15)
 
     def load(self, url, is_xpath=True):
-        logger.info('Load Url: %s' % url)
+        # logger.info('Load Url: %s' % url)
         self.lr.load(url, is_xpath=is_xpath)
         if self.check_captcha():
             self.lr.load(url, is_xpath=is_xpath)
@@ -394,7 +397,7 @@ class AmazonBase(object):
 
         if os.path.exists(cache_path):
             try:
-                return cPickle.loads(gzip.GzipFile(cache_path, 'rb').read())
+                return pickle.loads(gzip.GzipFile(cache_path, 'rb').read())
             except:
                 return {}
 
@@ -407,7 +410,7 @@ class AmazonBase(object):
         cache_path = os.path.join(self.CACHE_PAGES_ROOT, cache_name[0], cache_name[1], cache_name)
 
         gzip_file = gzip.open(cache_path, 'wb')
-        gzip_file.write(cPickle.dumps(data))
+        gzip_file.write(pickle.dumps(data))
         gzip_file.close()
 
     def exists_image(self, name):
