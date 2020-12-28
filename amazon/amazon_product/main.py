@@ -41,7 +41,7 @@ for i in range(multiple):
     for string_proxy in string_proxies:
         bs.append(BestSell(string_proxy=string_proxy))
 
-# bs[0].categories_first(categories=config.spider_categories)
+bs[0].categories_first(categories=config.spider_categories)
 
 
 def category():
