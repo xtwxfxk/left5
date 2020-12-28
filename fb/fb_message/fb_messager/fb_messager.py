@@ -8,6 +8,8 @@ from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select, WebDriverWait
 from selenium.webdriver.common.keys import Keys
+import win32clipboard as w
+import win32con
 
 config = configparser.ConfigParser()
 config.read('settings.ini')
@@ -65,22 +67,32 @@ class Messager():
         return True
 
     def post_message(self, message):
-        edit_div = self.browser.find_element_by_xpath('//div[@data-block="true"]/div')
+        edit_div = self.browser.find_element_by_xpath('//div[@data-block="true"]/div') # //div[@role="textbox"]
         edit_div.click()
         time.sleep(1)
 
-        for line in message.splitlines():
-            chunks = line.strip()
-            if WORD_COUNT > 1:
+        if WORD_COUNT > 0:
+            for line in message.splitlines():
+                chunks = line.strip()
                 chunks = [chunks[i:i+WORD_COUNT] for i in range(0, len(chunks), WORD_COUNT)]
 
-            for chars in chunks:
-                edit_div.send_keys(chars)
-                if WORD_INTERVAL > 0: time.sleep(WORD_INTERVAL)
+                for chars in chunks:
+                    edit_div.send_keys(chars)
+                    if WORD_INTERVAL > 0: time.sleep(WORD_INTERVAL)
 
-            edit_div.send_keys(Keys.ALT + Keys.ENTER)
-            edit_div = self.browser.find_elements_by_xpath('//div[@data-block="true"]/div')[-1]
-            edit_div.click()
+                edit_div.send_keys(Keys.ALT + Keys.ENTER)
+                time.sleep(1)
+                edit_div = self.browser.find_elements_by_xpath('//div[@data-block="true"]/div')[-1]
+                edit_div.click()
+        else:
+            w.OpenClipboard()
+            w.EmptyClipboard()
+            w.SetClipboardData(win32con.CF_UNICODETEXT, message)
+            w.CloseClipboard()
+
+            edit_div.send_keys(Keys.CONTROL, 'v')
+
+            if WORD_INTERVAL > 0: time.sleep(WORD_INTERVAL)
 
         edit_div.send_keys(Keys.ENTER)
         time.sleep(3)
@@ -89,9 +101,10 @@ class Messager():
             return True
         else:
             return False
+
     def load_user(self, url):
         self.browser.get(url)
-        time.sleep(10)
+        time.sleep(5)
         self.wait.until(lambda driver: driver.find_element_by_xpath('//div[@data-block="true"]/div'))
 
     def post_messages(self, users, messages):
@@ -101,15 +114,16 @@ class Messager():
                 self.load_user(user_url)
                 for message in messages:
                     try:
-                        if self.post_message(message):
-                            logger.info('发送成功，等待 %s 秒...' % MESSAGE_INTERVAL)
-                        else:
-                            logger.info('无法确认信息是否发送成功，等待 %s 秒...' % MESSAGE_INTERVAL)
+                        if message.strip():
+                            if self.post_message(message):
+                                logger.info('发送成功，等待 %s 秒...' % MESSAGE_INTERVAL)
+                            else:
+                                logger.info('无法确认信息是否发送成功，等待 %s 秒...' % MESSAGE_INTERVAL)
+                            time.sleep(MESSAGE_INTERVAL)
 
-                        time.sleep(MESSAGE_INTERVAL)
-                        if AUTO_REFRESH_PAGE:
-                            logger.info('重新加载用户: %s' % user_url)
-                            self.load_user(user_url)
+                            if AUTO_REFRESH_PAGE:
+                                logger.info('重新加载用户: %s' % user_url)
+                                self.load_user(user_url)
                     except Exception as e:
                         now = datetime.datetime.now()
                         self.browser.save_screenshot('logs/%s.png' % now.strftime('%Y-%m-%d %H-%M-%S'))
