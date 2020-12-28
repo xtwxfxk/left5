@@ -116,10 +116,7 @@ class BestSell(AmazonBase):
     @product_url
     @url_over
     def categories(self, url_obj=None, **kwargs):
-        try:
-            self.load(url_obj.url)
-        except:
-            logger.error(traceback.format_exc())
+        self.load(url_obj.url)
 
 
     @product_url
