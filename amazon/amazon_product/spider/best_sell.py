@@ -122,7 +122,7 @@ class BestSell(AmazonBase):
     @product_url
     @url_over
     def category_next(self, url_obj=None, **kwargs):
-        self.load(url_obj.url.encode('utf-8'))
+        self.load(url_obj.url)
 
     @url_over
     def product(self, url_obj=None, **kwargs):
@@ -160,7 +160,7 @@ class BestSell(AmazonBase):
 
         while session.query(Url).filter_by(type=URL_TYPE.BEST_SELL_CATEGORY, has_crawled=False).count() > 0:
             for url_obj in session.query(Url).filter_by(type=URL_TYPE.BEST_SELL_CATEGORY, has_crawled=False):
-                self.load(url_obj.url.encode('utf-8'))
+                self.load(url_obj.url)
 
                 # sub category
                 p_categories = url_obj.key.split('@@')
@@ -209,7 +209,7 @@ class BestSell(AmazonBase):
 
         while session.query(Url).filter_by(type=URL_TYPE.BEST_SELL_CATEGORY_NEXT, has_crawled=False).count() > 0:
             for url_obj in session.query(Url).filter_by(type=URL_TYPE.BEST_SELL_CATEGORY_NEXT, has_crawled=False):
-                self.load(url_obj.url.encode('utf-8'))
+                self.load(url_obj.url)
 
                 # product
                 product_eles = self.lr.xpaths('//div[@class="zg_itemImageImmersion"]/a')
