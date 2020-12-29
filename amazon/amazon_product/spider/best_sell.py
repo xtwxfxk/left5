@@ -48,49 +48,58 @@ def category(method):
 
 def next_page(method):
     def wrapped(self, **kwargs):
-        session = Session(autocommit=True)
-        method(self, **kwargs)
+        try:
+            session = Session(autocommit=True)
+            method(self, **kwargs)
 
-        url_obj = kwargs.get('url_obj')
+            url_obj = kwargs.get('url_obj')
 
-        ele = self.lr.xpath('//li[@class="a-last"]/a')
-        page_url = urljoin(self.lr.current_url, ele.attrib['href'].strip())
-        # https://www.amazon.com/Best-Sellers-Home-Kitchen-D%C3%A9cor-Products/zgbs/home-garden/1063278/ref=zg_bs_pg_2?_encoding=UTF8&pg=2
+            ele = self.lr.xpath('//li[@class="a-last"]/a')
+            page_url = urljoin(self.lr.current_url, ele.attrib['href'].strip())
+            # https://www.amazon.com/Best-Sellers-Home-Kitchen-D%C3%A9cor-Products/zgbs/home-garden/1063278/ref=zg_bs_pg_2?_encoding=UTF8&pg=2
 
-        parsed = urlparse(page_url)
-        index = parse_qs(parsed.query)['pg']
-        
-        key = '%s_%s' % (url_obj.key, index)
+            parsed = urlparse(page_url)
+            index = parse_qs(parsed.query)['pg'][0]
+            
+            key = '%s_%s' % (url_obj.key, index)
 
-        urls = []
-        if session.query(Url).filter_by(key=key).count() < 1:
-            logger.info('Add Category Next: %s' % page_url)
-            urls.append(Url(url=page_url, type=URL_TYPE.BEST_SELL_CATEGORY_NEXT, key=key))
+            # urls = []
+            if session.query(Url).filter_by(key=key).count() < 1:
+                logger.info('Add Category Next: %s' % page_url)
+                # urls.append(Url(url=page_url, type=URL_TYPE.BEST_SELL_CATEGORY_NEXT, name=url_obj.name, key=key))
+                session.add(Url(url=page_url, type=URL_TYPE.BEST_SELL_CATEGORY_NEXT, name=url_obj.name, key=key))
                 # session.commit()
-        session.bulk_save_objects(urls)
+
+            # session.bulk_save_objects(urls)
+        except:
+            logger.error(traceback.format_exc())
 
     return wrapped
 
 def product_url(method):
     def wrapped(self, **kwargs):
-        session = Session(autocommit=True)
+        try:
+            session = Session(autocommit=True)
 
-        method(self, **kwargs)
+            method(self, **kwargs)
 
-        urls = []
-        product_eles = self.lr.xpaths('//span[contains(@class, "zg-item")]/a')
-        for ele in product_eles:
-            product_url = urljoin(self.lr.current_url, ele.attrib['href'].strip())
-            asin = product_url.split('/dp/', 1)[1].split('/', 1)[0]
+            # urls = []
+            product_eles = self.lr.xpaths('//span[contains(@class, "zg-item")]/a')
+            for ele in product_eles:
+                product_url = urljoin(self.lr.current_url, ele.attrib['href'].strip())
+                asin = product_url.split('/dp/', 1)[1].split('/', 1)[0]
 
-            u = urlparse(product_url)
-            pu = '%s://%s/db/%s' % (u.scheme, u.netloc, asin)
-            if session.query(Url).filter_by(key=asin).count() < 1:
-                logger.info('Add Product: %s' % asin)
-                urls.append(Url(url=pu, type=URL_TYPE.PRODUCT_URL, key=asin))
-                # session.commit()
+                u = urlparse(product_url)
+                pu = '%s://%s/dp/%s' % (u.scheme, u.netloc, asin)
+                if session.query(Url).filter_by(key=asin).count() < 1:
+                    logger.info('Add Product: %s' % asin)
+                    # urls.append(Url(url=pu, type=URL_TYPE.PRODUCT_URL, name=asin, key=asin))
+                    session.add(Url(url=pu, type=URL_TYPE.PRODUCT_URL, name=asin, key=asin))
+                    # session.commit()
 
-        session.bulk_save_objects(urls)
+            # session.bulk_save_objects(urls)
+        except:
+            logger.error(traceback.format_exc())
 
     return wrapped
 
