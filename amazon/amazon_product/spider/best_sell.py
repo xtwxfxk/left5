@@ -2,6 +2,7 @@
 __author__ = 'xtwxfxk'
 
 import logging, traceback
+from urllib.parse import urlparse
 from urllib.parse import urljoin
 from sqlalchemy import update
 
@@ -51,7 +52,7 @@ def next_page(method):
         method(self, **kwargs)
 
         urls = []
-        for ele in self.lr.xpaths('//div[@id="zg_paginationWrapper"]//a')[1:]:
+        for ele in self.lr.xpaths('//li[@class="a-last"]/a')[1:]:
             page_url = urljoin(self.lr.current_url, ele.attrib['href'].strip())
 
             id = page_url.split('/ref', 1)[0].rsplit('/', 1)[-1]
@@ -73,11 +74,13 @@ def product_url(method):
         method(self, **kwargs)
 
         urls = []
-        product_eles = self.lr.xpaths('//div[@class="zg_itemImageImmersion"]/a')
+        product_eles = self.lr.xpaths('//span[contains(@class, "zg-item")]/a')
         for ele in product_eles:
             product_url = urljoin(self.lr.current_url, ele.attrib['href'].strip())
             asin = product_url.split('/dp/', 1)[1].split('/', 1)[0]
 
+            u = urlparse(product_url)
+            pu = '%s://%s/db/%s' % (u.scheme, u.netloc, asin)
             if session.query(Url).filter_by(key=asin).count() < 1:
                 logger.info('Add Product: %s' % asin)
                 urls.append(Url(url=product_url, type=URL_TYPE.PRODUCT_URL, key=asin))
