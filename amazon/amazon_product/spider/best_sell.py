@@ -52,16 +52,16 @@ def next_page(method):
         method(self, **kwargs)
 
         urls = []
-        for ele in self.lr.xpaths('//li[@class="a-last"]/a')[1:]:
-            page_url = urljoin(self.lr.current_url, ele.attrib['href'].strip())
+        ele = self.lr.xpath('//li[@class="a-last"]/a'):
+        page_url = urljoin(self.lr.current_url, ele.attrib['href'].strip())
 
-            id = page_url.split('/ref', 1)[0].rsplit('/', 1)[-1]
-            index = page_url.split('&pg=', 1)[-1]
-            key = '%s_%s' % (id, index)
+        id = page_url.split('/ref', 1)[0].rsplit('/', 1)[-1]
+        index = page_url.split('&pg=', 1)[-1]
+        key = '%s_%s' % (id, index)
 
-            if session.query(Url).filter_by(key=key).count() < 1:
-                logger.info('Add Category Next: %s' % page_url)
-                urls.append(Url(url=page_url, type=URL_TYPE.BEST_SELL_CATEGORY_NEXT, key=key))
+        if session.query(Url).filter_by(key=key).count() < 1:
+            logger.info('Add Category Next: %s' % page_url)
+            urls.append(Url(url=page_url, type=URL_TYPE.BEST_SELL_CATEGORY_NEXT, key=key))
                 # session.commit()
         session.bulk_save_objects(urls)
 
