@@ -62,6 +62,7 @@ def next_page(method):
         
         key = '%s_%s' % (url_obj.key, index)
 
+        urls = []
         if session.query(Url).filter_by(key=key).count() < 1:
             logger.info('Add Category Next: %s' % page_url)
             urls.append(Url(url=page_url, type=URL_TYPE.BEST_SELL_CATEGORY_NEXT, key=key))
@@ -86,7 +87,7 @@ def product_url(method):
             pu = '%s://%s/db/%s' % (u.scheme, u.netloc, asin)
             if session.query(Url).filter_by(key=asin).count() < 1:
                 logger.info('Add Product: %s' % asin)
-                urls.append(Url(url=product_url, type=URL_TYPE.PRODUCT_URL, key=asin))
+                urls.append(Url(url=pu, type=URL_TYPE.PRODUCT_URL, key=asin))
                 # session.commit()
 
         session.bulk_save_objects(urls)
