@@ -56,7 +56,7 @@ def category():
             except:
                 logger.error(traceback.format_exc())
 
-        time.sleep(5)
+        time.sleep(30)
 
 def category_next():
     try:
@@ -66,7 +66,7 @@ def category_next():
                 executor.submit(bs[i%len(bs)].category_next, url_obj=url_obj)
                 time.sleep(0.1)
 
-            time.sleep(10)
+            time.sleep(30)
     except:
         logger.error(traceback.format_exc())
 
@@ -78,7 +78,7 @@ def product():
             for i, url_obj in enumerate(session.query(Url).filter_by(type=URL_TYPE.PRODUCT_URL, has_crawled=False)): #.limit(20*len(string_proxies))):
                 executor.submit(bs[i%len(bs)].product, url_obj=url_obj)
                 time.sleep(0.1)
-            time.sleep(10)
+            time.sleep(30)
     except:
         logger.error(traceback.format_exc())
 
