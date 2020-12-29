@@ -29,19 +29,21 @@ string_proxies = [
 
 executor = ThreadPoolExecutor(max_workers=len(string_proxies)*multiple)
 
-b = BestSell() # string_proxy='socks4://192.168.1.188:1080')
-
-# b.product('B01FQN3W5U')
-
-# b.categories_first(categories=config.spider_categories)
-# b.categories(url_obj=url_obj)
+def first():
+    session = Session()
+    if session.query(Url).filter_by(type=URL_TYPE.BEST_SELL_CATEGORY, has_crawled=False).count() < 1:
+        b = BestSell() # string_proxy='socks4://192.168.1.188:1080')
+        # b.product('B01FQN3W5U')
+        b.categories_first(categories=config.spider_categories)
+        # b.categories(url_obj=url_obj)
+    session.close()
 
 bs = []
 for i in range(multiple):
     for string_proxy in string_proxies:
         bs.append(BestSell(string_proxy=string_proxy))
 
-bs[0].categories_first(categories=config.spider_categories)
+# bs[0].categories_first(categories=config.spider_categories)
 
 
 def category():
@@ -84,7 +86,10 @@ def product():
 # executor.submit(category_next)
 # executor.submit(category)
 
-category()
+if __name__ == '__main__':
+    first()
+
+    category()
 
 
 

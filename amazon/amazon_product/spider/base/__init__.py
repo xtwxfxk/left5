@@ -336,11 +336,11 @@ class AmazonBase(object):
 
         self.CACHE_EXPIRED_DAYS = kwargs.get('cache_expired_days', 15)
 
-    def load(self, url, is_xpath=True):
+    def load(self, url, is_xpath=True, is_decode=True):
         # logger.info('Load Url: %s' % url)
-        self.lr.load(url, is_xpath=is_xpath)
+        self.lr.load(url, is_xpath=is_xpath, is_decode=is_decode)
         if self.check_captcha():
-            self.lr.load(url, is_xpath=is_xpath)
+            self.lr.load(url, is_xpath=is_xpath, is_decode=is_decode)
 
     def check_captcha(self):
         if self.captcha is not None:
