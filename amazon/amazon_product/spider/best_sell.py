@@ -52,7 +52,7 @@ def next_page(method):
         method(self, **kwargs)
 
         urls = []
-        ele = self.lr.xpath('//li[@class="a-last"]/a'):
+        ele = self.lr.xpath('//li[@class="a-last"]/a')
         page_url = urljoin(self.lr.current_url, ele.attrib['href'].strip())
 
         id = page_url.split('/ref', 1)[0].rsplit('/', 1)[-1]
