@@ -3,6 +3,7 @@ __author__ = 'xtwxfxk'
 
 import logging, traceback
 from urllib.parse import urlparse
+from urllib.parse import parse_qs
 from urllib.parse import urljoin
 from sqlalchemy import update
 
@@ -48,16 +49,18 @@ def category(method):
 def next_page(method):
     def wrapped(self, **kwargs):
         session = Session(autocommit=True)
-
         method(self, **kwargs)
 
-        urls = []
+        url_obj = kwargs.get('url_obj')
+
         ele = self.lr.xpath('//li[@class="a-last"]/a')
         page_url = urljoin(self.lr.current_url, ele.attrib['href'].strip())
+        # https://www.amazon.com/Best-Sellers-Home-Kitchen-D%C3%A9cor-Products/zgbs/home-garden/1063278/ref=zg_bs_pg_2?_encoding=UTF8&pg=2
 
-        id = page_url.split('/ref', 1)[0].rsplit('/', 1)[-1]
-        index = page_url.split('&pg=', 1)[-1]
-        key = '%s_%s' % (id, index)
+        parsed = urlparse(page_url)
+        index = parse_qs(parsed.query)['pg']
+        
+        key = '%s_%s' % (url_obj.key, index)
 
         if session.query(Url).filter_by(key=key).count() < 1:
             logger.info('Add Category Next: %s' % page_url)
