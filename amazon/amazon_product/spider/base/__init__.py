@@ -2,6 +2,7 @@
 __author__ = 'xtwxfxk'
 
 import os, time, traceback, base64, pickle, hashlib, gzip, logging, logging.config, datetime, json
+import urllib.parse
 from urllib.parse import urljoin
 from lxml.etree import XMLSyntaxError
 
@@ -338,6 +339,7 @@ class AmazonBase(object):
 
     def load(self, url, is_xpath=True, is_decode=True):
         # logger.info('Load Url: %s' % url)
+        url = urllib.parse.quote(url, safe='https:/')
         self.lr.load(url, is_xpath=is_xpath, is_decode=is_decode)
         if self.check_captcha():
             self.lr.load(url, is_xpath=is_xpath, is_decode=is_decode)

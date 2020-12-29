@@ -118,7 +118,6 @@ class BestSell(AmazonBase):
     def categories(self, url_obj=None, **kwargs):
         self.load(url_obj.url)
 
-
     @product_url
     @url_over
     def category_next(self, url_obj=None, **kwargs):
