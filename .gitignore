@@ -41,3 +41,4 @@ ecg/ecg_pytorch/data
 ecg/ecg_pytorch/submit
 
 debug.log
+nohup.out

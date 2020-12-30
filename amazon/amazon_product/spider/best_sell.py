@@ -1,14 +1,17 @@
 # -*- coding: utf-8 -*-
 __author__ = 'xtwxfxk'
 
-import logging, urlparse, traceback
-
+import logging, traceback
+from urllib.parse import urlparse
+from urllib.parse import parse_qs
+from urllib.parse import urljoin
 from sqlalchemy import update
 
-from base import AmazonBase
-from base.models import Url, URL_TYPE, Session
+from .base import AmazonBase
+from .base.models import Url, URL_TYPE, Session
 
 logger = logging.getLogger('verbose')
+
 
 
 def category(method):
@@ -30,7 +33,7 @@ def category(method):
         category_eles = self.lr.xpaths(category_xpaths)
         if category_eles is not None and len(category_eles) > 0:
             for category_ele in category_eles:
-                url = self.wrapped_url(urlparse.urljoin(self.lr.current_url, category_ele.attrib['href']))
+                url = self.wrapped_url(urljoin(self.lr.current_url, category_ele.attrib['href']))
                 text = category_ele.text.strip()
 
                 key = '%s@@%s' % (url_obj.key, text)
@@ -46,21 +49,26 @@ def category(method):
 def next_page(method):
     def wrapped(self, **kwargs):
         session = Session(autocommit=True)
-
         method(self, **kwargs)
 
+        url_obj = kwargs.get('url_obj')
+
+        ele = self.lr.xpath('//li[@class="a-last"]/a')
+        page_url = urljoin(self.lr.current_url, ele.attrib['href'].strip())
+        # https://www.amazon.com/Best-Sellers-Home-Kitchen-D%C3%A9cor-Products/zgbs/home-garden/1063278/ref=zg_bs_pg_2?_encoding=UTF8&pg=2
+
+        parsed = urlparse(page_url)
+        index = parse_qs(parsed.query)['pg'][0]
+        
+        key = '%s_%s' % (url_obj.key, index)
+
         urls = []
-        for ele in self.lr.xpaths('//div[@id="zg_paginationWrapper"]//a')[1:]:
-            page_url = urlparse.urljoin(self.lr.current_url, ele.attrib['href'].strip())
+        if session.query(Url).filter_by(key=key).count() < 1:
+            logger.info('Add Category Next: %s' % page_url)
+            urls.append(Url(url=page_url, type=URL_TYPE.BEST_SELL_CATEGORY_NEXT, name=url_obj.name, key=key))
+            # session.add(Url(url=page_url, type=URL_TYPE.BEST_SELL_CATEGORY_NEXT, name=url_obj.name, key=key))
+            # session.commit()
 
-            id = page_url.split('/ref', 1)[0].rsplit('/', 1)[-1]
-            index = page_url.split('&pg=', 1)[-1]
-            key = '%s_%s' % (id, index)
-
-            if session.query(Url).filter_by(key=key).count() < 1:
-                logger.info('Add Category Next: %s' % page_url)
-                urls.append(Url(url=page_url, type=URL_TYPE.BEST_SELL_CATEGORY_NEXT, key=key))
-                # session.commit()
         session.bulk_save_objects(urls)
 
     return wrapped
@@ -71,25 +79,27 @@ def product_url(method):
 
         method(self, **kwargs)
 
-        urls = []
-        product_eles = self.lr.xpaths('//div[@class="zg_itemImageImmersion"]/a')
+        # urls = []
+        product_eles = self.lr.xpaths('//span[contains(@class, "zg-item")]/a')
         for ele in product_eles:
-            product_url = urlparse.urljoin(self.lr.current_url, ele.attrib['href'].strip())
+            product_url = urljoin(self.lr.current_url, ele.attrib['href'].strip())
             asin = product_url.split('/dp/', 1)[1].split('/', 1)[0]
 
+            u = urlparse(product_url)
+            pu = '%s://%s/dp/%s' % (u.scheme, u.netloc, asin)
             if session.query(Url).filter_by(key=asin).count() < 1:
                 logger.info('Add Product: %s' % asin)
-                urls.append(Url(url=product_url, type=URL_TYPE.PRODUCT_URL, key=asin))
+                # urls.append(Url(url=pu, type=URL_TYPE.PRODUCT_URL, name=asin, key=asin))
+                session.add(Url(url=pu, type=URL_TYPE.PRODUCT_URL, name=asin, key=asin))
                 # session.commit()
 
-        session.bulk_save_objects(urls)
+        # session.bulk_save_objects(urls)
 
     return wrapped
 
 def url_over(method):
     def wrapped(self, **kwargs):
         session = Session(autocommit=True)
-
         method(self, **kwargs)
 
         url_obj = kwargs.get('url_obj')
@@ -115,14 +125,12 @@ class BestSell(AmazonBase):
     @product_url
     @url_over
     def categories(self, url_obj=None, **kwargs):
-        self.load(url_obj.url.encode('utf-8'))
-
-
+        self.load(url_obj.url)
 
     @product_url
     @url_over
     def category_next(self, url_obj=None, **kwargs):
-        self.load(url_obj.url.encode('utf-8'))
+        self.load(url_obj.url)
 
     @url_over
     def product(self, url_obj=None, **kwargs):
@@ -132,11 +140,10 @@ class BestSell(AmazonBase):
         self.load(self.best_url)
         session = Session(autocommit=True)
 
-
         category_eles = self.lr.xpaths('//ul[@id="zg_browseRoot"]/ul/li/a')
         for category_ele in category_eles:
             if category_ele.text.strip() in categories:
-                url = self.wrapped_url(urlparse.urljoin(self.best_url, category_ele.attrib['href']))
+                url = self.wrapped_url(urljoin(self.best_url, category_ele.attrib['href']))
 
                 key = category_ele.text.strip()
                 if session.query(Url).filter_by(url=url).count() < 1:
@@ -151,7 +158,7 @@ class BestSell(AmazonBase):
         category_eles = self.lr.xpaths('//ul[@id="zg_browseRoot"]/ul/li/a')
         for category_ele in category_eles:
             if category_ele.text.strip() in categories:
-                url = self.wrapped_url(urlparse.urljoin(self.best_url, category_ele.attrib['href']))
+                url = self.wrapped_url(urljoin(self.best_url, category_ele.attrib['href']))
 
                 key = category_ele.text.strip()
                 if session.query(Url).filter_by(url=url).count() < 1:
@@ -161,7 +168,7 @@ class BestSell(AmazonBase):
 
         while session.query(Url).filter_by(type=URL_TYPE.BEST_SELL_CATEGORY, has_crawled=False).count() > 0:
             for url_obj in session.query(Url).filter_by(type=URL_TYPE.BEST_SELL_CATEGORY, has_crawled=False):
-                self.load(url_obj.url.encode('utf-8'))
+                self.load(url_obj.url)
 
                 # sub category
                 p_categories = url_obj.key.split('@@')
@@ -173,7 +180,7 @@ class BestSell(AmazonBase):
                 category_eles = self.lr.xpaths(category_xpaths)
                 if category_eles is not None and len(category_eles) > 0:
                     for category_ele in category_eles:
-                        url = self.wrapped_url(urlparse.urljoin(self.lr.current_url, category_ele.attrib['href']))
+                        url = self.wrapped_url(urljoin(self.lr.current_url, category_ele.attrib['href']))
                         text = category_ele.text.strip()
 
                         key = '%s@@%s' % (url_obj.key, text)
@@ -186,7 +193,7 @@ class BestSell(AmazonBase):
 
                 # pager
                 for ele in self.lr.xpaths('//div[@id="zg_paginationWrapper"]//a'):
-                    page_url = urlparse.urljoin(self.lr.current_url, ele.attrib['href'].strip())
+                    page_url = urljoin(self.lr.current_url, ele.attrib['href'].strip())
                     session.add(Url(url=page_url, type=URL_TYPE.BEST_SELL_CATEGORY_NEXT))
                     session.commit()
 
@@ -195,7 +202,7 @@ class BestSell(AmazonBase):
                 # product
                 product_eles = self.lr.xpaths('//div[@class="zg_itemImageImmersion"]/a')
                 for ele in product_eles:
-                    product_url = urlparse.urljoin(self.lr.current_url, ele.attrib['href'].strip())
+                    product_url = urljoin(self.lr.current_url, ele.attrib['href'].strip())
                     asin = product_url.split('/dp/', 1)[1].split('/', 1)[0]
 
                     if session.query(Url).filter_by(key=asin).count() < 1:
@@ -210,12 +217,12 @@ class BestSell(AmazonBase):
 
         while session.query(Url).filter_by(type=URL_TYPE.BEST_SELL_CATEGORY_NEXT, has_crawled=False).count() > 0:
             for url_obj in session.query(Url).filter_by(type=URL_TYPE.BEST_SELL_CATEGORY_NEXT, has_crawled=False):
-                self.load(url_obj.url.encode('utf-8'))
+                self.load(url_obj.url)
 
                 # product
                 product_eles = self.lr.xpaths('//div[@class="zg_itemImageImmersion"]/a')
                 for ele in product_eles:
-                    product_url = urlparse.urljoin(self.lr.current_url, ele.attrib['href'].strip())
+                    product_url = urljoin(self.lr.current_url, ele.attrib['href'].strip())
                     asin = product_url.split('/dp/', 1)[1].split('/', 1)[0]
 
                     if session.query(Url).filter_by(key=asin).count() < 1:

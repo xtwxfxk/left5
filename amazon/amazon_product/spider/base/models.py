@@ -8,7 +8,7 @@ from sqlalchemy import Column, Integer, String, Boolean, SmallInteger
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import QueuePool
 
-from ... import config
+import config
 
 Base = declarative_base()
 

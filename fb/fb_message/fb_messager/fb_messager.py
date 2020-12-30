@@ -9,6 +9,8 @@ from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select, WebDriverWait
 from selenium.webdriver.common.keys import Keys
+import win32clipboard as w
+import win32con
 
 config = configparser.ConfigParser()
 config.read('settings.ini')
@@ -66,7 +68,7 @@ class Messager():
         return True
 
     def post_message(self, message):
-        edit_div = self.browser.find_element_by_xpath('//div[@data-block="true"]/div')
+        edit_div = self.browser.find_element_by_xpath('//div[@data-block="true"]/div') # //div[@role="textbox"]
         edit_div.click()
         time.sleep(1)
 
@@ -104,8 +106,6 @@ class Messager():
 
             edit_div.send_keys(Keys.CONTROL + 'v')
 
-            if WORD_INTERVAL > 0: time.sleep(WORD_INTERVAL)
-
         edit_div.send_keys(Keys.ENTER)
         time.sleep(3)
         last_ele = self.browser.find_elements_by_xpath('//span[@role="gridcell"]')[-1]
@@ -116,9 +116,9 @@ class Messager():
 
     def load_user(self, url):
         self.browser.get(url)
-        time.sleep(2)
-        self.wait.until(lambda driver: driver.find_element_by_xpath('//div[@data-block="true"]/div'))
         time.sleep(5)
+        self.wait.until(lambda driver: driver.find_element_by_xpath('//div[@data-block="true"]/div'))
+        time.sleep(3)
 
     def post_messages(self, users, messages):
         for user_url in users:
@@ -127,15 +127,16 @@ class Messager():
                 self.load_user(user_url)
                 for message in messages:
                     try:
-                        if self.post_message(message):
-                            logger.info('发送成功，等待 %s 秒...' % MESSAGE_INTERVAL)
-                        else:
-                            logger.info('无法确认信息是否发送成功，等待 %s 秒...' % MESSAGE_INTERVAL)
+                        if message.strip():
+                            if self.post_message(message):
+                                logger.info('发送成功，等待 %s 秒...' % MESSAGE_INTERVAL)
+                            else:
+                                logger.info('无法确认信息是否发送成功，等待 %s 秒...' % MESSAGE_INTERVAL)
+                            time.sleep(MESSAGE_INTERVAL)
 
-                        time.sleep(MESSAGE_INTERVAL)
-                        if AUTO_REFRESH_PAGE:
-                            logger.info('重新加载用户: %s' % user_url)
-                            self.load_user(user_url)
+                            if AUTO_REFRESH_PAGE:
+                                logger.info('重新加载用户: %s' % user_url)
+                                self.load_user(user_url)
                     except Exception as e:
                         now = datetime.datetime.now()
                         self.browser.save_screenshot('logs/%s.png' % now.strftime('%Y-%m-%d %H-%M-%S'))
