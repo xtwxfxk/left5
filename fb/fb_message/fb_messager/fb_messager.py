@@ -9,8 +9,6 @@ from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select, WebDriverWait
 from selenium.webdriver.common.keys import Keys
-import win32clipboard as w
-import win32con
 
 config = configparser.ConfigParser()
 config.read('settings.ini')
