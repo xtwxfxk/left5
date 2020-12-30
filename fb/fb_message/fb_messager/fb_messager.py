@@ -4,6 +4,7 @@ __author__ = 'xtwxfxk'
 import os, time, math, json, traceback, itertools, urllib, copy, logging, configparser, random, datetime
 import logging
 import logging.config
+import win32clipboard as w
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select, WebDriverWait
@@ -69,18 +70,41 @@ class Messager():
         edit_div.click()
         time.sleep(1)
 
-        for line in message.splitlines():
-            chunks = line.strip()
+        if WORD_COUNT > 0:
             if WORD_COUNT > 1:
-                chunks = [chunks[i:i+WORD_COUNT] for i in range(0, len(chunks), WORD_COUNT)]
+                for line in message.splitlines():
+                    chunks = line.strip()
+                    if WORD_COUNT > 1:
+                        chunks = [chunks[i:i+WORD_COUNT] for i in range(0, len(chunks), WORD_COUNT)]
+                    else:
+                        chunks = [chunks, ]
 
-            for chars in chunks:
-                edit_div.send_keys(chars)
-                if WORD_INTERVAL > 0: time.sleep(WORD_INTERVAL)
+                    for chars in chunks:
+                        edit_div.send_keys(chars)
+                        if WORD_INTERVAL > 0: time.sleep(WORD_INTERVAL)
 
-            edit_div.send_keys(Keys.ALT + Keys.ENTER)
-            edit_div = self.browser.find_elements_by_xpath('//div[@data-block="true"]/div')[-1]
-            edit_div.click()
+                    edit_div.send_keys(Keys.ALT + Keys.ENTER)
+                    time.sleep(.5)
+                    edit_div = self.browser.find_elements_by_xpath('//div[@data-block="true"]/div')[-1]
+                    edit_div.click()
+                    time.sleep(.5)
+            else:
+                for char in message:
+                    if '\n' == char:
+                        edit_div.send_keys(Keys.ALT + Keys.ENTER)
+                    else:
+                        edit_div.send_keys(char)
+                    if WORD_INTERVAL > 0: time.sleep(WORD_INTERVAL)
+        else:
+            w.OpenClipboard()
+            w.EmptyClipboard()
+            # w.SetClipboardText(message)
+            w.SetClipboardData(w.CF_UNICODETEXT, message)
+            w.CloseClipboard()
+
+            edit_div.send_keys(Keys.CONTROL + 'v')
+
+            if WORD_INTERVAL > 0: time.sleep(WORD_INTERVAL)
 
         edit_div.send_keys(Keys.ENTER)
         time.sleep(3)
@@ -89,10 +113,12 @@ class Messager():
             return True
         else:
             return False
+
     def load_user(self, url):
         self.browser.get(url)
-        time.sleep(10)
+        time.sleep(2)
         self.wait.until(lambda driver: driver.find_element_by_xpath('//div[@data-block="true"]/div'))
+        time.sleep(5)
 
     def post_messages(self, users, messages):
         for user_url in users:
