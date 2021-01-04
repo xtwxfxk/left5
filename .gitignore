@@ -42,3 +42,5 @@ ecg/ecg_pytorch/submit
 
 debug.log
 nohup.out
+
+cache_amazon

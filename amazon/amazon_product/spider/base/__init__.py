@@ -20,8 +20,7 @@ def cache(update=True):
     def _cache(method):
         def wrapped(self, asin, is_cache=True, **kwargs):
             logger.info('Product: %s' % asin)
-
-            md5 = hashlib.md5(asin)
+            md5 = hashlib.md5(asin.encode())
             key = md5.hexdigest()
             cache_name = '%s.gz' % md5.hexdigest()
 
@@ -353,7 +352,7 @@ class AmazonBase(object):
 
                     try:
                         if captcha_img_ele is not None:
-
+                            print('##### %s ' % captcha_img_ele.attrib['src'])
                             form = self.lr.get_forms()[0]
                             self.lr.load(captcha_img_ele.attrib['src'])
                             cap = self.captcha.decode_stream(self.lr.body)

@@ -87,11 +87,9 @@ def product():
 # executor.submit(category)
 
 if __name__ == '__main__':
-    first()
-
-    category()
-
-    category_next()
+    # first()
+    # category()
+    # category_next()
     
     product()
 
