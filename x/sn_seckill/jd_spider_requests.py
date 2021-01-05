@@ -275,8 +275,14 @@ class JdSeckill(object):
 
         # 初始化信息
         self.sku_id = global_config.getRaw('config', 'sku_id')
-        self.prd_id = self.sku_id.split('/')[1]
-        self.seckill_num = 2
+        self.shop_code, self.prd_id = self.sku_id.split('/')
+        self.cmmdty_code = '%s%s' % (self.shop_code, self.prd_id)
+        self.province_code = "150"
+        self.city_code = "591"
+        self.district_code = "59106"
+        self.activity_type = "02"
+        
+        self.seckill_num = 2 # cmmdtyQty
         self.seckill_init_info = dict()
         self.seckill_url = dict()
         self.seckill_order_data = dict()
