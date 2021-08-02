@@ -48,13 +48,13 @@ def plot_decision_boundary(classifier, X, y, N = 10, scatter_weights = np.ones(l
     ax.set_xlabel('$X_1$')
     ax.set_ylabel('$X_2$')
 
-# boost = AdaBoostClassifier( base_estimator = DecisionTreeClassifier(max_depth = 1, max_leaf_nodes=2), 
-#                             algorithm = 'SAMME',n_estimators=10, learning_rate=1.0)
-# boost.fit(X,y)
-# plot_decision_boundary(boost, X,y, N = 50)#, weights)
-# plt.show()
+boost = AdaBoostClassifier( base_estimator = DecisionTreeClassifier(max_depth = 1, max_leaf_nodes=2), 
+                            algorithm = 'SAMME',n_estimators=10, learning_rate=1.0)
+boost.fit(X,y)
+plot_decision_boundary(boost, X,y, N = 50)#, weights)
+plt.show()
 
-# boost.score(X,y)
+boost.score(X,y)
 
 def AdaBoost_scratch(X,y, M=10, learning_rate = 1):
     #Initialization of utility variables
