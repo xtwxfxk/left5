@@ -10,6 +10,8 @@ import cv2
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.multiprocessing as mp
+# import multiprocessing as mp
+
 from tqdm import tqdm
 from torch.utils.tensorboard import SummaryWriter
 from numpy import linalg as LA
@@ -115,6 +117,7 @@ class NNPolicy(nn.Module): # an actor-critic neural network
 
     def try_load(self, save_dir):
         paths = glob.glob(save_dir + '*.tar')
+
         step = 0
         if len(paths) > 0:
             ckpts = [int(s.split('.')[-2]) for s in paths]
@@ -284,7 +287,6 @@ if __name__ == "__main__":
     info = {k: torch.DoubleTensor([0]).share_memory_() for k in ['run_epr', 'run_loss', 'episodes', 'frames']}
     info['frames'] += shared_model.try_load(args.save_dir) * 1e6
     if int(info['frames'].item()) == 0: printlog(args,'', end='', mode='w') # clear log file
-    
     processes = []
     for rank in range(args.processes):
         p = mp.Process(target=train, args=(shared_model, shared_optimizer, rank, args, info))
@@ -292,6 +294,8 @@ if __name__ == "__main__":
         processes.append(p)
     for p in processes: p.join()
 
+    # train(shared_model, shared_optimizer, 1, args, info)
 
 
-# python flappybird.py --processes 6 --rnn_steps 30 --hidden 512
+
+# python flappybird.py --processes 6 --rnn_steps 30 --hidden 512 --render True
