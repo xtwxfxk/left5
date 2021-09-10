@@ -39,7 +39,8 @@ class Strategy:
         # data = Market.kline('sh600519', '1d')
         # print(data)
         ltdxhq = LTdxHq()
-        df = ltdxhq.get_k_data_daily('300142', start='2019-01-01') # 000032 300142 603636 600519
+        # df = ltdxhq.get_k_data_daily('603636', start='2021-09-01') # 000032 300142 603636 600519
+        df = ltdxhq.get_k_data_1min('600519', start='2021-09-01') # 000032 300142 603636 600519
         df = StockDataFrame(df)
         ltdxhq.close()
         # print(df.head())
@@ -68,6 +69,7 @@ class Strategy:
                 df.iloc[current_step: current_step + NEXT_OBSERVATION_SIZE]['low'].values / MAX_SHARE_PRICE,
                 df.iloc[current_step: current_step + NEXT_OBSERVATION_SIZE]['close'].values / MAX_SHARE_PRICE,
                 df.iloc[current_step: current_step + NEXT_OBSERVATION_SIZE]['vol'].values / MAX_NUM_SHARES,
+                # df['close'].pct_change().fillna(0)[current_step: current_step + NEXT_OBSERVATION_SIZE],
 
                 df['macd'][current_step: current_step + NEXT_OBSERVATION_SIZE].values,
                 df['macdh'][current_step: current_step + NEXT_OBSERVATION_SIZE].values,
@@ -79,10 +81,14 @@ class Strategy:
                 df['rsi_12'][current_step: current_step + NEXT_OBSERVATION_SIZE].fillna(0).values,
             ])
 
-            self.kline.append([df.index.values[current_step][:10], df.iloc[current_step].open, df.iloc[current_step].high, df.iloc[current_step].low, df.iloc[current_step].close, df.iloc[current_step].vol])
+            
+            # df.index.values[current_step][:10]
+            self.kline.append([df.index.get_level_values(level=1)[current_step], df.iloc[current_step].open, df.iloc[current_step].high, df.iloc[current_step].low, df.iloc[current_step].close, df.iloc[current_step].vol])
 
             self.backtest.initialize(self.kline, data)
             self.begin(obs)
+        # print(self.buy_signal)
+        # print(self.sell_signal)
         plot_asset()
         plot_signal(self.kline, self.buy_signal, self.sell_signal, df['macd'].values)
 
@@ -93,7 +99,7 @@ class Strategy:
         action, state = self.model.predict(obs, state=None, deterministic=True)
         if Actions.Buy.value == action and self.backtest.long_quantity == 0:
             self.backtest.buy(
-                price = self.backtest.close,
+                price = self.backtest.close + 0.02,
                 amount = self.asset / self.backtest.close,
                 long_quantity = self.asset / self.backtest.close,
                 long_avg_price = self.backtest.close,
@@ -106,7 +112,7 @@ class Strategy:
             profit = (self.backtest.close - self.backtest.long_avg_price) * self.backtest.long_quantity
             self.asset += profit
             self.backtest.sell(
-                price = self.backtest.close,
+                price = self.backtest.close - 0.02,
                 amount = self.backtest.long_quantity,
                 long_quantity = 0,
                 long_avg_price = 0,
