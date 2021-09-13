@@ -40,7 +40,8 @@ class Strategy:
         # print(data)
         ltdxhq = LTdxHq()
         # df = ltdxhq.get_k_data_daily('603636', start='2021-09-01') # 000032 300142 603636 600519
-        df = ltdxhq.get_k_data_1min('000032', start='2021-08-31') # 000032 300142 603636 600519
+        # df = ltdxhq.get_k_data_1min('000032', start='2021-08-31') # 000032 300142 603636 600519
+        df = ltdxhq.get_k_data_daily('000032', start='2020-01-01')
         df = StockDataFrame(df)
         ltdxhq.close()
         # print(df.head())
@@ -62,13 +63,14 @@ class Strategy:
 
         self.model = PPO.load('ppo_stock')
 
-        for current_step in range(240, df.shape[0]):
+        for current_step in range(10, df.shape[0]):
             obs = np.array([
                 df.iloc[current_step - NEXT_OBSERVATION_SIZE: current_step]['open'].values / MAX_SHARE_PRICE,
                 df.iloc[current_step - NEXT_OBSERVATION_SIZE: current_step]['high'].values / MAX_SHARE_PRICE,
                 df.iloc[current_step - NEXT_OBSERVATION_SIZE: current_step]['low'].values / MAX_SHARE_PRICE,
                 df.iloc[current_step - NEXT_OBSERVATION_SIZE: current_step]['close'].values / MAX_SHARE_PRICE,
                 df.iloc[current_step - NEXT_OBSERVATION_SIZE: current_step ]['vol'].values / MAX_NUM_SHARES,
+                df.iloc[current_step - NEXT_OBSERVATION_SIZE: current_step ]['amount'].values / MAX_NUM_SHARES,
                 # df['close'].pct_change().fillna(0)[current_step: current_step + NEXT_OBSERVATION_SIZE],
 
                 df['macd'][current_step - NEXT_OBSERVATION_SIZE: current_step].values,
@@ -82,14 +84,15 @@ class Strategy:
             ])
 
             # df.index.values[current_step][:10]
-            self.kline.append([df.index.get_level_values(level=1)[current_step], df.iloc[current_step].open, df.iloc[current_step].high, df.iloc[current_step].low, df.iloc[current_step].close, df.iloc[current_step].vol])
+            self.kline.append([df.index.get_level_values(level=0)[current_step], df.iloc[current_step].open, df.iloc[current_step].high, df.iloc[current_step].low, df.iloc[current_step].close, df.iloc[current_step].vol])
 
             self.backtest.initialize(self.kline, data)
             self.begin(obs)
+
         # print(self.buy_signal)
         # print(self.sell_signal)
         plot_asset()
-        # plot_signal(self.kline, self.buy_signal, self.sell_signal, df['macd'].values)
+        plot_signal(self.kline, self.buy_signal, self.sell_signal) # , df['macd'].values)
 
     def begin(self, obs):
         if CurrentBar(self.kline) < 30:
@@ -105,8 +108,8 @@ class Strategy:
                 profit = 0,
                 asset = self.asset
             )
-            self.buy_signal.append(1)
-            self.sell_signal.append(0)
+            self.buy_signal.append(self.backtest.high)
+            # self.sell_signal.append(0)
         elif Actions.Sell.value == action and self.backtest.long_quantity !=0:
             profit = (self.backtest.close - self.backtest.long_avg_price) * self.backtest.long_quantity
             self.asset += profit
@@ -118,11 +121,12 @@ class Strategy:
                 profit = profit,
                 asset = self.asset
             )
-            self.buy_signal.append(0)
-            self.sell_signal.append(1)
-        else:
-            self.buy_signal.append(0)
-            self.sell_signal.append(0)
+            # self.buy_signal.append(0)
+            # self.sell_signal.append(1)
+            self.sell_signal.append(self.backtest.low)
+        # else:
+            # self.buy_signal.append(0)
+            # self.sell_signal.append(0)
 
         if self.backtest.long_quantity > 0 and self.backtest.low <= self.backtest.long_avg_price * .9:
             profit = (self.backtest.low - self.backtest.long_avg_price) * self.backtest.long_quantity
