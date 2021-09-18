@@ -5,6 +5,7 @@ from stockstats import StockDataFrame
 from stable_baselines3 import PPO
 import numpy as np
 import pandas as pd
+from sklearn import preprocessing
 
 from lutils.stock import LTdxHq
 
@@ -41,7 +42,7 @@ class Strategy:
         ltdxhq = LTdxHq()
         # df = ltdxhq.get_k_data_daily('603636', start='2021-09-01') # 000032 300142 603636 600519
         # df = ltdxhq.get_k_data_1min('000032', start='2021-08-31') # 000032 300142 603636 600519
-        df = ltdxhq.get_k_data_daily('000032', start='2021-01-01')
+        df = ltdxhq.get_k_data_daily('000032', start='2020-09-01')
         df = StockDataFrame(df)
         ltdxhq.close()
         # print(df.head())
@@ -63,8 +64,10 @@ class Strategy:
 
         self.model = PPO.load('ppo_stock')
 
+        self.min_max_scaler = preprocessing.MinMaxScaler()
+
         for current_step in range(10, df.shape[0]):
-            print(current_step)
+            # print(current_step)
             obs = np.array([
                 df.iloc[current_step - NEXT_OBSERVATION_SIZE: current_step]['open'].values / MAX_SHARE_PRICE,
                 df.iloc[current_step - NEXT_OBSERVATION_SIZE: current_step]['high'].values / MAX_SHARE_PRICE,
@@ -88,7 +91,7 @@ class Strategy:
             self.kline.append([df.index.get_level_values(level=0)[current_step], df.iloc[current_step].open, df.iloc[current_step].high, df.iloc[current_step].low, df.iloc[current_step].close, df.iloc[current_step].vol])
 
             self.backtest.initialize(self.kline, data)
-            self.begin(obs)
+            self.begin(obs) # self.min_max_scaler.fit_transform(obs)
 
         print(self.buy_signal)
         print(self.sell_signal)
