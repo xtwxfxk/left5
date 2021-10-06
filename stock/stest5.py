@@ -38,10 +38,12 @@ class Strategy:
 
         # data = Market.kline('sh600519', '1d')
         # print(data)
+        code = '000032' # 000032 300142 603636 600519
         ltdxhq = LTdxHq()
-        # df = ltdxhq.get_k_data_daily('603636', start='2021-09-01') # 000032 300142 603636 600519
+        # df = ltdxhq.get_k_data_daily('603636', start='2021-09-01')
         # df = ltdxhq.get_k_data_1min('000032', start='2021-08-31') # 000032 300142 603636 600519
-        df = ltdxhq.get_k_data_daily('000032', start='2021-01-01')
+        df = ltdxhq.get_k_data_daily(code, start='2021-01-01')
+        df = ltdxhq.to_qfq(code, df)
         df = StockDataFrame(df)
         ltdxhq.close()
         # print(df.head())
@@ -59,7 +61,7 @@ class Strategy:
         # amount    63589532.00
         data = []
         for index, row in df.iterrows():
-            data.append([index[:10], row.open, row.high, row.low, row.close, row.vol,])
+            data.append([index[:10], row.open, row.high, row.low, row.close, row.volume,])
 
         self.model = PPO.load('ppo_stock')
 
@@ -70,7 +72,7 @@ class Strategy:
                 df.iloc[current_step - NEXT_OBSERVATION_SIZE: current_step]['high'].values / MAX_SHARE_PRICE,
                 df.iloc[current_step - NEXT_OBSERVATION_SIZE: current_step]['low'].values / MAX_SHARE_PRICE,
                 df.iloc[current_step - NEXT_OBSERVATION_SIZE: current_step]['close'].values / MAX_SHARE_PRICE,
-                df.iloc[current_step - NEXT_OBSERVATION_SIZE: current_step ]['vol'].values / MAX_NUM_SHARES,
+                df.iloc[current_step - NEXT_OBSERVATION_SIZE: current_step ]['volume'].values / MAX_NUM_SHARES,
                 df.iloc[current_step - NEXT_OBSERVATION_SIZE: current_step ]['amount'].values / MAX_NUM_SHARES,
                 # df['close'].pct_change().fillna(0)[current_step: current_step + NEXT_OBSERVATION_SIZE],
 
@@ -85,7 +87,7 @@ class Strategy:
             ])
 
             # df.index.values[current_step][:10]
-            self.kline.append([df.index.get_level_values(level=0)[current_step], df.iloc[current_step].open, df.iloc[current_step].high, df.iloc[current_step].low, df.iloc[current_step].close, df.iloc[current_step].vol])
+            self.kline.append([df.index.get_level_values(level=0)[current_step], df.iloc[current_step].open, df.iloc[current_step].high, df.iloc[current_step].low, df.iloc[current_step].close, df.iloc[current_step].volume])
 
             self.backtest.initialize(self.kline, data)
             self.begin(obs)
