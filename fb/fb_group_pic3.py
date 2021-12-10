@@ -68,8 +68,10 @@ def fetch_image(keywords):
 
         body = browser.find_element_by_xpath('//body')
 
+
+        # 截图内容
         # article_xpath = '//div[@role="article"]/div'
-        article_xpath = '//div[@role="article"]/div/div/div/div/div/a[@role="link"]'
+        article_xpath = '//div[@role="main"]//div[@role="article"]/div/div/div/div/div/div[2]/div/div[3]'
         wait.until(lambda driver: driver.find_element_by_xpath(article_xpath))
 
         eles = []
@@ -91,9 +93,10 @@ def fetch_image(keywords):
         for ele in eles[:pic_count]:
             browser.execute_script('arguments[0].setAttribute("style", "margin-top: 10px;")', ele)
 
-            highlight_eles = ele.find_elements_by_xpath('.//span[@dir="auto"]/span')
+            highlight_eles = ele.find_elements_by_xpath('.//span[@dir="auto"]//div[@dir="auto"]')
             for highlight_ele in highlight_eles:
-                text = highlight_ele.text.lower()
+                # text = highlight_ele.text.lower()
+                text = highlight_ele.get_attribute('innerHTML').lower()
                 new_text = text.replace(keyword.lower(), '''<span class="ccccxxxxccc">%s</span>''' % keyword.lower())
                 aa = 'arguments[0].innerHTML = `%s`;' % new_text.replace('"', '\\"')
                 browser.execute_script(aa, highlight_ele)
@@ -101,17 +104,6 @@ def fetch_image(keywords):
         eles = browser.find_elements_by_xpath(article_xpath)
 
         for i, ele in enumerate(eles[:pic_count]):
-            # browser.execute_script('arguments[0].setAttribute("style", "width: 680px;display: block;")', ele)
-            # browser.execute_script('arguments[0].style.cssText = "width: 680px"', ele)
-            # browser.execute_script('arguments[0].style.width = "680px"', ele)
-            # browser.execute_script('arguments[0].style.display = "block"', ele)
-            # browser.execute_script('arguments[0].css("width", "680px");', ele)
-
-            # print('<span style="width: 680px;display: block">%s</span>' % ele.get_attribute('innerHTML'))
-            # browser.execute_script('arguments[0].innerHTML = `<span style=\\"width: 680px;display: block\\">%s</span>`;' % ele.get_attribute('innerHTML'), ele)
-            # ele = ele.find_element_by_xpath('./span')
-            # browser.execute_script('arguments[0].role = "cccsdf"', ele)
-
             print('sss')
             img = Image.open(BytesIO(ele.screenshot_as_png))
 
@@ -119,8 +111,9 @@ def fetch_image(keywords):
             url_size = ele.size
             url_box = [0, 0, url_size['width'], url_size['height']]
 
+            # 图片部分
             img_nodes = []
-            img_eles = ele.find_elements_by_xpath('.//div[@style="height: 90px; width: 90px;"]')
+            img_eles = ele.find_elements_by_xpath('./div[2]')
             for img_ele in img_eles:
                 img_left = img_ele.location['x'] - url_location['x']
                 img_upper = img_ele.location['y'] - url_location['y']
@@ -130,6 +123,7 @@ def fetch_image(keywords):
                 img_img = img.crop(img_box)
                 img_nodes.append([img_box, img_img])
 
+            # 高亮部分
             hightNodes = []
             trs = ele.find_elements_by_xpath('.//span[@class="ccccxxxxccc"]')
             for t in trs:

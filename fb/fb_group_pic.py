@@ -43,23 +43,33 @@ def fetch_image(keywords):
 
         # wait.until(lambda driver: driver.find_element_by_xpath('//input[@name="q"]'))
         time.sleep(5)
-        search = browser.find_element_by_xpath('//input[@name="q"]')
+        search = browser.find_element_by_xpath('//input[@type="search"]')
 
         search.clear()
         search.send_keys(keyword)
         search.send_keys(Keys.ENTER)
 
-        wait.until(lambda driver: driver.find_element_by_xpath('//span[text()="你的小组" or text()="Your Groups"]'))
-        group = browser.find_element_by_xpath('//span[text()="你的小组" or text()="Your Groups"]')
+        tizi_xpath = '//span[text()="帖子" or text()="Your Groups"]'
+        wait.until(lambda driver: driver.find_element_by_xpath(tizi_xpath))
+        group = browser.find_element_by_xpath(tizi_xpath)
         group.click()
 
-        body = browser.find_element_by_xpath('//body')
+        # body = browser.find_element_by_xpath('//body')
 
-        wait.until(lambda driver: driver.find_element_by_xpath('//div[@class="_4rmu"]'))
+        tiezilaiyuan_xpath = '//span[text()="帖子来源"]'
+        wait.until(lambda driver: driver.find_element_by_xpath(tiezilaiyuan_xpath))
+        tiezilaiyuan = browser.find_element_by_xpath(tiezilaiyuan_xpath)
+        tiezilaiyuan.click()
+
+        haha_xpath = '//span[text()="你的小组和主页"]'
+        wait.until(lambda driver: driver.find_element_by_xpath(haha_xpath))
+        haha = browser.find_element_by_xpath(haha_xpath)
+        haha.click()
+
 
         eles = []
         for i in range(10):
-            eles = browser.find_elements_by_xpath('//div[@class="_4rmu"]')
+            eles = browser.find_elements_by_xpath('//div[@role="main"]//div[@role="article"]/div/div/div/div/div/div[2]/div/div[3]')
             if len(eles) < pic_count:
                 if body:
                     for _ in range(2):
@@ -74,7 +84,7 @@ def fetch_image(keywords):
         for i, ele in enumerate(eles[:pic_count]):
             img = Image.open(BytesIO(ele.screenshot_as_png))
 
-            blacks = ele.find_elements_by_xpath('./div/div[1]')
+            blacks = ele.find_elements_by_xpath('./div[1]')
 
             url_localtion = blacks[0].location
             url_size = blacks[0].size
