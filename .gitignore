@@ -6,6 +6,7 @@
 **/logs/
 **/dist/
 **/trained_models/
+stock/finrl/models/
 *.spec
 *.pyc
 chromedriver.exe
