@@ -1,0 +1,1 @@
+pyinstaller -F fb_messager.py

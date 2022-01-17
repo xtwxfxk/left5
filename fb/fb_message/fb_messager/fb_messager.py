@@ -54,6 +54,8 @@ class Messager():
         self.browser = webdriver.Chrome(options=opts)
         self.wait = WebDriverWait(self.browser, 120)
 
+        self.input_xpath = '//div[@role="main"]//div[@data-lexical-editor="true"]'
+
         while not self.check_login():
             time.sleep(120)
 
@@ -66,7 +68,7 @@ class Messager():
         return True
 
     def post_message(self, message):
-        edit_div = self.browser.find_element_by_xpath('//div[@data-block="true"]/div') # //div[@role="textbox"]
+        edit_div = self.browser.find_element_by_xpath(self.input_xpath) # //div[@role="textbox"]
         edit_div.click()
         time.sleep(1)
 
@@ -85,7 +87,7 @@ class Messager():
 
                     edit_div.send_keys(Keys.ALT + Keys.ENTER)
                     time.sleep(.5)
-                    edit_div = self.browser.find_elements_by_xpath('//div[@data-block="true"]/div')[-1]
+                    edit_div = self.browser.find_elements_by_xpath(self.input_xpath)[-1]
                     edit_div.click()
                     time.sleep(.5)
             else:
@@ -115,7 +117,7 @@ class Messager():
     def load_user(self, url):
         self.browser.get(url)
         time.sleep(5)
-        self.wait.until(lambda driver: driver.find_element_by_xpath('//div[@data-block="true"]/div'))
+        self.wait.until(lambda driver: driver.find_element_by_xpath(self.input_xpath))
         time.sleep(3)
 
     def post_messages(self, users, messages):
