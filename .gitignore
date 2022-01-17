@@ -5,6 +5,7 @@
 **/build/
 **/logs/
 **/dist/
+**/trained_models/
 *.spec
 *.pyc
 chromedriver.exe
