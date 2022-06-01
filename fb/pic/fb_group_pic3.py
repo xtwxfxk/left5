@@ -40,8 +40,12 @@ def fetch_image(keywords):
         browser.get('http://www.facebook.com')
         doc = Document()
 
+        wait.until(lambda driver: driver.find_element_by_xpath('//div[@role="banner"]//label'))
+        slabel = browser.find_element_by_xpath('//div[@role="banner"]//label')
+        slabel.click()
         wait.until(lambda driver: driver.find_element_by_xpath('//input[@type="search"]'))
         search = browser.find_element_by_xpath('//input[@type="search"]')
+        time.sleep(2)
         search.clear()
         search.send_keys(keyword)
         time.sleep(1)
@@ -98,7 +102,8 @@ def fetch_image(keywords):
                 # text = highlight_ele.text.lower()
                 text = highlight_ele.get_attribute('innerHTML').lower()
                 new_text = text.replace(keyword.lower(), '''<span class="ccccxxxxccc">%s</span>''' % keyword.lower())
-                aa = 'arguments[0].innerHTML = `%s`;' % new_text.replace('"', '\\"')
+                aa = '''arguments[0].innerHTML = '%s';''' % new_text.replace("'", "\\'")
+                print(aa)
                 browser.execute_script(aa, highlight_ele)
 
         eles = browser.find_elements_by_xpath(article_xpath)

@@ -1,0 +1,5 @@
+
+profile_dir: D:/fb_profile
+pic_count: 20
+blur: 3 # 0 不模糊， 数字越大模糊越厉害
+watermark: 333.png # 水印文件 不给就没有水印 你把上次发我的文件丢这个目录名字 跟这个一样就行

@@ -1,0 +1,1 @@
+pyinstaller -F fb_group_pic3.py
