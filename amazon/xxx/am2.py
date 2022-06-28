@@ -79,7 +79,7 @@ class SpiderAmazon():
 
     def fetch_asins(self):
         if not os.path.exists(os.path.join(PRODUCTS_DIR, self.keyword)): os.makedirs(os.path.join(PRODUCTS_DIR, self.keyword))
-        
+
         for asin in self.asins:
             try:
                 if not os.path.exists(os.path.join(PRODUCTS_DIR, self.keyword, '%s.txt' % asin)):
@@ -99,27 +99,16 @@ class SpiderAmazon():
             title_ele = self.lr.xpath('//span[@id="productTitle"]')
             title = ''.join(title_ele.itertext()).strip()
 
-            manufacturer = ''
-            detail_name_eles = self.lr.xpaths('//table[contains(@id, "productDetails")]//th')
-            detail_value_eles = self.lr.xpaths('//table[contains(@id, "productDetails")]//td')
+            brand = ''
+            brand_ele = self.lr.xpath('//a[@id="bylineInfo"]')
+            if brand_ele is not None:
+                text = brand_ele.text.strip().lower()
+                if text.startswith('visit'):
+                    brand = text[9:-5].strip()
+                elif text.startswith('brand'):
+                    brand = text[6:].strip()
 
-            if detail_name_eles is None or len(detail_name_eles) < 1:
-                detail_name_eles = self.lr.xpaths('//div[contains(@id, "detailBullets_feature_div")]/ul[contains(@class, "detail-bullet-list")]//li/span/span[1]')
-                detail_value_eles = self.lr.xpaths('//div[contains(@id, "detailBullets_feature_div")]/ul[contains(@class, "detail-bullet-list")]//li/span/span[2]')
-
-
-            manufacturer_index = -1
-            for i, detail_name_ele in enumerate(detail_name_eles):
-                detail_text = ''.join(detail_name_ele.itertext()).strip().lower()
-
-                if detail_text.find('manufacturer') > -1 and detail_text.find('by') < 1:
-                    manufacturer_index = i
-                    break
-
-            if manufacturer_index > -1:
-                manufacturer = ''.join(detail_value_eles[manufacturer_index].itertext()).strip().strip('\\n').strip('‎').strip()
-
-            self.product_info = [asin, manufacturer, title]
+            self.product_info = [asin, brand, title]
         except Exception as ex:
             open('xx\\%s.html' % time.time(), 'w', encoding='utf-8').write(str(self.lr.body))
             logger.error(ex, exc_info=True)
@@ -131,8 +120,8 @@ class SpiderAmazon():
             self.lr.load(urljoin(self.lr.current_url, search_ele.get('href')))
 
             try:
-                asin, manufacturer, title = self.product_info
-                if manufacturer:
+                asin, brand, title = self.product_info
+                if brand:
                     state_ele = self.lr.xpath('//input[@name="state"]')
                     state = state_ele.get('value')
 
@@ -140,7 +129,7 @@ class SpiderAmazon():
                     'state': state,
                     'p_search': 'search',
                     'p_s_All': '',
-                    'p_s_ALL': manufacturer,
+                    'p_s_ALL': brand,
                     'a_default': 'search',
                     'a_search': 'Submit',}
 
@@ -148,41 +137,43 @@ class SpiderAmazon():
 
                     eles = self.lr.xpaths('//table[@id="searchResultTable"]//tr')
                     if eles is not None and len(eles) > 1:
-                        logger.info('Manufacturer %s: %s' % (manufacturer, len(eles)))
+                        logger.info('Brand %s: %s' % (brand, len(eles)))
                         self.uspto_count = len(eles)
                     else:
-                        logger.info('Manufacturer %s: None' % manufacturer)
+                        logger.info('Brand %s: None' % brand)
                         self.uspto_count = 0
                 else:
-                    logger.info('Pass Empty Manufacturer %s' % asin)
+                    logger.info('Pass Empty Brand %s' % asin)
             except Exception as ex:
                 logger.error(ex, exc_info=True)
 
 
     def fetch_trademarkia(self, asin):
         try:
-            asin, manufacturer, title = self.product_info
-            if manufacturer:
-                self.lr.load('https://www.trademarkia.com/trademarks-search.aspx?tn=%s' % quote(manufacturer))
+            asin, brand, title = self.product_info
+            if brand:
+                self.lr.load('https://www.trademarkia.com/trademarks-search.aspx?tn=%s' % quote(brand))
                 eles = self.lr.xpaths('//table[contains(@class, "tablesaw")]//tr')
                 if eles is not None and len(eles) > 1:
-                    logger.info('Manufacturer %s: %s' % (manufacturer, len(eles)))
+                    logger.info('Brand %s: %s' % (brand, len(eles)))
                     self.trademarkia_count = len(eles)
                 else:
-                    logger.info('Manufacturer %s: None' % manufacturer)
+                    logger.info('Brand %s: None' % brand)
                     self.trademarkia_count = 0
             else:
-                logger.info('Pass Empty Manufacturer %s' % asin)
+                logger.info('Pass Empty Brand %s' % asin)
 
         except Exception as ex:
             logger.error(ex, exc_info=True)
+
+
 
     def output_csv(self, keyword):
         product_dir = os.path.join(PRODUCTS_DIR, keyword)
 
         products = []
         for file in os.listdir(product_dir):
-            asin, manufacturer, title = open(os.path.join(product_dir, file), 'r', encoding='utf-8').read().strip().split('|||')
+            asin, brand, title = open(os.path.join(product_dir, file), 'r', encoding='utf-8').read().strip().split('|||')
 
             t_m = '否'
             t_dir = os.path.join(TRADEMARKIA_DIR, '%s.txt' % asin)
@@ -196,7 +187,7 @@ class SpiderAmazon():
                 if int(open(u_dir).read().strip()) > 0:
                     u_m = '是'
 
-            products.append([title, asin, manufacturer, t_m, u_m])
+            products.append([title, asin, brand, t_m, u_m])
 
         fields = ['标题', 'asin', '品牌', 'TRADEMARKIA', 'USPTO']
         csv_path = os.path.join(CSV_DIR, '%s.csv' % keyword)
