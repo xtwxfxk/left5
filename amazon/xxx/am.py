@@ -2,11 +2,21 @@
 __author__ = 'xtwxfxk'
 
 import os, time, csv, traceback
-from urllib.parse import urljoin, quote
+from urllib.parse import urljoin, quote, quote_plus
 import logging
 import logging.config
 from lutils.lrequests import LRequests
+from lutils.captcha import GsaCaptcha
 from concurrent.futures import ThreadPoolExecutor
+import requests
+from bs4 import BeautifulSoup
+
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import Select, WebDriverWait
+import undetected_chromedriver.v2 as uc
+
 
 logging.config.fileConfig('logging.conf')
 logger = logging.getLogger('verbose')
@@ -32,21 +42,73 @@ if not os.path.exists(USPTO_DIR): os.makedirs(USPTO_DIR)
 CSV_DIR = os.path.join(ROOT, 'csv')
 if not os.path.exists(CSV_DIR): os.makedirs(CSV_DIR)
 
+CAPTCHA_DIR = os.path.join(ROOT, 'tmp', 'captcha')
+if not os.path.exists(CAPTCHA_DIR): os.makedirs(CAPTCHA_DIR)
+
+
 class SpiderAmazon():
 
     def __init__(self):
 
         self.lr = LRequests()
+        self.gsa = GsaCaptcha()
         self.key_asins = {}
+
+        user_data_dir = 'D://profiles//amazon'
+
+        options = uc.ChromeOptions()
+        if user_data_dir:
+            options.add_argument('--user-data-dir=%s' % user_data_dir)
+
+        options.add_argument('--start-maximized')
+        self.browser = uc.Chrome(options=options)
+        self.wait = WebDriverWait(self.browser, 120)
 
     def load_amazon(self, url):
         self.lr.load(url)
+        # if(url.find('ref=nb_sb_noss') > -1):
+        #     open('xxx\\%s.html' % time.time(), 'w', encoding='utf-8').write(self.lr.body)
 
-        if self.lr.body.find('Enter the characters you see below') > 0:
-            logger.error("Captcha!!!")
-            time.sleep(10)
-            self.lr = LRequests()
+        if self.lr.body.find('Something went wrong on our end') > 0:
+            self.lr.load('https://www.amazon.com/ref=cs_503_link')
+            time.sleep(1)
             self.lr.load(url)
+
+            forms = BeautifulSoup(self.lr.body).find_all('form')
+            for f in forms:
+                print('33333333333333333')
+                print('444444 %s' % f.attrs.get('action'))
+                for input_tag in f.find_all("input"):
+                    print('%s - %s' % (input_tag.attrs.get('name'), input_tag.attrs.get('value')))
+
+            open('xxx\\%s.html' % time.time(), 'w').write(self.lr.body)
+
+        while self.lr.body.find('Enter the characters you see below') > 0:
+            try:
+                logger.error("Captcha!!!")
+
+                captcha_path = os.path.join(CAPTCHA_DIR, '%s.jpg' % time.time())
+                self.lr.load_img(self.lr.xpath('//img[contains(@src, "captcha")]').get('src'))
+                with open(captcha_path, 'wb') as f:
+                    f.write(self.lr.body)
+                code = self.gsa.decode(captcha_path)
+
+                logger.info('Decode Captcha: %s' % code)
+                amzn = self.lr.xpath('//input[@name="amzn"]').get('value')
+                amzn_r = self.lr.xpath('//input[@name="amzn-r"]').get('value')
+
+                captcha_url = 'https://www.amazon.com/errors/validateCaptcha?amzn=%s&amzn-r=%s&field-keywords=%s' % (quote_plus(amzn), quote_plus(amzn_r), code)
+                # payload = {'amzn': amzn,
+                #             'amzn-r': amzn_r,
+                #             'field-keywords': code,}
+
+                self.lr.load(captcha_url, method='GET') #, data=payload)
+                # open('xxx\\%s.html' % time.time(), 'w', encoding='utf-8').write(self.lr.body)
+                # self.lr.load(url)
+            except Exception as ex:
+                logger.error(ex, exc_info=True)
+
+
 
     def fetch_list(self, keyword):
 
@@ -54,7 +116,26 @@ class SpiderAmazon():
         if not os.path.exists(file):
             self.key_asins[keyword] = []
 
-            self.lr.load('https://www.amazon.com/s?k=%s' % quote(keyword))
+            # self.lr.load('https://www.amazon.com')
+            self.load_amazon('https://www.amazon.com')
+            # self.load_amazon('https://www.amazon.com')
+            # self.load_amazon('https://www.amazon.com')
+            # open('xxx\\%s.html' % time.time(), 'w').write(self.lr.body)
+
+            # print('cccccccccccccccc %s' % self.lr.body.find('crid'))
+            # self.lr.load('https://www.amazon.com/s?k=%s' % quote(keyword))
+            # self.load_amazon('https://www.amazon.com/s?k=%s' % quote(keyword))
+
+            # form = BeautifulSoup(self.lr.body).find_all('form')[0]
+            # for f in forms:
+            #     print('33333333333333333')
+            #     print('444444 %s' % f.attrs.get('action'))
+            #     for input_tag in f.find_all("input"):
+            #         print('%s - %s' % (input_tag.attrs.get('name'), input_tag.attrs.get('value')))
+            # print('--------------------')
+            # s_url = '%s?field-keywords=%s' % (urljoin('https://www.amazon.com/', form.attrs.get('action')), quote(keyword))
+            # self.load_amazon('https://www.amazon.com/s/ref=nb_sb_noss_1?url=search-alias%%3Daps&field-keywords=%s' % quote(keyword))
+            self.load_amazon('https://www.amazon.com/s?field-keywords=%s&ref=cs_503_search' % quote(keyword))
 
             while 1:
                 self.fetch_asin(keyword)
@@ -115,7 +196,7 @@ class SpiderAmazon():
         except KeyboardInterrupt:
             return
         except Exception as ex:
-            open('xx.html', 'w', encoding='utf-8').write(str(self.lr.body))
+            # open('xx.html', 'w', encoding='utf-8').write(str(self.lr.body))
             logger.error(ex, exc_info=True)
 
     def fetch_uspto(self, keyword):
@@ -236,7 +317,8 @@ def do_keyword(keyword):
 
         sa.output_csv(keyword)
     except Exception as ex:
-        traceback.print_exc()
+        # traceback.print_exc()
+        logger.error(ex, exc_info=True)
 
 def start():
     # for file in os.listdir(KEYWORD_PATH):
@@ -251,13 +333,26 @@ def start():
     executor = ThreadPoolExecutor(max_workers=5)
 
     for file in os.listdir(KEYWORD_PATH):
-        for keyword in open(os.path.join(KEYWORD_PATH, file), 'r', encoding='utf-8').readlines():
-            keyword = keyword.strip()
-            if keyword:
-                executor.submit(do_keyword, keyword)
+        try:
+            for keyword in open(os.path.join(KEYWORD_PATH, file), 'r', encoding='utf-8').readlines():
+                keyword = keyword.strip()
+                if keyword:
+                    executor.submit(do_keyword, keyword)
+        except Exception as ex:
+            logger.error(ex, exc_info=True)
 
 
 # https://www.trademarkia.com/trademarks-search.aspx?tn=GreenLife
 # https://tmsearch.uspto.gov/
 if __name__ == '__main__':
     start()
+
+    # gsa = GsaCaptcha()
+    # print(gsa.decode('D:\\code\\python\\left5\\amazon\\xxx\\tmp\\captcha\\Captcha_fbcjbbjtal.jpg'))
+
+    # lr = LRequests()
+    # r = lr.load_img('https://images-na.ssl-images-amazon.com/captcha/rhnrlggh/Captcha_rsoyrzxybz.jpg')
+
+    # with open('D:\\code\\python\\left5\\amazon\\xxx\\tmp\\captcha\\xxx.jpg', 'wb') as f:
+    #     # shutil.copyfileobj(r, f)
+    #     f.write(lr.body)
