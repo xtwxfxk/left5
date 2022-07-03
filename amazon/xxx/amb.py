@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 __author__ = 'xtwxfxk'
 
-import os, time, csv, traceback
+import os, time, csv, traceback, queue
 from urllib.parse import urljoin, quote, quote_plus
 import logging
 import logging.config
@@ -10,6 +10,14 @@ from lutils.captcha import GsaCaptcha
 from concurrent.futures import ThreadPoolExecutor
 import requests
 from bs4 import BeautifulSoup
+
+from selenium import webdriver
+
+from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import Select, WebDriverWait
+
+import undetected_chromedriver.v2 as uc
 
 logging.config.fileConfig('logging.conf')
 logger = logging.getLogger('verbose')
@@ -41,65 +49,59 @@ if not os.path.exists(CAPTCHA_DIR): os.makedirs(CAPTCHA_DIR)
 
 class SpiderAmazon():
 
-    def __init__(self):
+    def __init__(self, q, profile_dir=None):
 
         self.lr = LRequests()
         self.gsa = GsaCaptcha()
         self.key_asins = {}
 
+        self.q = q
+
+        options = uc.ChromeOptions()
+        if profile_dir is not None:
+            options.add_argument('--user-data-dir=%s' % profile_dir)
+
+        prefs = {}
+        # prefs["profile.default_content_settings"] = {"images": 2}
+        # prefs["profile.managed_default_content_settings"] = {"images": 2}
+        prefs["intl.accept_languages"] = 'en,en_US'
+
+        options.add_experimental_option("prefs", prefs)
+        options.add_argument('--start-maximized')
+        options.add_argument('--blink-settings=imagesEnabled=false')
+        options.add_argument('--lang=en')
+        
+        self.browser = uc.Chrome(options=options)
+        self.wait = WebDriverWait(self.browser, 120)
+
     def load_amazon(self, url):
-        self.lr.load(url)
-        # if(url.find('ref=nb_sb_noss') > -1):
-        #     open('xxx\\%s.html' % time.time(), 'w', encoding='utf-8').write(self.lr.body)
+        logger.info('load url %s' % url)
+        self.browser.get(url)
 
-        if self.lr.body.find('Something went wrong on our end') > 0:
-            forms = BeautifulSoup(self.lr.body).find_all('form')
-            for f in forms:
-                print('=======-----')
-                print('1111111 %s' % f.attrs.get('action'))
-                for input_tag in f.find_all("input"):
-                    print('%s - %s' % (input_tag.attrs.get('name'), input_tag.attrs.get('value')))
-                print('2222222 %s' % f.attrs.get('action'))
-                for input_tag in f.find_all("select"):
-                    print('%s - %s' % (input_tag.attrs.get('name'), input_tag.attrs.get('value')))
+        # while self.lr.body.find('Enter the characters you see below') > 0:
+        #     try:
+        #         logger.error("Captcha!!!")
 
-            self.lr.load('https://www.amazon.com/ref=cs_503_link')
-            time.sleep(1)
-            self.lr.load(url)
+        #         captcha_path = os.path.join(CAPTCHA_DIR, '%s.jpg' % time.time())
+        #         self.lr.load_img(self.lr.xpath('//img[contains(@src, "captcha")]').get('src'))
+        #         with open(captcha_path, 'wb') as f:
+        #             f.write(self.lr.body)
+        #         code = self.gsa.decode(captcha_path)
 
-            forms = BeautifulSoup(self.lr.body).find_all('form')
-            for f in forms:
-                print('=======')
-                print('444444 %s' % f.attrs.get('action'))
-                for input_tag in f.find_all("input"):
-                    print('%s - %s' % (input_tag.attrs.get('name'), input_tag.attrs.get('value')))
+        #         logger.info('Decode Captcha: %s' % code)
+        #         amzn = self.lr.xpath('//input[@name="amzn"]').get('value')
+        #         amzn_r = self.lr.xpath('//input[@name="amzn-r"]').get('value')
 
-            open('xxx\\%s.html' % time.time(), 'w', encoding='utf-8').write(self.lr.body)
+        #         captcha_url = 'https://www.amazon.com/errors/validateCaptcha?amzn=%s&amzn-r=%s&field-keywords=%s' % (quote_plus(amzn), quote_plus(amzn_r), code)
+        #         # payload = {'amzn': amzn,
+        #         #             'amzn-r': amzn_r,
+        #         #             'field-keywords': code,}
 
-        while self.lr.body.find('Enter the characters you see below') > 0:
-            try:
-                logger.error("Captcha!!!")
-
-                captcha_path = os.path.join(CAPTCHA_DIR, '%s.jpg' % time.time())
-                self.lr.load_img(self.lr.xpath('//img[contains(@src, "captcha")]').get('src'))
-                with open(captcha_path, 'wb') as f:
-                    f.write(self.lr.body)
-                code = self.gsa.decode(captcha_path)
-
-                logger.info('Decode Captcha: %s' % code)
-                amzn = self.lr.xpath('//input[@name="amzn"]').get('value')
-                amzn_r = self.lr.xpath('//input[@name="amzn-r"]').get('value')
-
-                captcha_url = 'https://www.amazon.com/errors/validateCaptcha?amzn=%s&amzn-r=%s&field-keywords=%s' % (quote_plus(amzn), quote_plus(amzn_r), code)
-                # payload = {'amzn': amzn,
-                #             'amzn-r': amzn_r,
-                #             'field-keywords': code,}
-
-                self.lr.load(captcha_url, method='GET') #, data=payload)
-                # open('xxx\\%s.html' % time.time(), 'w', encoding='utf-8').write(self.lr.body)
-                # self.lr.load(url)
-            except Exception as ex:
-                logger.error(ex, exc_info=True)
+        #         self.lr.load(captcha_url, method='GET') #, data=payload)
+        #         # open('xxx\\%s.html' % time.time(), 'w', encoding='utf-8').write(self.lr.body)
+        #         # self.lr.load(url)
+        #     except Exception as ex:
+        #         logger.error(ex, exc_info=True)
 
 
 
@@ -109,26 +111,6 @@ class SpiderAmazon():
         if not os.path.exists(file):
             self.key_asins[keyword] = []
 
-            # self.lr.load('https://www.amazon.com')
-            # self.load_amazon('https://www.amazon.com')
-            # self.load_amazon('https://www.amazon.com')
-            # self.load_amazon('https://www.amazon.com')
-            # open('xxx\\%s.html' % time.time(), 'w').write(self.lr.body)
-
-            # print('cccccccccccccccc %s' % self.lr.body.find('crid'))
-            # self.lr.load('https://www.amazon.com/s?k=%s' % quote(keyword))
-            # self.load_amazon('https://www.amazon.com/s?k=%s' % quote(keyword))
-
-            # form = BeautifulSoup(self.lr.body).find_all('form')[0]
-            # for f in forms:
-            #     print('33333333333333333')
-            #     print('444444 %s' % f.attrs.get('action'))
-            #     for input_tag in f.find_all("input"):
-            #         print('%s - %s' % (input_tag.attrs.get('name'), input_tag.attrs.get('value')))
-            # print('--------------------')
-            # s_url = '%s?field-keywords=%s' % (urljoin('https://www.amazon.com/', form.attrs.get('action')), quote(keyword))
-            # self.load_amazon('https://www.amazon.com/s/ref=nb_sb_noss_1?url=search-alias%%3Daps&field-keywords=%s' % quote(keyword))
-            # self.load_amazon('https://www.amazon.com/s?field-keywords=%s&ref=cs_503_search' % quote(keyword))
             self.load_amazon('https://www.amazon.com/s?k=%s' % quote(keyword))
 
             while 1:
@@ -144,19 +126,18 @@ class SpiderAmazon():
             logger.info('pass keyword: %s' % keyword)
 
     def fetch_asin(self, keyword):
-        product_eles = self.lr.xpaths('//div[contains(@class, "s-result-list")]/div[contains(@data-component-type, "s-search-result")]')
+        product_eles = self.browser.find_elements_by_xpath('//div[contains(@class, "s-result-list")]/div[contains(@data-component-type, "s-search-result")]')
         for product_ele in product_eles:
-            logger.info('asin: %s' % product_ele.get('data-asin'))
-            self.key_asins[keyword].append(product_ele.get('data-asin'))
+            logger.info('asin: %s' % product_ele.get_attribute('data-asin'))
+            self.key_asins[keyword].append(product_ele.get_attribute('data-asin'))
 
 
     def next_page(self):
-        next_ele = self.lr.xpath('//div[contains(@class, "s-pagination-container")]//a[contains(@aria-label, "next page")]')
+        next_ele = self.browser.find_element_by_xpath('//div[contains(@class, "s-pagination-container")]//a[contains(@aria-label, "next page")]')
         if next_ele is None:
             return False
         else:
-            next_url = urljoin(self.lr.current_url, next_ele.get('href'))
-            self.lr.load(next_url)
+            next_ele.click()
             return True
 
     def fetch_products(self, keyword):
@@ -180,17 +161,20 @@ class SpiderAmazon():
             # self.lr.load('https://www.amazon.com/dp/%s' % asin)
             self.load_amazon('https://www.amazon.com/dp/%s' % asin)
 
-            title_ele = self.lr.xpath('//span[@id="productTitle"]')
-            title = ''.join(title_ele.itertext()).strip()
+            title_ele = self.browser.find_element_by_xpath('//span[@id="productTitle"]')
+            title = title_ele.text.strip()
 
             brand = ''
-            brand_ele = self.lr.xpath('//a[@id="bylineInfo"]')
-            if brand_ele is not None:
-                text = brand_ele.text.strip().lower()
-                if text.startswith('visit'):
-                    brand = text[9:-5].strip()
-                elif text.startswith('brand'):
-                    brand = text[6:].strip()
+            try:
+                brand_ele = self.browser.find_element_by_xpath('//a[@id="bylineInfo"]')
+                if brand_ele is not None:
+                    text = brand_ele.text.strip().lower()
+                    if text.startswith('visit'):
+                        brand = text[9:-5].strip()
+                    elif text.startswith('brand'):
+                        brand = text[6:].strip()
+            except NoSuchElementException as ex:
+                logger.info('not brand %s' % asin)
 
             open(os.path.join(PRODUCTS_DIR, keyword, '%s.txt' % asin), 'w', encoding='utf-8').write('|||'.join([asin, brand, title]))
         except KeyboardInterrupt:
@@ -307,19 +291,27 @@ class SpiderAmazon():
                 csvwriter.writerow(fields)
                 csvwriter.writerows(products)
 
+    def do(self):
+        try:
+            while 1:
+                try:
+                    keyword = self.q.get(timeout=5)
+                    self.fetch_list(keyword)
+                    self.fetch_products(keyword)
+                    self.fetch_trademarkia(keyword)
+                    self.fetch_uspto(keyword)
 
-def do_keyword(keyword):
-    try:
-        sa = SpiderAmazon()
-        sa.fetch_list(keyword)
-        sa.fetch_products(keyword)
-        sa.fetch_trademarkia(keyword)
-        sa.fetch_uspto(keyword)
+                    self.output_csv(keyword)
+                except queue.Empty:
+                    logger.info('Empty')
+                    time.sleep(5)
+                except Exception as ex:
+                    logger.error(ex, exc_info=True)
 
-        sa.output_csv(keyword)
-    except Exception as ex:
-        # traceback.print_exc()
-        logger.error(ex, exc_info=True)
+        except Exception as ex:
+            logger.error(ex, exc_info=True)
+
+
 
 def start():
     # for file in os.listdir(KEYWORD_PATH):
@@ -330,18 +322,25 @@ def start():
 
     # sa.fetch_product('B09KWZXG2N')
 
+    try:
+        q = queue.Queue(10)
+        thread_num = 3
 
-    executor = ThreadPoolExecutor(max_workers=5)
+        executor = ThreadPoolExecutor(max_workers=thread_num)
 
-    for file in os.listdir(KEYWORD_PATH):
-        try:
-            for keyword in open(os.path.join(KEYWORD_PATH, file), 'r', encoding='utf-8').readlines():
-                keyword = keyword.strip()
-                if keyword:
-                    executor.submit(do_keyword, keyword)
-        except Exception as ex:
-            logger.error(ex, exc_info=True)
+        for i in range(thread_num):
+            executor.submit(SpiderAmazon(q, 'D:\\profiles\\amazon%s' % i).do)
 
+        for file in os.listdir(KEYWORD_PATH):
+            try:
+                for i, keyword in enumerate(open(os.path.join(KEYWORD_PATH, file), 'r', encoding='utf-8').readlines()):
+                    keyword = keyword.strip()
+                    if keyword:
+                        q.put(keyword)
+            except Exception as ex:
+                logger.error(ex, exc_info=True)
+    except Exception as ex:
+        logger.error(ex, exc_info=True)
 
 # https://www.trademarkia.com/trademarks-search.aspx?tn=GreenLife
 # https://tmsearch.uspto.gov/
