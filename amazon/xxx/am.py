@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 __author__ = 'xtwxfxk'
 
-import os, time, csv, traceback
+import os, time, csv, traceback, sys
+import sqlite3
 from urllib.parse import urljoin, quote, quote_plus
 import logging
 import logging.config
@@ -38,6 +39,43 @@ if not os.path.exists(CSV_DIR): os.makedirs(CSV_DIR)
 CAPTCHA_DIR = os.path.join(ROOT, 'tmp', 'captcha')
 if not os.path.exists(CAPTCHA_DIR): os.makedirs(CAPTCHA_DIR)
 
+
+def get_cookies(url, cookiesfile):
+
+    def chrome_decrypt(encrypted_value, key=None):
+        dec = AES.new(key, AES.MODE_CBC, IV=iv).decrypt(encrypted_value[3:])
+        decrypted = dec[:-dec[-1]].decode('utf8')
+        return decrypted
+
+    cookies = []
+    if sys.platform == 'win32':
+        import win32crypt
+        conn = sqlite3.connect(cookiesfile)
+        cursor = conn.cursor()
+        cursor.execute('SELECT name, value, encrypted_value FROM cookies WHERE host_key like "' + url + '"')
+        for name, value, encrypted_value in cursor.fetchall():
+            if value or (encrypted_value[:3] == b'v101'):
+                cookies.append((name, value))
+            else:
+                decrypted_value = win32crypt.CryptUnprotectData(
+                    encrypted_value, None, None, None, 0)[1].decode('utf-8') or 'ERROR'
+                cookies.append((name, decrypted_value))
+
+    elif sys.platform == 'linux':
+        my_pass = 'peanuts'.encode('utf8')
+        iterations = 1
+        key = PBKDF2(my_pass, salt, length, iterations)
+        conn = sqlite3.connect(cookiesfile)
+        cursor = conn.cursor()
+        cursor.execute('SELECT name, value, encrypted_value FROM cookies WHERE host_key like "' + url + '"')
+        for name, value, encrypted_value in cursor.fetchall():
+            decrypted_tuple = (name, chrome_decrypt(encrypted_value, key=key))
+            cookies.append(decrypted_tuple)
+    else:
+        print('This tool is only supported by linux and Mac and Windows')
+
+    conn.close()
+    return cookies
 
 class SpiderAmazon():
 
@@ -346,7 +384,7 @@ def start():
 # https://www.trademarkia.com/trademarks-search.aspx?tn=GreenLife
 # https://tmsearch.uspto.gov/
 if __name__ == '__main__':
-    start()
+    # start()
 
     # gsa = GsaCaptcha()
     # print(gsa.decode('D:\\code\\python\\left5\\amazon\\xxx\\tmp\\captcha\\Captcha_fbcjbbjtal.jpg'))
@@ -357,3 +395,5 @@ if __name__ == '__main__':
     # with open('D:\\code\\python\\left5\\amazon\\xxx\\tmp\\captcha\\xxx.jpg', 'wb') as f:
     #     # shutil.copyfileobj(r, f)
     #     f.write(lr.body)
+
+    print(get_cookies('.amazon.com', 'C:/Users/left5/AppData/Local/Google/Chrome/User Data/Default/Network/Cookies'))
