@@ -17,7 +17,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select, WebDriverWait
 from selenium.common.exceptions import WebDriverException
 
-# import undetected_chromedriver.v2 as uc
+import undetected_chromedriver.v2 as uc
+
 config = configparser.ConfigParser()
 config.read('settings.ini', encoding='utf-8')
 user_data_root = config['setting']['user_data_root']
@@ -61,8 +62,8 @@ class SpiderAmazon():
 
         self.q = q
 
-        options = webdriver.ChromeOptions()
-        # options = uc.ChromeOptions()
+        # options = webdriver.ChromeOptions()
+        options = uc.ChromeOptions()
         if profile_dir is not None:
             options.add_argument('--user-data-dir=%s' % profile_dir)
 
@@ -71,13 +72,13 @@ class SpiderAmazon():
         # prefs["profile.managed_default_content_settings"] = {"images": 2}
         # prefs["intl.accept_languages"] = 'en,en_US'
 
-        options.add_experimental_option("prefs", prefs)
-        options.add_argument('--start-maximized')
+        # options.add_experimental_option("prefs", prefs)
+        # options.add_argument('--start-maximized')
         options.add_argument('--blink-settings=imagesEnabled=false')
         options.add_argument('--lang=en')
         
-        self.browser = webdriver.Chrome(options=options)
-        # self.browser = uc.Chrome(options=options)
+        # self.browser = webdriver.Chrome(options=options)
+        self.browser = uc.Chrome(options=options, driver_executable_path=os.path.join(os.getcwd(), 'chromedriver.exe'), use_subprocess=True)
         self.wait = WebDriverWait(self.browser, 120)
 
     def load_amazon(self, url):
@@ -132,6 +133,7 @@ class SpiderAmazon():
 
             while 1:
                 self.fetch_asin(keyword)
+
                 if not self.next_page():
                     break
 
@@ -150,12 +152,26 @@ class SpiderAmazon():
 
 
     def next_page(self):
-        next_ele = self.browser.find_element_by_xpath('//div[contains(@class, "s-pagination-container")]//a[contains(@aria-label, "next page")]')
-        if next_ele is None:
-            return False
-        else:
-            next_ele.click()
-            return True
+        r = False
+        for i in range(3):
+            try:
+                self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+                time.sleep(1)
+                next_ele = self.browser.find_element_by_xpath('//div[contains(@class, "s-pagination-container")]//a[contains(@class, "s-pagination-next")]')
+                if next_ele is None:
+                    pass
+                else:
+                    # next_ele.click()
+                    url = urljoin(self.browser.current_url, next_ele.get_attribute('href'))
+                    logger.info('load url %s' % url)
+                    self.browser.get(url)
+                    r = True
+                    break
+            except Exception as ex:
+                logger.info('error agent %s' % str(i+1))
+                logger.error(ex, exc_info=True)
+        return r
+
 
     def fetch_products(self, keyword):
         asins_file = os.path.join(ASIN_DIR, '%s.txt' % keyword)
