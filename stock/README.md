@@ -1,6 +1,6 @@
 # awesome-quant
 
-https://github.com/wilsonfreitas/awesome-quant
+[more](https://github.com/wilsonfreitas/awesome-quant)
 
 A curated list of insanely awesome libraries, packages and resources for Quants (Quantitative Finance)
 
