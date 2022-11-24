@@ -62,3 +62,5 @@ assets.h5
 wiki_prices.csv
 ^spx_d.csv
 wiki_stocks.csv
+
+*.pkl
