@@ -76,7 +76,8 @@ def fetch_image(keywords):
         # 截图内容
         # article_xpath = '//div[@role="article"]/div'
         # article_xpath = '//div[@role="main"]//div[@role="article"]/div/div/div/div/div/div[2]/div/div[3]'
-        article_xpath = '//div[@role="main"]//div[@role="article"]/div/div/div/div/div/div/div/div[3]'
+        # article_xpath = '//div[@role="main"]//div[@role="article"]/div/div/div/div/div/div/div/div[3]'
+        article_xpath = '//div[@role="main"]//div[@role="article"]/div/div/div/div/div/div[2]/div/div/div[3]'
         wait.until(lambda driver: driver.find_element_by_xpath(article_xpath))
 
         eles = []

@@ -1,6 +1,6 @@
 
 profile_dir: D:/profiles/xxxxxx
-proxy: socks5://127.0.0.1:1080
+proxy: socks5://127.0.0.1:7890
 pic_count: 10
 pic_alpha: 0
 blur: 5
