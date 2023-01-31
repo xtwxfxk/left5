@@ -5,6 +5,7 @@ checklist = {}
 s_valit = False
 SCORE_DIT = {}
 
+
 # 28365-365   365365824
 
 def pro_start(arg):
@@ -14,6 +15,7 @@ def pro_start(arg):
     import time
     import requests
     import json
+    import cloudscraper
     from autobahn.twisted.websocket import connectWS, WebSocketClientFactory, WebSocketClientProtocol
     from autobahn.websocket.compress import (
         PerMessageDeflateOffer,
@@ -54,12 +56,44 @@ def pro_start(arg):
         def stopProducing(self):
             pass
 
+    # verify = '365.cer'
+
     proxies = {
         'http': 'http://127.0.0.1:7890',
         'https': 'http://127.0.0.1:7890'
     }
-    requests.get = partial(requests.get) #, proxies=proxies)
-    requests.post = partial(requests.post) #, proxies=proxies)
+    # requests.get = partial(requests.get, proxies=proxies)
+    # requests.post = partial(requests.post, proxies=proxies)
+
+    sess = requests.Session()
+    # # sess.verify = 'D:/code/python/left5/x/365.pem'
+
+    sess.headers.update({
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+        'Connection': 'keep-alive',
+        'sec-ch-ua': '".Not/A)Brand";v="99", "Google Chrome";v="103", "Chromium";v="103"',
+        'sec-ch-ua-mobile': '?0',
+        'sec-ch-ua-platform': '"Windows"',
+        'Sec-Fetch-Dest': 'document',
+        'Sec-Fetch-Mode': 'navigate',
+        'Sec-Fetch-Site': 'none',
+        'Sec-Fetch-User': '?1',
+        'Upgrade-Insecure-Requests': '1',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',
+    })
+
+    # scraper = cloudscraper.CloudScraper()
+    browser = {
+        'browser': 'chrome',
+        'desktop': False,
+        'mobile': True,
+        'platform': 'android',
+
+    }
+    scraper = cloudscraper.create_scraper(sess=sess, browser=browser, debug=True, interpreter='js2py', delay=10) # sess=sess
+
     log.startLogging(sys.stdout)
 
     language = 'cn'  # en or cn
@@ -443,21 +477,41 @@ def pro_start(arg):
 
 
     def get_session_id():
-        headers = {
-                "Host": "www.365365824.com",
-                "Connection": "keep-alive",
-                "Origin": "https://www.365365824.com",
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36",
-                "Accept": "*/*",
-                "Referer": "https://www.365365824.com/",
-                "Accept-Encoding": "gzip, deflate, br",
-                "Accept-Language": "en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7",
-                "Cookie": "aps03=ct=42&lng=2",
-            }
+        # headers = {
+        #     # "Host": "www.365365824.com",
+        #     # "Connection": "keep-alive",
+        #     # "Origin": "https://www.365365824.com",
+        #     # "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36",
+        #     # "Accept": "*/*",
+        #     # "Referer": "https://www.365365824.com/",
+        #     # "Accept-Encoding": "gzip, deflate, br",
+        #     # "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
+        #     # "Cookie": "aps03=ct=88&lng=2",
+
+        #     'Accept': '*/*',
+        #     'Accept-Encoding': 'gzip, deflate, br',
+        #     'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+        #     'Connection': 'keep-alive',
+        #     'Cookie': 'aps03=ct=88&lng=2',
+        #     'Host': 'www.365365824.com',
+        #     'Origin': 'https://www.365365824.com',
+        #     'Referer': 'https://www.365365824.com/',
+        #     'sec-ch-ua': '".Not/A)Brand";v="99", "Google Chrome";v="103", "Chromium";v="103"',
+        #     'sec-ch-ua-mobile': '?0',
+        #     'sec-ch-ua-platform': '"Windows"',
+        #     'Sec-Fetch-Dest': 'empty',
+        #     'Sec-Fetch-Mode': 'cors',
+        #     'Sec-Fetch-Site': 'same-origin',
+        #     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',
+        # }
+
+
         url = 'https://www.365365824.com/defaultapi/sports-configuration'
         for i in range(5):
             try:
-                response = requests.get(url=url, headers=headers, verify=False)
+                # response = requests.get(url=url, headers=headers, verify='365.pem') # proxies=proxies
+                # response = sess.get(url=url) #, headers=headers) # proxies=proxies
+                response = scraper.get(url=url)
                 session_id = response.cookies['pstk']
                 break
             except:
@@ -466,28 +520,24 @@ def pro_start(arg):
         return session_id
 
     def get_js_code():
-        headers = {
-            "Host": "www.365365824.com",
-            "Connection": "keep-alive",
-            "Cache-Control": "max-age=0",
-            "Upgrade-Insecure-Requests": "1",
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36",
-            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-            "Referer": "https://www.365365824.com/",
-            "Accept-Encoding": "gzip, deflate, br",
-            "Accept-Language": "en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7",
-            'Cookie': 'aps03=ct=212&lng=2',
-        }
-        url = 'https://www.365365824.com/'
+        url = 'https://www.365365824.com/#/IP/B18'
 
         for i in range(5):
-            response = requests.get(url=url, headers=headers, verify=False)
+            # response = requests.get(url=url, headers=headers, verify='365.pem') # proxies=proxies
+
+            # cert = ('D:/code/python/left5/x', '365.pem')
+            # response = sess.get(url=url) # , cert=cert) # proxies=proxies # 'D:/code/python/left5/x/365.pem'
+            response = scraper.get(url)
+
             txt = response.content.decode()
+
+            open('%s.html' % time.time(), 'w').write(txt)
 
             code_lst = re.findall("function\(\)\{\}\}\)\(boot\|\|\(boot\=\{\}\)\);\!function\(\)(.*?),J=\(", txt)
             if len(code_lst) > 0:
                 code = code_lst[0]
                 return code
+            time.sleep(5)
 
         open('xx.html', 'w').write(txt)
         raise Exception("错误{}".format(txt))
@@ -507,10 +557,10 @@ def pro_start(arg):
         global is_valit
         is_valit = False
 
-        USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36"
+        USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36"
         url_auto = "wss://pshudws.365pushodds.com/zap/?uid=" + str(random.random())[2:]
         factory_auto = MyFactory(
-            url_auto, useragent=USER_AGENT, protocols=['zap-protocol-v2'])
+            url_auto, useragent=USER_AGENT, protocols=['zap-protocol-v1'])
 
         # factory_auto = MyFactory(
         #     url_auto, useragent=USER_AGENT, protocols=['zap-protocol-v1'], proxy={'host': "127.0.0.1", 'port': 8888})
@@ -539,7 +589,7 @@ def pro_start(arg):
 
         url = "wss://premws-pt3.365pushodds.com/zap/?uid=" + str(random.random())[2:]
         factory = MyFactory(
-            url, useragent=USER_AGENT, protocols=['zap-protocol-v1'])
+            url, useragent=USER_AGENT, protocols=['zap-protocol-v2'])
         # factory = MyFactory(
         #     url, useragent=USER_AGENT, protocols=['zap-protocol-v1'], proxy={'host': "127.0.0.1", 'port': 8888})
         factory.protocol = MyClientProtocol
