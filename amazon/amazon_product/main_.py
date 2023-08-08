@@ -3,7 +3,7 @@ __author__ = 'xtwxfxk'
 
 import logging, logging.config, time, traceback
 from shove import Shove
-from concurrent.futures imoprt ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor
 
 from spider.best_sell import BestSell, ThreadSet
 from spider.base.models import URL_TYPE

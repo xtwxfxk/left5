@@ -1,0 +1,903 @@
+2023-07-14 21:15:12 INFO utils 开始读取代码文件...
+2023-07-14 21:15:12 INFO utils 订阅数量 230
+2023-07-14 21:15:14 INFO ctp_datas 版本号为: v6.6.9_20220914  9:57:19.2466         
+2023-07-14 21:15:14 INFO utils 开始读取代码文件...
+2023-07-14 21:15:14 INFO utils 订阅数量 230
+2023-07-14 21:15:14 INFO ctp_datas OnFrontConnected
+2023-07-14 21:15:14 INFO ctp_datas OnRspUserLogin
+2023-07-14 21:15:14 INFO ctp_datas SessionID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas SubscribeMarketData: 0
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309C3000
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309C3050
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309C3100
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309C3150
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309C3200
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309C3250
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309C3300
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309C3350
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309C3400
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309C3450
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309C3500
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309C3550
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309C3600
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309C3650
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309C3700
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309C3750
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309C3800
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309C3850
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309C3900
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309C3950
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309C4000
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309C4050
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309C4100
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309C4150
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309C4200
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309C4250
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309C4300
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309C4350
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309P3000
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309P3050
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309P3100
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309P3150
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309P3200
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas_process                                datetime  rb2309
+datetime                                       
+2023-07-14 21:15:13 2023-07-14 21:15:13  3716.0
+2023-07-14 21:15:14 INFO ctp_datas_process                                datetime  rb2309C3000
+datetime                                            
+2023-07-14 21:01:00 2023-07-14 21:01:00        708.0
+2023-07-14 21:15:14 INFO ctp_datas_process                                datetime  rb2309C3050
+datetime                                            
+2023-07-14 21:01:00 2023-07-14 21:01:00        658.0
+2023-07-14 21:15:14 INFO ctp_datas_process                                datetime  rb2309C3100
+datetime                                            
+2023-07-14 21:00:59 2023-07-14 21:00:59        608.0
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas_process                                datetime  rb2309C3150
+datetime                                            
+2023-07-14 21:00:58 2023-07-14 21:00:58        558.0
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309P3250
+2023-07-14 21:15:14 INFO ctp_datas_process                                datetime  rb2309C3200
+datetime                                            
+2023-07-14 21:00:57 2023-07-14 21:00:57        508.5
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas_process                                datetime  rb2309C3250
+datetime                                            
+2023-07-14 21:00:56 2023-07-14 21:00:56        459.5
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas_process                                datetime  rb2309C3300
+datetime                                            
+2023-07-14 21:14:49 2023-07-14 21:14:49        411.0
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309P3300
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas_process                                datetime  rb2309C3350
+datetime                                            
+2023-07-14 21:14:49 2023-07-14 21:14:49        364.0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas_process                                datetime  rb2309C3400
+datetime                                            
+2023-07-14 21:14:49 2023-07-14 21:14:49        318.0
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309P3350
+2023-07-14 21:15:14 INFO ctp_datas_process                                datetime  rb2309C3450
+datetime                                            
+2023-07-14 21:14:49 2023-07-14 21:14:49        274.5
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas_process                                datetime  rb2309C3500
+datetime                                            
+2023-07-14 21:14:49 2023-07-14 21:14:49        233.0
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309P3400
+2023-07-14 21:15:14 INFO ctp_datas_process                                datetime  rb2309C3550
+datetime                                            
+2023-07-14 21:14:49 2023-07-14 21:14:49        195.0
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas_process                                datetime  rb2309C3600
+datetime                                            
+2023-07-14 21:14:49 2023-07-14 21:14:49        160.0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas_process                                datetime  rb2309C3650
+datetime                                            
+2023-07-14 21:14:49 2023-07-14 21:14:49        129.0
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309P3450
+2023-07-14 21:15:14 INFO ctp_datas_process                                datetime  rb2309C3700
+datetime                                            
+2023-07-14 21:15:10 2023-07-14 21:15:10        102.0
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas_process                                datetime  rb2309C3750
+datetime                                            
+2023-07-14 21:15:11 2023-07-14 21:15:11         75.0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas_process                                datetime  rb2309C3800
+datetime                                            
+2023-07-14 21:15:12 2023-07-14 21:15:12         60.0
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309P3500
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas_process                                datetime  rb2309C3850
+datetime                                            
+2023-07-14 21:14:50 2023-07-14 21:14:50         45.0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas_process                                datetime  rb2309C3900
+datetime                                            
+2023-07-14 21:14:50 2023-07-14 21:14:50         54.0
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas_process                                datetime  rb2309C3950
+datetime                                            
+2023-07-14 21:14:50 2023-07-14 21:14:50         23.0
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309P3550
+2023-07-14 21:15:14 INFO ctp_datas_process                                datetime  rb2309C4000
+datetime                                            
+2023-07-14 21:14:50 2023-07-14 21:14:50         16.0
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas_process                                datetime  rb2309C4050
+datetime                                            
+2023-07-14 21:11:33 2023-07-14 21:11:33         11.0
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309P3600
+2023-07-14 21:15:14 INFO ctp_datas_process                                datetime  rb2309C4100
+datetime                                            
+2023-07-14 21:11:17 2023-07-14 21:11:17          7.0
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas_process                                datetime  rb2309C4150
+datetime                                            
+2023-07-14 21:10:53 2023-07-14 21:10:53          4.5
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309P3650
+2023-07-14 21:15:14 INFO ctp_datas_process                                datetime  rb2309C4200
+datetime                                            
+2023-07-14 21:10:58 2023-07-14 21:10:58          3.0
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas_process                                datetime  rb2309C4250
+datetime                                            
+2023-07-14 21:10:56 2023-07-14 21:10:56          1.5
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:14 INFO ctp_datas_process                                datetime  rb2309C4300
+datetime                                            
+2023-07-14 21:10:50 2023-07-14 21:10:50          1.0
+2023-07-14 21:15:14 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:14 INFO ctp_datas_process                                datetime  rb2309C4350
+datetime                                            
+2023-07-14 21:10:43 2023-07-14 21:10:43          0.5
+2023-07-14 21:15:14 INFO ctp_datas InstrumentID=rb2309P3700
+2023-07-14 21:15:14 INFO ctp_datas_process                                datetime  rb2309P3000
+datetime                                            
+2023-07-14 21:13:39 2023-07-14 21:13:39          0.5
+2023-07-14 21:15:14 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:14 INFO ctp_datas_process                                datetime  rb2309P3050
+datetime                                            
+2023-07-14 21:14:01 2023-07-14 21:14:01          0.5
+2023-07-14 21:15:14 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2309P3100
+datetime                                            
+2023-07-14 21:14:35 2023-07-14 21:14:35          0.5
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2309P3750
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2309P3150
+datetime                                            
+2023-07-14 21:15:11 2023-07-14 21:15:11          0.5
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2309P3200
+datetime                                            
+2023-07-14 21:15:11 2023-07-14 21:15:11          1.0
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2309P3800
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2309P3850
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2309P3900
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2309P3950
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2309P4000
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2309P4050
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2309P4100
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2309P4150
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2309P4200
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2309P4250
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2309P4300
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2309P4350
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C2850
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C2900
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C2950
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C3000
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C3050
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C3100
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C3150
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C3200
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C3250
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C3300
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2309P3250
+datetime                                            
+2023-07-14 21:00:00 2023-07-14 21:00:00          2.0
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2309P3300
+datetime                                            
+2023-07-14 21:00:00 2023-07-14 21:00:00          3.5
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2309P3350
+datetime                                            
+2023-07-14 21:15:01 2023-07-14 21:15:01         10.0
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2309P3400
+datetime                                            
+2023-07-14 21:15:01 2023-07-14 21:15:01         14.0
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2309P3450
+datetime                                            
+2023-07-14 21:15:01 2023-07-14 21:15:01         16.5
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2309P3500
+datetime                                            
+2023-07-14 21:15:01 2023-07-14 21:15:01         25.0
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2309P3550
+datetime                                            
+2023-07-14 21:15:01 2023-07-14 21:15:01         37.0
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2309P3600
+datetime                                            
+2023-07-14 21:15:01 2023-07-14 21:15:01         40.5
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2309P3650
+datetime                                            
+2023-07-14 21:15:01 2023-07-14 21:15:01         71.0
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2309P3700
+datetime                                            
+2023-07-14 21:15:01 2023-07-14 21:15:01         94.0
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2309P3750
+datetime                                            
+2023-07-14 21:15:01 2023-07-14 21:15:01        121.0
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2309P3800
+datetime                                            
+2023-07-14 21:15:01 2023-07-14 21:15:01        152.0
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2309P3850
+datetime                                            
+2023-07-14 21:15:01 2023-07-14 21:15:01        186.5
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2309P3900
+datetime                                            
+2023-07-14 21:15:01 2023-07-14 21:15:01        224.0
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C3350
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2309P3950
+datetime                                            
+2023-07-14 21:15:01 2023-07-14 21:15:01        265.0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2309P4000
+datetime                                            
+2023-07-14 21:15:01 2023-07-14 21:15:01        307.5
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2309P4050
+datetime                                            
+2023-07-14 21:15:01 2023-07-14 21:15:01        352.5
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C3400
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2309P4100
+datetime                                            
+2023-07-14 21:15:01 2023-07-14 21:15:01        398.5
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2309P4150
+datetime                                            
+2023-07-14 21:00:51 2023-07-14 21:00:51        446.0
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2309P4200
+datetime                                            
+2023-07-14 21:00:53 2023-07-14 21:00:53        494.5
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C3450
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2309P4250
+datetime                                            
+2023-07-14 21:00:54 2023-07-14 21:00:54        543.5
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2309P4300
+datetime                                            
+2023-07-14 21:00:55 2023-07-14 21:00:55        592.5
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C3500
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2309P4350
+datetime                                            
+2023-07-14 21:00:56 2023-07-14 21:00:56        642.0
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308
+datetime                                       
+2023-07-14 21:15:13 2023-07-14 21:15:13  3746.0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C2850
+datetime                                            
+2023-07-14 21:01:04 2023-07-14 21:01:04        888.0
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C3550
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C2900
+datetime                                            
+2023-07-14 21:01:04 2023-07-14 21:01:04        838.0
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C2950
+datetime                                            
+2023-07-14 21:01:04 2023-07-14 21:01:04        788.0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C3000
+datetime                                            
+2023-07-14 21:01:04 2023-07-14 21:01:04        738.0
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C3050
+datetime                                            
+2023-07-14 21:01:04 2023-07-14 21:01:04        688.0
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C3600
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C3100
+datetime                                            
+2023-07-14 21:10:33 2023-07-14 21:10:33        638.0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C3150
+datetime                                            
+2023-07-14 21:10:54 2023-07-14 21:10:54        588.0
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C3650
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C3200
+datetime                                            
+2023-07-14 21:10:42 2023-07-14 21:10:42        538.0
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C3250
+datetime                                            
+2023-07-14 21:10:43 2023-07-14 21:10:43        488.0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C3300
+datetime                                            
+2023-07-14 21:11:00 2023-07-14 21:11:00        438.0
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C3700
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C3750
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C3800
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C3850
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C3900
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C3950
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C4000
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C4050
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C4100
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C4150
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C4200
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C4250
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C4300
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C4350
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C4400
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C4450
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C4500
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C4550
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C4600
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C4650
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C4700
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C4750
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C4800
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308C4850
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308P2850
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308P2900
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308P2950
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C3350
+datetime                                            
+2023-07-14 21:14:40 2023-07-14 21:14:40        397.0
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C3400
+datetime                                            
+2023-07-14 21:15:03 2023-07-14 21:15:03        347.5
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C3450
+datetime                                            
+2023-07-14 21:15:07 2023-07-14 21:15:07        300.0
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C3500
+datetime                                            
+2023-07-14 21:15:07 2023-07-14 21:15:07        256.5
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C3550
+datetime                                            
+2023-07-14 21:15:04 2023-07-14 21:15:04        205.0
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C3600
+datetime                                            
+2023-07-14 21:15:07 2023-07-14 21:15:07        163.5
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C3650
+datetime                                            
+2023-07-14 21:15:08 2023-07-14 21:15:08        108.5
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308P3000
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C3700
+datetime                                            
+2023-07-14 21:15:05 2023-07-14 21:15:05         68.5
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C3750
+datetime                                            
+2023-07-14 21:15:12 2023-07-14 21:15:12         38.5
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308P3050
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C3800
+datetime                                            
+2023-07-14 21:15:11 2023-07-14 21:15:11         21.5
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C3850
+datetime                                            
+2023-07-14 21:15:10 2023-07-14 21:15:10         11.5
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308P3100
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C3900
+datetime                                            
+2023-07-14 21:15:05 2023-07-14 21:15:05          5.0
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C3950
+datetime                                            
+2023-07-14 21:15:03 2023-07-14 21:15:03          3.0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C4000
+datetime                                            
+2023-07-14 21:15:10 2023-07-14 21:15:10          3.0
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C4050
+datetime                                            
+2023-07-14 21:15:03 2023-07-14 21:15:03          1.5
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308P3150
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C4100
+datetime                                            
+2023-07-14 21:15:03 2023-07-14 21:15:03          1.0
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C4150
+datetime                                            
+2023-07-14 21:11:01 2023-07-14 21:11:01          1.0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C4200
+datetime                                            
+2023-07-14 21:11:01 2023-07-14 21:11:01          0.5
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C4250
+datetime                                            
+2023-07-14 21:09:22 2023-07-14 21:09:22          1.0
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308P3200
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C4300
+datetime                                            
+2023-07-14 21:11:01 2023-07-14 21:11:01          0.5
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308P3250
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C4350
+datetime                                            
+2023-07-14 21:14:57 2023-07-14 21:14:57          0.5
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C4400
+datetime                                            
+2023-07-14 21:09:19 2023-07-14 21:09:19          0.5
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C4450
+datetime                                            
+2023-07-14 21:09:22 2023-07-14 21:09:22          0.5
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308P3300
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C4500
+datetime                                            
+2023-07-14 21:09:35 2023-07-14 21:09:35          0.5
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C4550
+datetime                                            
+2023-07-14 21:01:19 2023-07-14 21:01:19          0.5
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C4600
+datetime                                            
+2023-07-14 21:01:19 2023-07-14 21:01:19          0.5
+2023-07-14 21:15:15 INFO ctp_datas InstrumentID=rb2308P3350
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C4650
+datetime                                            
+2023-07-14 21:01:19 2023-07-14 21:01:19          0.5
+2023-07-14 21:15:15 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:15 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:15 INFO ctp_datas_process                                datetime  rb2308C4700
+datetime                                            
+2023-07-14 21:01:19 2023-07-14 21:01:19          0.5
+2023-07-14 21:15:16 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:16 INFO ctp_datas_process                                datetime  rb2308C4750
+datetime                                            
+2023-07-14 21:04:07 2023-07-14 21:04:07          0.5
+2023-07-14 21:15:16 INFO ctp_datas InstrumentID=rb2308P3400
+2023-07-14 21:15:16 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:16 INFO ctp_datas_process                                datetime  rb2308C4800
+datetime                                            
+2023-07-14 21:01:19 2023-07-14 21:01:19          0.5
+2023-07-14 21:15:16 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:16 INFO ctp_datas_process                                datetime  rb2308C4850
+datetime                                            
+2023-07-14 21:01:19 2023-07-14 21:01:19          0.5
+2023-07-14 21:15:16 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:16 INFO ctp_datas InstrumentID=rb2308P3450
+2023-07-14 21:15:16 INFO ctp_datas_process                                datetime  rb2308P2850
+datetime                                            
+2023-07-14 21:01:08 2023-07-14 21:01:08          0.5
+2023-07-14 21:15:16 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:16 INFO ctp_datas_process                                datetime  rb2308P2900
+datetime                                            
+2023-07-14 21:01:08 2023-07-14 21:01:08          0.5
+2023-07-14 21:15:16 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:16 INFO ctp_datas_process                                datetime  rb2308P2950
+datetime                                            
+2023-07-14 21:01:20 2023-07-14 21:01:20          0.5
+2023-07-14 21:15:16 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:16 INFO ctp_datas InstrumentID=rb2308P3500
+2023-07-14 21:15:16 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:16 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:16 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:16 INFO ctp_datas InstrumentID=rb2308P3550
+2023-07-14 21:15:16 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:16 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:16 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:16 INFO ctp_datas InstrumentID=rb2308P3600
+2023-07-14 21:15:16 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:16 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:16 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:16 INFO ctp_datas InstrumentID=rb2308P3650
+2023-07-14 21:15:16 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:16 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:16 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:16 INFO ctp_datas InstrumentID=rb2308P3700
+2023-07-14 21:15:16 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:16 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:16 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:16 INFO ctp_datas InstrumentID=rb2308P3750
+2023-07-14 21:15:16 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:16 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:16 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:16 INFO ctp_datas InstrumentID=rb2308P3800
+2023-07-14 21:15:16 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:16 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:16 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:16 INFO ctp_datas InstrumentID=rb2308P3850
+2023-07-14 21:15:16 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:16 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:16 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:16 INFO ctp_datas InstrumentID=rb2308P3900
+2023-07-14 21:15:16 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:16 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:16 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:16 INFO ctp_datas InstrumentID=rb2308P3950
+2023-07-14 21:15:16 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:16 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:16 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:16 INFO ctp_datas InstrumentID=rb2308P4000
+2023-07-14 21:15:16 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:16 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:16 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:16 INFO ctp_datas InstrumentID=rb2308P4050
+2023-07-14 21:15:16 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:16 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:16 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:16 INFO ctp_datas InstrumentID=rb2308P4100
+2023-07-14 21:15:16 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:16 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:16 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:16 INFO ctp_datas InstrumentID=rb2308P4150
+2023-07-14 21:15:16 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:16 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:16 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:16 INFO ctp_datas InstrumentID=rb2308P4200
+2023-07-14 21:15:16 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:16 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:16 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:16 INFO ctp_datas InstrumentID=rb2308P4250
+2023-07-14 21:15:16 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:16 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:16 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:16 INFO ctp_datas InstrumentID=rb2308P4300
+2023-07-14 21:15:16 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:16 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:16 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:16 INFO ctp_datas InstrumentID=rb2308P4350
+2023-07-14 21:15:16 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:16 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:16 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:16 INFO ctp_datas InstrumentID=rb2308P4400
+2023-07-14 21:15:16 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:16 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:16 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:16 INFO ctp_datas InstrumentID=rb2308P4450
+2023-07-14 21:15:16 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:16 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:16 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:16 INFO ctp_datas InstrumentID=rb2308P4500
+2023-07-14 21:15:16 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:16 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:16 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:16 INFO ctp_datas InstrumentID=rb2308P4550
+2023-07-14 21:15:16 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:16 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:16 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:16 INFO ctp_datas InstrumentID=rb2308P4600
+2023-07-14 21:15:16 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:16 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:16 INFO ctp_datas OnRspSubMarketData
+2023-07-14 21:15:16 INFO ctp_datas InstrumentID=rb2308P4650
+2023-07-14 21:15:16 INFO ctp_datas ErrorID=0
+2023-07-14 21:15:16 INFO ctp_datas ErrorMsg=CTP:No Error
+2023-07-14 21:15:16 INFO ctp_datas_process                                datetime  rb2308P3000
+datetime                                            
+2023-07-14 21:01:19 2023-07-14 21:01:19          0.5
+2023-07-14 21:15:16 INFO ctp_datas_process                                datetime  rb2308P3050
+datetime                                            
+2023-07-14 21:11:01 2023-07-14 21:11:01          0.5
+2023-07-14 21:15:16 INFO ctp_datas_process                                datetime  rb2308P3100
+datetime                                            
+2023-07-14 21:15:02 2023-07-14 21:15:02          0.5
+2023-07-14 21:15:16 INFO ctp_datas_process                                datetime  rb2308P3150
+datetime                                            
+2023-07-14 21:12:27 2023-07-14 21:12:27          0.5
+2023-07-14 21:15:16 INFO ctp_datas_process                                datetime  rb2308P3200
+datetime                                            
+2023-07-14 21:12:26 2023-07-14 21:12:26          0.5
+2023-07-14 21:15:16 INFO ctp_datas_process                                datetime  rb2308P3250
+datetime                                            
+2023-07-14 21:11:01 2023-07-14 21:11:01          1.0
+2023-07-14 21:15:16 INFO ctp_datas_process                                datetime  rb2308P3300
+datetime                                            
+2023-07-14 21:12:54 2023-07-14 21:12:54          1.0
+2023-07-14 21:15:16 INFO ctp_datas_process                                datetime  rb2308P3350
+datetime                                            
+2023-07-14 21:11:27 2023-07-14 21:11:27          1.0
+2023-07-14 21:15:16 INFO ctp_datas_process                                datetime  rb2308P3400
+datetime                                            
+2023-07-14 21:15:03 2023-07-14 21:15:03          1.0
+2023-07-14 21:15:16 INFO ctp_datas_process                                datetime  rb2308P3450
+datetime                                            
+2023-07-14 21:15:03 2023-07-14 21:15:03          1.5
+2023-07-14 21:15:16 INFO ctp_datas_process                                datetime  rb2308P3500
+datetime                                            
+2023-07-14 21:15:06 2023-07-14 21:15:06          1.5
+2023-07-14 21:15:16 INFO ctp_datas_process                                datetime  rb2308P3550
+datetime                                            
+2023-07-14 21:15:13 2023-07-14 21:15:13          3.0
+2023-07-14 21:15:16 INFO ctp_datas_process                                datetime  rb2308P3600
+datetime                                            
+2023-07-14 21:15:05 2023-07-14 21:15:05          5.0
+2023-07-14 21:15:16 INFO ctp_datas_process                                datetime  rb2308P3650
+datetime                                            
+2023-07-14 21:15:04 2023-07-14 21:15:04         10.5

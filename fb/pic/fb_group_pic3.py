@@ -58,7 +58,7 @@ def fetch_image(keywords):
         group.click()
         time.sleep(1)
 
-        group_source_xpath = '//span[contains(text(), "帖子来源")]'
+        group_source_xpath = '//input[contains(@placeholder, "帖子来源")]' # //input[contains(text(), "帖子来源")]
         wait.until(lambda driver: driver.find_element_by_xpath(group_source_xpath))
         group_source = browser.find_element_by_xpath(group_source_xpath)
         group_source.click()

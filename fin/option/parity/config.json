@@ -1,0 +1,17 @@
+{
+    "ctp_config": {
+        "user_id": "208571",
+        "broker_id": "9999",
+        "password": "abc#2dAde654",
+        "md_server": "tcp://180.168.146.187:10211",
+        "td_server": "tcp://180.168.146.187:10201",
+        "app_id": "simnow_client_test",
+        "auth_code": "0000000000000000"
+        
+    },
+
+    "strategy_config": {
+        "duration": "5m",
+        "price_diff": 10
+    }
+}
