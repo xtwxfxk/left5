@@ -10,6 +10,8 @@ from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select, WebDriverWait
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains
 
 config = yaml.safe_load(open('config.yml').read())
 
@@ -33,6 +35,8 @@ def fetch_image(keywords):
 
     wait = WebDriverWait(browser, 120)
 
+    actions = ActionChains(browser)
+
     if not os.path.exists('docx'):
         os.mkdir('docx')
 
@@ -40,11 +44,11 @@ def fetch_image(keywords):
         browser.get('http://www.facebook.com')
         doc = Document()
 
-        wait.until(lambda driver: driver.find_element_by_xpath('//div[@role="banner"]//label'))
-        slabel = browser.find_element_by_xpath('//div[@role="banner"]//label')
+        wait.until(lambda driver: driver.find_element(By.XPATH, '//div[@role="banner"]//label'))
+        slabel = browser.find_element(By.XPATH, '//div[@role="banner"]//label')
         slabel.click()
-        wait.until(lambda driver: driver.find_element_by_xpath('//input[@type="search"]'))
-        search = browser.find_element_by_xpath('//input[@type="search"]')
+        wait.until(lambda driver: driver.find_element(By.XPATH, '//input[@type="search"]'))
+        search = browser.find_element(By.XPATH, '//input[@type="search"]')
         time.sleep(2)
         search.clear()
         search.send_keys(keyword)
@@ -53,36 +57,37 @@ def fetch_image(keywords):
         time.sleep(2)
 
         group_span_xpath = '//div[@role="region"]//span[contains(text(), "帖子")]'
-        wait.until(lambda driver: driver.find_element_by_xpath(group_span_xpath))
-        group = browser.find_element_by_xpath(group_span_xpath)
+        wait.until(lambda driver: driver.find_element(By.XPATH, group_span_xpath))
+        group = browser.find_element(By.XPATH, group_span_xpath)
         group.click()
         time.sleep(1)
 
         group_source_xpath = '//input[contains(@placeholder, "帖子来源")]' # //input[contains(text(), "帖子来源")]
-        wait.until(lambda driver: driver.find_element_by_xpath(group_source_xpath))
-        group_source = browser.find_element_by_xpath(group_source_xpath)
+        wait.until(lambda driver: driver.find_element(By.XPATH, group_source_xpath))
+        group_source = browser.find_element(By.XPATH, group_source_xpath)
         group_source.click()
         time.sleep(1)
 
         group_my_xpath = '//span[@dir="auto"]/span[contains(text(), "你的小组和主页")]'
-        wait.until(lambda driver: driver.find_element_by_xpath(group_my_xpath))
-        group_my = browser.find_element_by_xpath(group_my_xpath)
+        wait.until(lambda driver: driver.find_element(By.XPATH, group_my_xpath))
+        group_my = browser.find_element(By.XPATH, group_my_xpath)
         group_my.click()
         time.sleep(1)
 
-        body = browser.find_element_by_xpath('//body')
+        body = browser.find_element(By.XPATH, '//body')
 
 
         # 截图内容
         # article_xpath = '//div[@role="article"]/div'
         # article_xpath = '//div[@role="main"]//div[@role="article"]/div/div/div/div/div/div[2]/div/div[3]'
         # article_xpath = '//div[@role="main"]//div[@role="article"]/div/div/div/div/div/div/div/div[3]'
-        article_xpath = '//div[@role="main"]//div[@role="article"]/div/div/div/div/div/div[2]/div/div/div[3]'
-        wait.until(lambda driver: driver.find_element_by_xpath(article_xpath))
+        # article_xpath = '//div[@role="main"]//div[@role="article"]/div/div/div/div/div/div[2]/div/div/div[3]'
+        article_xpath = '//div[@role="main"]//div[@role="article"]'
+        wait.until(lambda driver: driver.find_element(By.XPATH, article_xpath))
 
         eles = []
         for i in range(10):
-            eles = browser.find_elements_by_xpath(article_xpath)
+            eles = browser.find_elements(By.XPATH, article_xpath)
             if len(eles) < pic_count:
                 if body:
                     for _ in range(3):
@@ -95,11 +100,15 @@ def fetch_image(keywords):
         body.send_keys(Keys.HOME)
         time.sleep(2)
 
-        eles = browser.find_elements_by_xpath(article_xpath)
-        for ele in eles[:pic_count]:
+        eles = browser.find_elements(By.XPATH, article_xpath)
+        for article_ele in eles[:pic_count]:
+            actions.move_to_element(article_ele).perform()
+            time.sleep(1)
+            ele = article_ele.find_element(By.XPATH, './div/div/div/div/div/div[2]/div/div/div[3]')
+
             browser.execute_script('arguments[0].setAttribute("style", "margin-top: 10px;")', ele)
 
-            highlight_eles = ele.find_elements_by_xpath('.//span[@dir="auto"]//div[@dir="auto"]')
+            highlight_eles = ele.find_elements(By.XPATH, './/span[@dir="auto"]//div[@dir="auto"]')
             for highlight_ele in highlight_eles:
                 # text = highlight_ele.text.lower()
                 text = highlight_ele.get_attribute('innerHTML').lower()
@@ -108,10 +117,14 @@ def fetch_image(keywords):
                 print(aa)
                 browser.execute_script(aa, highlight_ele)
 
-        eles = browser.find_elements_by_xpath(article_xpath)
+        # eles = browser.find_elements(By.XPATH, article_xpath)
 
-        for i, ele in enumerate(eles[:pic_count]):
+        # for i, article_ele in enumerate(eles[:pic_count]):
             print('sss')
+            # actions.move_to_element(article_ele).perform()
+            # time.sleep(1)
+            ele = article_ele.find_element(By.XPATH, './div/div/div/div/div/div[2]/div/div/div[3]')
+
             img = Image.open(BytesIO(ele.screenshot_as_png))
 
             url_location = ele.location
@@ -120,7 +133,7 @@ def fetch_image(keywords):
 
             # 图片部分
             img_nodes = []
-            img_eles = ele.find_elements_by_xpath('./div[2]')
+            img_eles = ele.find_elements(By.XPATH, './div[2]')
             for img_ele in img_eles:
                 img_left = img_ele.location['x'] - url_location['x']
                 img_upper = img_ele.location['y'] - url_location['y']
@@ -132,7 +145,7 @@ def fetch_image(keywords):
 
             # 高亮部分
             hightNodes = []
-            trs = ele.find_elements_by_xpath('.//span[@class="ccccxxxxccc"]')
+            trs = ele.find_elements(By.XPATH, './/span[@class="ccccxxxxccc"]')
             for t in trs:
                 left = t.location['x'] - url_location['x']
                 upper = t.location['y'] - url_location['y']
